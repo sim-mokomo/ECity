@@ -9,30 +9,28 @@ namespace MokomoGames
 {
     public class UIStamina : MonoBehaviour
     {
-        [SerializeField] private Slider _valueSlider;
-        [SerializeField] private Button _recoveryButton;
-        [SerializeField] private TextMeshProUGUI _toRemainingTimeText;
-        [SerializeField] private TextMeshProUGUI _currentValueText;
+        [SerializeField] private Slider valueSlider;
+        [SerializeField] private Button recoveryButton;
+        [SerializeField] private TextMeshProUGUI toRemainingTimeText;
+        [SerializeField] private TextMeshProUGUI currentValueText;
 
         public event Action OnTapedRecoveryButton;
         
         private void Awake()
         {
-            _recoveryButton.onClick.AddListener( () => OnTapedRecoveryButton?.Invoke() );
-            SetCurrentValue(stamina: 60,maxStamina: 83);
-            SetRecoveryTime(1,3);
+            recoveryButton.onClick.AddListener( () => OnTapedRecoveryButton?.Invoke() );
         }
 
         public void SetCurrentValue(int stamina,int maxStamina)
         {
-            _currentValueText.text = $"{stamina}/{maxStamina}";
-            _valueSlider.maxValue = maxStamina;
-            _valueSlider.value = stamina;
+            currentValueText.text = $"{stamina}/{maxStamina}";
+            valueSlider.maxValue = maxStamina;
+            valueSlider.value = stamina;
         }
 
         public void SetRecoveryTime(int hours,int minutes)
         {
-            _toRemainingTimeText.text = $"あと{hours:00}:{minutes:00}";
+            toRemainingTimeText.text = $"あと{hours:00}:{minutes:00}";
         }
     }
 }
