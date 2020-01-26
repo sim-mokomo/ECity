@@ -215,10 +215,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cd83a19c8ddb40388b4a42a56e8e34c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _valueSlider: {fileID: 4360420206427603194}
-  _recoveryButton: {fileID: 2386986355407380725}
-  _toRemainingTimeText: {fileID: 5455022363427434618}
-  _currentValueText: {fileID: 4590022187597996883}
+  valueSlider: {fileID: 4360420206427603194}
+  recoveryButton: {fileID: 2386986355407380725}
+  toRemainingTimeText: {fileID: 5455022363427434618}
+  currentValueText: {fileID: 4590022187597996883}
+  uiRecoveryStaminaDialog: {fileID: 0}
 --- !u!1 &3254831988940420645
 GameObject:
   m_ObjectHideFlags: 0
