@@ -28,9 +28,9 @@ namespace MokomoGames
             valueSlider.value = stamina;
         }
 
-        public void SetRecoveryTime(uint hours,uint minutes)
+        public void SetRecoveryTime(uint minutes,uint seconds)
         {
-            toRemainingTimeText.text = $"あと{hours:00}:{minutes:00}";
+            toRemainingTimeText.text = $"あと{minutes:00}:{seconds:00}";
         }
     }
 }

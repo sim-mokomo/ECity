@@ -26,5 +26,10 @@ namespace MokomoGames
                     1,
                     1);
           }
+
+          public void SetStaminaTime(uint minutes, uint seconds)
+          {
+               staminaUi.SetRecoveryTime(minutes,seconds);
+          }
      }
 }
