@@ -22,5 +22,11 @@ namespace MokomoGames
             saveDic.Add("stamina",Stamina.ToString(CultureInfo.InvariantCulture));
             return saveDic;
         }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as PlayerSaveData;
+            return this.Stamina == other.Stamina;
+        }
     }
 }
