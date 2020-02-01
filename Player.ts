@@ -1,6 +1,3 @@
-import "./PlayFab/CloudScript"
-import {PlayerSaveData} from "./PlayerSaveData";
-
 const stamina : string = "stamina";
 
 handlers.updatePlayerSaveData = (args, context) => {

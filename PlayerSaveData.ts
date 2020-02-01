@@ -1,4 +1,4 @@
-export class PlayerSaveData
+class PlayerSaveData
 {
     public stamina:number;
 
