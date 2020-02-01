@@ -7,11 +7,11 @@ namespace MokomoGames
 {
     public class PlayerSaveData
     {
-        [SerializeField] private float stamina;
+        [SerializeField] private uint stamina;
 
-        public float Stamina => stamina;
+        public uint Stamina => stamina;
 
-        public PlayerSaveData(float stamina)
+        public PlayerSaveData(uint stamina)
         {
             this.stamina = stamina;
         }
