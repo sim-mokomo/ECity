@@ -41,5 +41,18 @@ namespace MokomoGames
                 error => { }
             );
         }
+
+        public static void UpdateStamina(int diff,Action onEndUpdate)
+        {
+            PlayFabClientAPI.ExecuteCloudScript(
+                new ExecuteCloudScriptRequest()
+                {
+                    FunctionName = "updateStamina",
+                    FunctionParameter = new Dictionary<string,int>(){{"diff",diff}},
+                    GeneratePlayStreamEvent = true,
+                },
+                result => { onEndUpdate?.Invoke(); },
+                error => { });
+        }
     }
 }
