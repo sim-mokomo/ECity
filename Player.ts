@@ -19,3 +19,19 @@ handlers.getPlayerSaveData = (args,context) => {
     );
     return JSON.stringify(saveData);
 };
+
+handlers.updateStamina = (args,context) => 
+{
+    const diff : number = args["diff"];
+    const res = server.GetUserData({
+        PlayFabId: currentPlayerId
+    });
+    
+    const calcedStamina : number = 
+        Number(res.Data["stamina"].Value) + diff;
+    
+    server.UpdateUserData({
+        PlayFabId: currentPlayerId,
+        Data:{stamina: calcedStamina.toString()}
+    })
+};
