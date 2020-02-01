@@ -15,12 +15,13 @@ namespace Tests
             LoginProvider.LoginByEditor(customId:"PlayerSaveDataRepository",
                 result =>
                 {
-                    var playerSaveData = new PlayerSaveData(stamina:100);
-                    PlayerSaveDataRepository.UpdatePlayerSaveData(playerSaveData, () =>
+                    var saveData = new PlayerSaveData(stamina:100);
+                    PlayerSaveDataRepository.UpdatePlayerSaveData(saveData, () =>
                     {
-                        var prevSaveData = new PlayerSaveData(stamina: 0);
-                       PlayerSaveDataRepository.GetPlayerSaveData(prevSaveData);
-                       Assert.Equals(prevSaveData,playerSaveData);
+                       PlayerSaveDataRepository.GetPlayerSaveData(PlayerSaveData.Empty, gotSaveData =>
+                       {
+                            Assert.Equals(saveData,gotSaveData);
+                       });
                     });
                 },
                 error => { });           
