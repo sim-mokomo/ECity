@@ -62,3 +62,8 @@ Assets/TextMesh Pro
 Assets/TextMesh Pro.meta
 Assets/DLDatas/OutResources
 Assets/DLDatas/OutResources.meta
+.idea
+Assets/PlayFabEditorExtensions
+Assets/PlayFabSdk
+Assets/PlayFabSdk.meta
+Assets/PlayFabEditorExtensions.meta
