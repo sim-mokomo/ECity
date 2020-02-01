@@ -6,8 +6,29 @@ using UnityEngine;
 public class HomeScreenController : MonoBehaviour
 {
     [SerializeField] private UIHeader headerUi;
+    private StaminaRecoveryTimeController staminaRecoveryTimeController;
 
     public void Begin()
+    {
+        staminaRecoveryTimeController = new StaminaRecoveryTimeController();
+        staminaRecoveryTimeController.OnRecoveriedStamina += RefreshStamina;
+        staminaRecoveryTimeController.OnClock += () =>
+        {
+            headerUi.SetStaminaTime(
+                staminaRecoveryTimeController.Minutes,
+                staminaRecoveryTimeController.Seconds);
+        };
+        staminaRecoveryTimeController.Begin();
+        
+        RefreshStamina();
+    }
+
+    public void Tick()
+    {
+        
+    }
+
+    private void RefreshStamina()
     {
         PlayerSaveDataRepository.GetPlayerSaveData(PlayerSaveData.Empty, playerSaveData =>
         {
@@ -16,10 +37,5 @@ public class HomeScreenController : MonoBehaviour
                 maxStamina: 999
                 );
         });
-    }
-
-    public void Tick()
-    {
-        
     }
 }
