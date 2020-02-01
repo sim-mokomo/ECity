@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using MokomoGames;
+using PlayFab;
+using PlayFab.ClientModels;
 using UnityEngine;
 
 public class HomeScreenController : MonoBehaviour
@@ -37,5 +39,15 @@ public class HomeScreenController : MonoBehaviour
                 maxStamina: 999
                 );
         });
+    }
+
+    private void UpdateTimeWhenLeaving()
+    {
+        PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
+        {
+            FunctionName = "updateTimeWhenLeaving"
+        },
+            result => { },
+            error => { });
     }
 }
