@@ -1,17 +1,19 @@
 "use strict";
 exports.__esModule = true;
 require("./PlayFab/CloudScript");
-var staminaColumnName = "stamina";
+var PlayerSaveData_1 = require("./PlayerSaveData");
+var stamina = "stamina";
 handlers.updatePlayerSaveData = function (args, context) {
-    var stamina = args[staminaColumnName];
+    var staminaVal = args[stamina];
     server.UpdateUserData({
         PlayFabId: currentPlayerId,
-        Data: { staminaColumnName: stamina.toString() }
+        Data: { stamina: staminaVal.toString() }
     });
 };
 handlers.getPlayerSaveData = function (args, context) {
     var res = server.GetUserData({
         PlayFabId: currentPlayerId
     });
-    return JSON.stringify(res.Data);
+    var saveData = new PlayerSaveData_1.PlayerSaveData(Number(res.Data[stamina].Value));
+    return JSON.stringify(saveData);
 };

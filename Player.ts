@@ -1,12 +1,14 @@
 import "./PlayFab/CloudScript"
-const staminaColumnName : string = "stamina";
+import {PlayerSaveData} from "./PlayerSaveData";
+
+const stamina : string = "stamina";
 
 handlers.updatePlayerSaveData = (args, context) => {
-    const stamina : number = args[staminaColumnName];
+    const staminaVal : number = args[stamina];
     
     server.UpdateUserData({
         PlayFabId: currentPlayerId,
-        Data: {staminaColumnName : stamina.toString()}
+        Data: {stamina : staminaVal.toString()}
     })
 };
 
@@ -15,5 +17,8 @@ handlers.getPlayerSaveData = (args,context) => {
         PlayFabId: currentPlayerId
     });
     
-    return JSON.stringify(res.Data);
+    const saveData = new PlayerSaveData(
+        Number(res.Data[stamina].Value)
+    );
+    return JSON.stringify(saveData);
 };
