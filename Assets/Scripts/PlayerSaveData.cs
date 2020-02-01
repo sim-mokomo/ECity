@@ -8,8 +8,8 @@ namespace MokomoGames
     public class PlayerSaveData
     {
         [SerializeField] private uint stamina;
-
         public uint Stamina => stamina;
+        public static PlayerSaveData Empty => new PlayerSaveData(0);
 
         public PlayerSaveData(uint stamina)
         {

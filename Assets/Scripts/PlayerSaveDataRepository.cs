@@ -24,7 +24,7 @@ namespace MokomoGames
                 error => { });
         }
         
-        public static void GetPlayerSaveData(PlayerSaveData playerSaveData)
+        public static void GetPlayerSaveData(PlayerSaveData playerSaveData,Action<PlayerSaveData> onEndGetSaveData)
         {
             PlayFabClientAPI.ExecuteCloudScript
             (
@@ -36,6 +36,7 @@ namespace MokomoGames
                 scriptResult =>
                 {
                     JsonUtilityExtensions.FunctionResult2Instance<PlayerSaveData>(scriptResult.FunctionResult,playerSaveData);
+                    onEndGetSaveData?.Invoke(playerSaveData);
                 },
                 error => { }
             );

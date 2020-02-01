@@ -21,14 +21,14 @@ namespace MokomoGames
             recoveryButton.onClick.AddListener( () => OnTapedRecoveryButton?.Invoke() );
         }
 
-        public void SetCurrentValue(int stamina,int maxStamina)
+        public void SetCurrentValue(uint stamina,uint maxStamina)
         {
             currentValueText.text = $"{stamina}/{maxStamina}";
             valueSlider.maxValue = maxStamina;
             valueSlider.value = stamina;
         }
 
-        public void SetRecoveryTime(int hours,int minutes)
+        public void SetRecoveryTime(uint hours,uint minutes)
         {
             toRemainingTimeText.text = $"あと{hours:00}:{minutes:00}";
         }

@@ -42,7 +42,7 @@ namespace MokomoGames
             gameObject.SetActive(false);
         }
 
-        private void Initialize(int currentStamina,int maxStamina,int yukichiNum,int consumeYukichiNum=1)
+        public void Initialize(uint currentStamina,uint maxStamina,uint yukichiNum,uint consumeYukichiNum=1)
         {
             stamina.SetCurrentValue(currentStamina,maxStamina);
             hasYukichiNumText.text = $"{yukichiNum}";
