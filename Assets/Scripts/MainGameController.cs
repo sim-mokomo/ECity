@@ -9,15 +9,17 @@ using TMPro;
 
 public class MainGameController : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI loginIdText;
-    [SerializeField] private HomeScreenController homeScreenController;
+    private MasterSequencer masterSequencer;
+    public static UserData UserData { get; private set; }
 
     private void Start()
     {
+        masterSequencer = FindObjectOfType<MasterSequencer>();
+        masterSequencer.AllDisplay(false);
+
         void OnLoggedIn(LoginResult result)
         {
-            loginIdText.text = $"ID:{result.PlayFabId}";
-            homeScreenController.Begin();
+            UserData = new UserData(result.PlayFabId);
         }
 
         void OnError(PlayFabError error)
@@ -29,5 +31,13 @@ public class MainGameController : MonoBehaviour
 #elif UNITY_ANDROID || UNITY_IPHONE
         LoginProvider.LoginByMobile(OnLoggedIn, OnError);
 #endif
+        masterSequencer.ChangeSequenceWithLoading(
+            () => UserData != null,
+            MasterSequencer.SequencerType.Title);
+    }
+
+    private void Update()
+    {
+        masterSequencer.Tick();
     }
 }
