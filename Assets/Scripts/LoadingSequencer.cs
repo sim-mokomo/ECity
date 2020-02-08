@@ -8,7 +8,7 @@ namespace MokomoGames
     public class LoadingSequencer : MonoBehaviour, ISequencer
     {
         public MasterSequencer.SequencerType Type => MasterSequencer.SequencerType.Loading;
-        public event Action<MasterSequencer.SequencerType> OnLeave;
+        public event Action<MasterSequencer.SequencerType, bool, Func<bool>> OnLeave;
         private event Func<bool> leaveCondition;
         public MasterSequencer.SequencerType DistSequencer { get; private set; }
 
@@ -25,7 +25,7 @@ namespace MokomoGames
                 yield return null;
             }
 
-            OnLeave?.Invoke(DistSequencer);
+            OnLeave?.Invoke(DistSequencer,false,null);
         }
 
         public void Tick()
