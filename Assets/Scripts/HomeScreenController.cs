@@ -30,6 +30,11 @@ public class HomeScreenController : MonoBehaviour
         
     }
 
+    public void End()
+    {
+        
+    }
+
     private void RefreshStamina()
     {
         PlayerSaveDataRepository.GetPlayerSaveData(PlayerSaveData.Empty, playerSaveData =>
