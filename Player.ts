@@ -1,7 +1,7 @@
-const stamina : string = "stamina";
+const staminaKey = "stamina";
 
 handlers.updatePlayerSaveData = (args, context) => {
-    const staminaVal : number = args[stamina];
+    const staminaVal : number = args[staminaKey];
     
     server.UpdateUserData({
         PlayFabId: currentPlayerId,
@@ -15,7 +15,7 @@ handlers.getPlayerSaveData = (args,context) => {
     });
     
     const saveData = new PlayerSaveData(
-        Number(res.Data[stamina].Value)
+        Number(res.Data[staminaKey].Value)
     );
     return JSON.stringify(saveData);
 };
@@ -28,7 +28,7 @@ handlers.updateStamina = (args,context) =>
     });
     
     const calcedStamina : number = 
-        Number(res.Data["stamina"].Value) + diff;
+        Number(res.Data[staminaKey].Value) + diff;
     
     server.UpdateUserData({
         PlayFabId: currentPlayerId,
