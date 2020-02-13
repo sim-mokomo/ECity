@@ -45,14 +45,4 @@ public class HomeScreenController : MonoBehaviour
                 );
         });
     }
-
-    private void UpdateTimeWhenLeaving()
-    {
-        PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
-        {
-            FunctionName = "updateTimeWhenLeaving"
-        },
-            result => { },
-            error => { });
-    }
 }
