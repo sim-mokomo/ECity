@@ -1,0 +1,24 @@
+syntax = "proto3";
+package ecity;
+
+option csharp_namespace = "MokomoGames.Protobuf";
+
+message UpdateStaminaRequest 
+{
+    int32 diff = 1;
+}
+
+message UpdateStaminaResponse
+{
+    uint32 currentStamina = 1;
+}
+
+message PlayerSaveData
+{
+    uint32 stamina = 1;
+}
+
+message GetPlayerSaveDataResponse
+{
+    PlayerSaveData saveData = 1;
+}
