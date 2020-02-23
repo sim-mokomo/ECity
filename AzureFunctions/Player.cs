@@ -54,6 +54,39 @@ namespace MokomoGames.Function
 
             return JsonFormatter.Default.Format(saveDataResponse);
         }
+
+        public static async Task<T> GetUserDataElement<T>(string masterPlayerAccountId) where T :class,IMessage<T>,new()
+        {
+            var getUserDataRequest = new GetUserDataRequest()
+            {
+                PlayFabId = masterPlayerAccountId
+            };
+            var userDataResponse = await PlayFabServerAPI.GetUserDataAsync(getUserDataRequest);
+            var classValue = userDataResponse.Result.Data[typeof(T).ToString()];
+            if(classValue != null)
+            {
+                var json = classValue.Value;
+                var parser = new MessageParser<T>(()=> new T());
+                var instance = parser.ParseJson(json);
+                return instance;
+            }
+            return null;
+        }
+
+        public static async Task UpdateUserDataElement<T>(string masterPlayerAccountId,T obj) where T :class,IMessage<T>,new()
+        {
+            var updateUserDataRequest = new UpdateUserDataRequest()
+            {
+                PlayFabId = masterPlayerAccountId,
+                Data = new Dictionary<string, string>
+                {
+                    {typeof(T).ToString(),JsonFormatter.Default.Format(obj)}
+                }
+            };
+            var userDataResponse = await PlayFabServerAPI.UpdateUserDataAsync(updateUserDataRequest);
+        }
+
+        
     }
 
 }
