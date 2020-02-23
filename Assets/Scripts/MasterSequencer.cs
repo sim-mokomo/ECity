@@ -32,7 +32,7 @@ namespace MokomoGames
 
         public void Tick()
         {
-            currentSequencer.Tick();
+            currentSequencer?.Tick();
         }
 
         public void ChangeSequence(SequencerType distType)
