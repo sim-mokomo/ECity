@@ -26,17 +26,17 @@ namespace MokomoGames.Protobuf {
           string.Concat(
             "ChVwcm90b3MvVXNlckRhdGEucHJvdG8SBWVjaXR5IiQKFFVwZGF0ZVN0YW1p",
             "bmFSZXF1ZXN0EgwKBGRpZmYYASABKAUiLwoVVXBkYXRlU3RhbWluYVJlc3Bv",
-            "bnNlEhYKDmN1cnJlbnRTdGFtaW5hGAEgASgNIiEKDlBsYXllclNhdmVEYXRh",
-            "Eg8KB3N0YW1pbmEYASABKA0iRAoZR2V0UGxheWVyU2F2ZURhdGFSZXNwb25z",
-            "ZRInCghzYXZlRGF0YRgBIAEoCzIVLmVjaXR5LlBsYXllclNhdmVEYXRhQheq",
-            "AhRNb2tvbW9HYW1lcy5Qcm90b2J1ZmIGcHJvdG8z"));
+            "bnNlEhYKDmN1cnJlbnRTdGFtaW5hGAEgASgNIiwKGUdldFBsYXllclNhdmVE",
+            "YXRhUmVzcG9uc2USDwoHc3RhbWluYRgBIAEoAiIuChtVcGRhdGVQbGF5ZXJT",
+            "YXZlRGF0YVJlcXVlc3QSDwoHc3RhbWluYRgBIAEoAkIXqgIUTW9rb21vR2Ft",
+            "ZXMuUHJvdG9idWZiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.UpdateStaminaRequest), global::MokomoGames.Protobuf.UpdateStaminaRequest.Parser, new[]{ "Diff" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.UpdateStaminaResponse), global::MokomoGames.Protobuf.UpdateStaminaResponse.Parser, new[]{ "CurrentStamina" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.PlayerSaveData), global::MokomoGames.Protobuf.PlayerSaveData.Parser, new[]{ "Stamina" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.GetPlayerSaveDataResponse), global::MokomoGames.Protobuf.GetPlayerSaveDataResponse.Parser, new[]{ "SaveData" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.GetPlayerSaveDataResponse), global::MokomoGames.Protobuf.GetPlayerSaveDataResponse.Parser, new[]{ "Stamina" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.UpdatePlayerSaveDataRequest), global::MokomoGames.Protobuf.UpdatePlayerSaveDataRequest.Parser, new[]{ "Stamina" }, null, null, null, null)
           }));
     }
     #endregion
@@ -301,135 +301,6 @@ namespace MokomoGames.Protobuf {
 
   }
 
-  public sealed partial class PlayerSaveData : pb::IMessage<PlayerSaveData> {
-    private static readonly pb::MessageParser<PlayerSaveData> _parser = new pb::MessageParser<PlayerSaveData>(() => new PlayerSaveData());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<PlayerSaveData> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::MokomoGames.Protobuf.UserDataReflection.Descriptor.MessageTypes[2]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public PlayerSaveData() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public PlayerSaveData(PlayerSaveData other) : this() {
-      stamina_ = other.stamina_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public PlayerSaveData Clone() {
-      return new PlayerSaveData(this);
-    }
-
-    /// <summary>Field number for the "stamina" field.</summary>
-    public const int StaminaFieldNumber = 1;
-    private uint stamina_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public uint Stamina {
-      get { return stamina_; }
-      set {
-        stamina_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as PlayerSaveData);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(PlayerSaveData other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (Stamina != other.Stamina) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (Stamina != 0) hash ^= Stamina.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (Stamina != 0) {
-        output.WriteRawTag(8);
-        output.WriteUInt32(Stamina);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (Stamina != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Stamina);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(PlayerSaveData other) {
-      if (other == null) {
-        return;
-      }
-      if (other.Stamina != 0) {
-        Stamina = other.Stamina;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 8: {
-            Stamina = input.ReadUInt32();
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
   public sealed partial class GetPlayerSaveDataResponse : pb::IMessage<GetPlayerSaveDataResponse> {
     private static readonly pb::MessageParser<GetPlayerSaveDataResponse> _parser = new pb::MessageParser<GetPlayerSaveDataResponse>(() => new GetPlayerSaveDataResponse());
     private pb::UnknownFieldSet _unknownFields;
@@ -438,7 +309,7 @@ namespace MokomoGames.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::MokomoGames.Protobuf.UserDataReflection.Descriptor.MessageTypes[3]; }
+      get { return global::MokomoGames.Protobuf.UserDataReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -455,7 +326,7 @@ namespace MokomoGames.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public GetPlayerSaveDataResponse(GetPlayerSaveDataResponse other) : this() {
-      saveData_ = other.saveData_ != null ? other.saveData_.Clone() : null;
+      stamina_ = other.stamina_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -464,14 +335,14 @@ namespace MokomoGames.Protobuf {
       return new GetPlayerSaveDataResponse(this);
     }
 
-    /// <summary>Field number for the "saveData" field.</summary>
-    public const int SaveDataFieldNumber = 1;
-    private global::MokomoGames.Protobuf.PlayerSaveData saveData_;
+    /// <summary>Field number for the "stamina" field.</summary>
+    public const int StaminaFieldNumber = 1;
+    private float stamina_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::MokomoGames.Protobuf.PlayerSaveData SaveData {
-      get { return saveData_; }
+    public float Stamina {
+      get { return stamina_; }
       set {
-        saveData_ = value;
+        stamina_ = value;
       }
     }
 
@@ -488,14 +359,14 @@ namespace MokomoGames.Protobuf {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(SaveData, other.SaveData)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Stamina, other.Stamina)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (saveData_ != null) hash ^= SaveData.GetHashCode();
+      if (Stamina != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Stamina);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -509,9 +380,9 @@ namespace MokomoGames.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (saveData_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(SaveData);
+      if (Stamina != 0F) {
+        output.WriteRawTag(13);
+        output.WriteFloat(Stamina);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -521,8 +392,8 @@ namespace MokomoGames.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (saveData_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(SaveData);
+      if (Stamina != 0F) {
+        size += 1 + 4;
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -535,11 +406,8 @@ namespace MokomoGames.Protobuf {
       if (other == null) {
         return;
       }
-      if (other.saveData_ != null) {
-        if (saveData_ == null) {
-          SaveData = new global::MokomoGames.Protobuf.PlayerSaveData();
-        }
-        SaveData.MergeFrom(other.SaveData);
+      if (other.Stamina != 0F) {
+        Stamina = other.Stamina;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -552,11 +420,137 @@ namespace MokomoGames.Protobuf {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 10: {
-            if (saveData_ == null) {
-              SaveData = new global::MokomoGames.Protobuf.PlayerSaveData();
-            }
-            input.ReadMessage(SaveData);
+          case 13: {
+            Stamina = input.ReadFloat();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class UpdatePlayerSaveDataRequest : pb::IMessage<UpdatePlayerSaveDataRequest> {
+    private static readonly pb::MessageParser<UpdatePlayerSaveDataRequest> _parser = new pb::MessageParser<UpdatePlayerSaveDataRequest>(() => new UpdatePlayerSaveDataRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<UpdatePlayerSaveDataRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::MokomoGames.Protobuf.UserDataReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UpdatePlayerSaveDataRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UpdatePlayerSaveDataRequest(UpdatePlayerSaveDataRequest other) : this() {
+      stamina_ = other.stamina_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UpdatePlayerSaveDataRequest Clone() {
+      return new UpdatePlayerSaveDataRequest(this);
+    }
+
+    /// <summary>Field number for the "stamina" field.</summary>
+    public const int StaminaFieldNumber = 1;
+    private float stamina_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float Stamina {
+      get { return stamina_; }
+      set {
+        stamina_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as UpdatePlayerSaveDataRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(UpdatePlayerSaveDataRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Stamina, other.Stamina)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Stamina != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Stamina);
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Stamina != 0F) {
+        output.WriteRawTag(13);
+        output.WriteFloat(Stamina);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Stamina != 0F) {
+        size += 1 + 4;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(UpdatePlayerSaveDataRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Stamina != 0F) {
+        Stamina = other.Stamina;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 13: {
+            Stamina = input.ReadFloat();
             break;
           }
         }

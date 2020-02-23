@@ -13,12 +13,12 @@ message UpdateStaminaResponse
     uint32 currentStamina = 1;
 }
 
-message PlayerSaveData
-{
-    uint32 stamina = 1;
-}
-
 message GetPlayerSaveDataResponse
 {
-    PlayerSaveData saveData = 1;
+    float stamina = 1;
+}
+
+message UpdatePlayerSaveDataRequest
+{
+    float stamina = 1;
 }
