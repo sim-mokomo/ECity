@@ -39,10 +39,10 @@ public class HomeScreenController : MonoBehaviour
     {
         PlayerSaveDataRepository.GetPlayerSaveData(playerSaveData =>
         {
-            headerUi.SetStamina(
-                stamina:(uint)playerSaveData.Stamina, 
-                maxStamina: 999
-                );
+            headerUi.SetStamina(playerSaveData.Stamina,999);
+            headerUi.SetCoinNum(playerSaveData.Coin);
+            headerUi.SetMizuNum(playerSaveData.Mizu);
+            headerUi.SetYukichiNum(playerSaveData.Yukichi);
         });
     }
 }

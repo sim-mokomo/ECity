@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using MokomoGames;
+using TMPro;
 using UnityEngine;
 
 namespace MokomoGames
@@ -10,7 +11,10 @@ namespace MokomoGames
      {
           [SerializeField] private UIStamina staminaUi;
           [SerializeField] private UIRecoveryStaminaDialog recoveryStaminaDialog;
-          
+          [SerializeField] private TextMeshProUGUI yukichiNumText;
+          [SerializeField] private TextMeshProUGUI coinNumText;
+          [SerializeField] private TextMeshProUGUI mizuNumText;
+
           private void Awake()
           {
                staminaUi.OnTapedRecoveryButton += () => { recoveryStaminaDialog.Open(); };
@@ -25,6 +29,21 @@ namespace MokomoGames
                     maxStamina,
                     1,
                     1);
+          }
+
+          public void SetCoinNum(uint coinNum)
+          {
+               coinNumText.text = $"{coinNum}";
+          }
+
+          public void SetMizuNum(uint mizuNum)
+          {
+               mizuNumText.text = $"{mizuNum}";
+          }
+
+          public void SetYukichiNum(uint yukichiNum)
+          {
+               yukichiNumText.text = $"{yukichiNum}";
           }
 
           public void SetStaminaTime(uint minutes, uint seconds)

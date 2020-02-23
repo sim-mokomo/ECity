@@ -14,7 +14,7 @@ namespace MokomoGames
 {
     public class PlayerSaveDataRepository
     {
-        public static void GetPlayerSaveData(Action<GetPlayerSaveDataResponse> onEndGetSaveData)
+        public static void GetPlayerSaveData(Action<PlayerSaveData> onEndGetSaveData)
         {
             PlayFabCloudScriptAPI.ExecuteFunction(
                 new ExecuteFunctionRequest()
@@ -26,9 +26,9 @@ namespace MokomoGames
                 },
                 result =>
                 {
-                    Debug.Log(result.FunctionResult.GetType());
+                    Debug.Log(result.FunctionResult.ToString());
                     var response = GetPlayerSaveDataResponse.Parser.ParseJson(result.FunctionResult.ToString());
-                    onEndGetSaveData?.Invoke(response);
+                    onEndGetSaveData?.Invoke(response.SaveData);
                 },
                 PlayFabUtility.GenerateErrorReport);
         }
