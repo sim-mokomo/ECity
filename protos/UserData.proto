@@ -15,10 +15,13 @@ message UpdateStaminaResponse
 
 message GetPlayerSaveDataResponse
 {
-    float stamina = 1;
+    PlayerSaveData saveData = 1;
 }
 
-message UpdatePlayerSaveDataRequest
+message PlayerSaveData
 {
-    float stamina = 1;
+    uint32 stamina = 1;
+    uint32 yukichi = 2;
+    uint32 coin = 3;
+    uint32 mizu = 4;
 }

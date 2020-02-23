@@ -26,17 +26,18 @@ namespace MokomoGames.Protobuf {
           string.Concat(
             "ChVwcm90b3MvVXNlckRhdGEucHJvdG8SBWVjaXR5IiQKFFVwZGF0ZVN0YW1p",
             "bmFSZXF1ZXN0EgwKBGRpZmYYASABKAUiLwoVVXBkYXRlU3RhbWluYVJlc3Bv",
-            "bnNlEhYKDmN1cnJlbnRTdGFtaW5hGAEgASgNIiwKGUdldFBsYXllclNhdmVE",
-            "YXRhUmVzcG9uc2USDwoHc3RhbWluYRgBIAEoAiIuChtVcGRhdGVQbGF5ZXJT",
-            "YXZlRGF0YVJlcXVlc3QSDwoHc3RhbWluYRgBIAEoAkIXqgIUTW9rb21vR2Ft",
-            "ZXMuUHJvdG9idWZiBnByb3RvMw=="));
+            "bnNlEhYKDmN1cnJlbnRTdGFtaW5hGAEgASgNIkQKGUdldFBsYXllclNhdmVE",
+            "YXRhUmVzcG9uc2USJwoIc2F2ZURhdGEYASABKAsyFS5lY2l0eS5QbGF5ZXJT",
+            "YXZlRGF0YSJOCg5QbGF5ZXJTYXZlRGF0YRIPCgdzdGFtaW5hGAEgASgNEg8K",
+            "B3l1a2ljaGkYAiABKA0SDAoEY29pbhgDIAEoDRIMCgRtaXp1GAQgASgNQheq",
+            "AhRNb2tvbW9HYW1lcy5Qcm90b2J1ZmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.UpdateStaminaRequest), global::MokomoGames.Protobuf.UpdateStaminaRequest.Parser, new[]{ "Diff" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.UpdateStaminaResponse), global::MokomoGames.Protobuf.UpdateStaminaResponse.Parser, new[]{ "CurrentStamina" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.GetPlayerSaveDataResponse), global::MokomoGames.Protobuf.GetPlayerSaveDataResponse.Parser, new[]{ "Stamina" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.UpdatePlayerSaveDataRequest), global::MokomoGames.Protobuf.UpdatePlayerSaveDataRequest.Parser, new[]{ "Stamina" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.GetPlayerSaveDataResponse), global::MokomoGames.Protobuf.GetPlayerSaveDataResponse.Parser, new[]{ "SaveData" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.PlayerSaveData), global::MokomoGames.Protobuf.PlayerSaveData.Parser, new[]{ "Stamina", "Yukichi", "Coin", "Mizu" }, null, null, null, null)
           }));
     }
     #endregion
@@ -326,7 +327,7 @@ namespace MokomoGames.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public GetPlayerSaveDataResponse(GetPlayerSaveDataResponse other) : this() {
-      stamina_ = other.stamina_;
+      saveData_ = other.saveData_ != null ? other.saveData_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -335,14 +336,14 @@ namespace MokomoGames.Protobuf {
       return new GetPlayerSaveDataResponse(this);
     }
 
-    /// <summary>Field number for the "stamina" field.</summary>
-    public const int StaminaFieldNumber = 1;
-    private float stamina_;
+    /// <summary>Field number for the "saveData" field.</summary>
+    public const int SaveDataFieldNumber = 1;
+    private global::MokomoGames.Protobuf.PlayerSaveData saveData_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public float Stamina {
-      get { return stamina_; }
+    public global::MokomoGames.Protobuf.PlayerSaveData SaveData {
+      get { return saveData_; }
       set {
-        stamina_ = value;
+        saveData_ = value;
       }
     }
 
@@ -359,14 +360,14 @@ namespace MokomoGames.Protobuf {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Stamina, other.Stamina)) return false;
+      if (!object.Equals(SaveData, other.SaveData)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Stamina != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Stamina);
+      if (saveData_ != null) hash ^= SaveData.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -380,9 +381,9 @@ namespace MokomoGames.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Stamina != 0F) {
-        output.WriteRawTag(13);
-        output.WriteFloat(Stamina);
+      if (saveData_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(SaveData);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -392,8 +393,8 @@ namespace MokomoGames.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Stamina != 0F) {
-        size += 1 + 4;
+      if (saveData_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(SaveData);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -406,8 +407,11 @@ namespace MokomoGames.Protobuf {
       if (other == null) {
         return;
       }
-      if (other.Stamina != 0F) {
-        Stamina = other.Stamina;
+      if (other.saveData_ != null) {
+        if (saveData_ == null) {
+          SaveData = new global::MokomoGames.Protobuf.PlayerSaveData();
+        }
+        SaveData.MergeFrom(other.SaveData);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -420,8 +424,11 @@ namespace MokomoGames.Protobuf {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 13: {
-            Stamina = input.ReadFloat();
+          case 10: {
+            if (saveData_ == null) {
+              SaveData = new global::MokomoGames.Protobuf.PlayerSaveData();
+            }
+            input.ReadMessage(SaveData);
             break;
           }
         }
@@ -430,11 +437,11 @@ namespace MokomoGames.Protobuf {
 
   }
 
-  public sealed partial class UpdatePlayerSaveDataRequest : pb::IMessage<UpdatePlayerSaveDataRequest> {
-    private static readonly pb::MessageParser<UpdatePlayerSaveDataRequest> _parser = new pb::MessageParser<UpdatePlayerSaveDataRequest>(() => new UpdatePlayerSaveDataRequest());
+  public sealed partial class PlayerSaveData : pb::IMessage<PlayerSaveData> {
+    private static readonly pb::MessageParser<PlayerSaveData> _parser = new pb::MessageParser<PlayerSaveData>(() => new PlayerSaveData());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<UpdatePlayerSaveDataRequest> Parser { get { return _parser; } }
+    public static pb::MessageParser<PlayerSaveData> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -447,55 +454,97 @@ namespace MokomoGames.Protobuf {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public UpdatePlayerSaveDataRequest() {
+    public PlayerSaveData() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public UpdatePlayerSaveDataRequest(UpdatePlayerSaveDataRequest other) : this() {
+    public PlayerSaveData(PlayerSaveData other) : this() {
       stamina_ = other.stamina_;
+      yukichi_ = other.yukichi_;
+      coin_ = other.coin_;
+      mizu_ = other.mizu_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public UpdatePlayerSaveDataRequest Clone() {
-      return new UpdatePlayerSaveDataRequest(this);
+    public PlayerSaveData Clone() {
+      return new PlayerSaveData(this);
     }
 
     /// <summary>Field number for the "stamina" field.</summary>
     public const int StaminaFieldNumber = 1;
-    private float stamina_;
+    private uint stamina_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public float Stamina {
+    public uint Stamina {
       get { return stamina_; }
       set {
         stamina_ = value;
       }
     }
 
+    /// <summary>Field number for the "yukichi" field.</summary>
+    public const int YukichiFieldNumber = 2;
+    private uint yukichi_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as UpdatePlayerSaveDataRequest);
+    public uint Yukichi {
+      get { return yukichi_; }
+      set {
+        yukichi_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "coin" field.</summary>
+    public const int CoinFieldNumber = 3;
+    private uint coin_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint Coin {
+      get { return coin_; }
+      set {
+        coin_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "mizu" field.</summary>
+    public const int MizuFieldNumber = 4;
+    private uint mizu_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint Mizu {
+      get { return mizu_; }
+      set {
+        mizu_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(UpdatePlayerSaveDataRequest other) {
+    public override bool Equals(object other) {
+      return Equals(other as PlayerSaveData);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(PlayerSaveData other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Stamina, other.Stamina)) return false;
+      if (Stamina != other.Stamina) return false;
+      if (Yukichi != other.Yukichi) return false;
+      if (Coin != other.Coin) return false;
+      if (Mizu != other.Mizu) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Stamina != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Stamina);
+      if (Stamina != 0) hash ^= Stamina.GetHashCode();
+      if (Yukichi != 0) hash ^= Yukichi.GetHashCode();
+      if (Coin != 0) hash ^= Coin.GetHashCode();
+      if (Mizu != 0) hash ^= Mizu.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -509,9 +558,21 @@ namespace MokomoGames.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Stamina != 0F) {
-        output.WriteRawTag(13);
-        output.WriteFloat(Stamina);
+      if (Stamina != 0) {
+        output.WriteRawTag(8);
+        output.WriteUInt32(Stamina);
+      }
+      if (Yukichi != 0) {
+        output.WriteRawTag(16);
+        output.WriteUInt32(Yukichi);
+      }
+      if (Coin != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(Coin);
+      }
+      if (Mizu != 0) {
+        output.WriteRawTag(32);
+        output.WriteUInt32(Mizu);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -521,8 +582,17 @@ namespace MokomoGames.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Stamina != 0F) {
-        size += 1 + 4;
+      if (Stamina != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Stamina);
+      }
+      if (Yukichi != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Yukichi);
+      }
+      if (Coin != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Coin);
+      }
+      if (Mizu != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Mizu);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -531,12 +601,21 @@ namespace MokomoGames.Protobuf {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(UpdatePlayerSaveDataRequest other) {
+    public void MergeFrom(PlayerSaveData other) {
       if (other == null) {
         return;
       }
-      if (other.Stamina != 0F) {
+      if (other.Stamina != 0) {
         Stamina = other.Stamina;
+      }
+      if (other.Yukichi != 0) {
+        Yukichi = other.Yukichi;
+      }
+      if (other.Coin != 0) {
+        Coin = other.Coin;
+      }
+      if (other.Mizu != 0) {
+        Mizu = other.Mizu;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -549,8 +628,20 @@ namespace MokomoGames.Protobuf {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 13: {
-            Stamina = input.ReadFloat();
+          case 8: {
+            Stamina = input.ReadUInt32();
+            break;
+          }
+          case 16: {
+            Yukichi = input.ReadUInt32();
+            break;
+          }
+          case 24: {
+            Coin = input.ReadUInt32();
+            break;
+          }
+          case 32: {
+            Mizu = input.ReadUInt32();
             break;
           }
         }

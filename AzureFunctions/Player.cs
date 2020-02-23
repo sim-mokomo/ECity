@@ -42,16 +42,23 @@ namespace MokomoGames.Function
 
             InitializePlayFabSettings(context);
             
+            var saveData = await GetUserDataElement<PlayerSaveData>(CurrentPlayerId(context));
+            // デフォルト値設定
+            if(saveData == null)
             {
-                PlayFabId = context.CallerEntityProfile.Lineage.MasterPlayerAccountId,
-            };
+                await UpdateUserDataElement<PlayerSaveData>(CurrentPlayerId(context),new PlayerSaveData()
+                {
+                    Stamina = 20,
+                    Coin = 0,
+                    Mizu = 0,
+                    Yukichi = 0,
+                });
+            }
 
-            var userDataResponse = await PlayFabServerAPI.GetUserDataAsync(getUserDataRequest);
             var saveDataResponse = new GetPlayerSaveDataResponse()
             {
-                Stamina = uint.Parse(userDataResponse.Result.Data["stamina"].Value)
+                SaveData = saveData
             };
-
             return JsonFormatter.Default.Format(saveDataResponse);
         }
 
