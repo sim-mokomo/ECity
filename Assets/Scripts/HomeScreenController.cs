@@ -37,10 +37,10 @@ public class HomeScreenController : MonoBehaviour
 
     private void RefreshStamina()
     {
-        PlayerSaveDataRepository.GetPlayerSaveData(PlayerSaveData.Empty, playerSaveData =>
+        PlayerSaveDataRepository.GetPlayerSaveData(playerSaveData =>
         {
             headerUi.SetStamina(
-                stamina:playerSaveData.Stamina, 
+                stamina:(uint)playerSaveData.Stamina, 
                 maxStamina: 999
                 );
         });

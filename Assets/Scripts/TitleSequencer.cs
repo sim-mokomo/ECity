@@ -15,7 +15,7 @@ namespace MokomoGames
         public void Begin()
         {
             Display(true);
-            var userData = MainGameController.UserData;
+            var userData = MainGameController.UserDataContainer;
             loginIdText.text = $"ID:{userData.PlayFabId}";
         }
 

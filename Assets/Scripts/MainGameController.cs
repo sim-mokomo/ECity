@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Google.Protobuf;
 using UnityEngine;
 using MokomoGames;
 using PlayFab;
 using PlayFab.ClientModels;
 using TMPro;
+using MokomoGames.Protobuf;
 
 public class MainGameController : MonoBehaviour
 {
     private MasterSequencer masterSequencer;
-    public static UserData UserData { get; private set; }
+    public static UserDataContainer UserDataContainer { get; private set; }
 
     private void Start()
     {
@@ -19,7 +22,7 @@ public class MainGameController : MonoBehaviour
 
         void OnLoggedIn(LoginResult result)
         {
-            UserData = new UserData(result.PlayFabId);
+            UserDataContainer = new UserDataContainer(result.PlayFabId,result.AuthenticationContext);
         }
 
         void OnError(PlayFabError error)
@@ -32,7 +35,7 @@ public class MainGameController : MonoBehaviour
         LoginProvider.LoginByMobile(OnLoggedIn, OnError);
 #endif
         masterSequencer.ChangeSequenceWithLoading(
-            () => UserData != null,
+            () => UserDataContainer != null,
             MasterSequencer.SequencerType.Title);
     }
 
