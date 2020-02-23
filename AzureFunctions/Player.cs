@@ -69,15 +69,18 @@ namespace MokomoGames.Function
                 PlayFabId = masterPlayerAccountId
             };
             var userDataResponse = await PlayFabServerAPI.GetUserDataAsync(getUserDataRequest);
-            var classValue = userDataResponse.Result.Data[typeof(T).ToString()];
-            if(classValue != null)
+
+            var key = typeof(T).ToString();
+            if(!userDataResponse.Result.Data.ContainsKey(key))
             {
-                var json = classValue.Value;
-                var parser = new MessageParser<T>(()=> new T());
-                var instance = parser.ParseJson(json);
-                return instance;
+                return null;
             }
-            return null;
+
+            var classValue = userDataResponse.Result.Data[key];
+            var json = classValue.Value;
+            var parser = new MessageParser<T>(()=> new T());
+            var instance = parser.ParseJson(json);
+            return instance;
         }
 
         public static async Task UpdateUserDataElement<T>(string masterPlayerAccountId,T obj) where T :class,IMessage<T>,new()
