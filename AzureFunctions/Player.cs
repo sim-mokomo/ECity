@@ -21,19 +21,27 @@ namespace MokomoGames.Function
 {
     public static class Player
     {
+        public static string CurrentPlayerId(FunctionContext<dynamic> context)
+        {
+            return context.CallerEntityProfile.Lineage.MasterPlayerAccountId;
+        }
+
+        public static void InitializePlayFabSettings(FunctionContext<dynamic> context)
+        {
+            PlayFabSettings.staticSettings.DeveloperSecretKey = context.ApiSettings.DeveloperSecretKey;
+            PlayFabSettings.staticSettings.TitleId = context.ApiSettings.TitleId;
+        }
+
         [FunctionName("getPlayerSaveData")]
         public static async Task<dynamic> GetPlayerSaveData(
             [HttpTrigger(AuthorizationLevel.Function,"get", "post", Route = null)] HttpRequestMessage req,
             ILogger log)
         {
             var context = await FunctionContext<dynamic>.Create(req);
-
             var args = context.FunctionArgument;
 
-            PlayFabSettings.staticSettings.DeveloperSecretKey = context.ApiSettings.DeveloperSecretKey;
-            PlayFabSettings.staticSettings.TitleId = context.ApiSettings.TitleId;
+            InitializePlayFabSettings(context);
             
-            var getUserDataRequest = new GetUserDataRequest()
             {
                 PlayFabId = context.CallerEntityProfile.Lineage.MasterPlayerAccountId,
             };
