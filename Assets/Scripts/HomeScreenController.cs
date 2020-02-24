@@ -5,16 +5,18 @@ using MokomoGames.Protobuf;
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
+using Zenject;
 
 public class HomeScreenController : MonoBehaviour
 {
     [SerializeField] private UIHeader headerUi;
     private StaminaRecoveryTimeController staminaRecoveryTimeController;
     private PlayerSaveData saveData;
+    [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
 
     public void Begin()
     {
-        staminaRecoveryTimeController = new StaminaRecoveryTimeController();
+        staminaRecoveryTimeController = new StaminaRecoveryTimeController(10,_playerSaveDataRepository);
         staminaRecoveryTimeController.OnRecoveriedStamina += () =>
         {
             saveData.Stamina += 1;
@@ -28,7 +30,7 @@ public class HomeScreenController : MonoBehaviour
         };
         staminaRecoveryTimeController.Begin();
         
-        PlayerSaveDataRepository.GetPlayerSaveData(responseSaveData =>
+        _playerSaveDataRepository.GetPlayerSaveData(responseSaveData =>
         {
             saveData = responseSaveData;
             Refresh(saveData);
