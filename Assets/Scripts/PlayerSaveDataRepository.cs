@@ -11,9 +11,9 @@ using UnityEngine;
 
 namespace MokomoGames
 {
-    public class PlayerSaveDataRepository
+    public class PlayerSaveDataRepository : IPlayerSaveDataRepository
     {
-        public static void GetPlayerSaveData(Action<PlayerSaveData> onEndGetSaveData)
+        public void GetPlayerSaveData(Action<PlayerSaveData> onEndGetSaveData)
         {
             PlayFabUtility.ExecuteFunction<GetPlayerSaveDataResponse>(
                 functionName: "getPlayerSaveData",
@@ -21,7 +21,7 @@ namespace MokomoGames
                 callBack: response => { onEndGetSaveData?.Invoke(response.SaveData); });
         }
 
-        public static void RecoveryStaminaByWaitTime(Action<RecoveryStaminaByWaitTimeResponse> onEnd)
+        public void RecoveryStaminaByWaitTime(Action<RecoveryStaminaByWaitTimeResponse> onEnd)
         {
             PlayFabUtility.ExecuteFunction<RecoveryStaminaByWaitTimeResponse>(
                 functionName: "recoveryStaminaByWaitTime",
