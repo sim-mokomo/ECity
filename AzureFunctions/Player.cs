@@ -128,7 +128,20 @@ namespace MokomoGames.Function
             var userDataResponse = await PlayFabServerAPI.UpdateUserDataAsync(updateUserDataRequest);
         }
 
-        
+        [FunctionName("getRankTable")]
+        public static async Task<dynamic> GetRankTable(
+            [HttpTrigger(AuthorizationLevel.Function,"get", "post", Route = null)] HttpRequestMessage req,
+            ILogger log)
+        {
+            var context = await FunctionContext<dynamic>.Create(req);
+            var args = context.FunctionArgument;
+
+            InitializePlayFabSettings(context);
+            var titleDataResponse = await PlayFabServerAPI.GetTitleDataAsync(new GetTitleDataRequest());
+            var json = titleDataResponse.Result.Data["RankTable"];
+            log.LogInformation(json);
+            return json;
+        }
     }
 
 }

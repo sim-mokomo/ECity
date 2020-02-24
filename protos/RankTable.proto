@@ -1,0 +1,16 @@
+syntax = "proto3";
+package ecity;
+
+option csharp_namespace = "MokomoGames.Protobuf";
+
+message RankTableRecord
+{
+    uint32 rank = 1;
+    uint32 max_fuel = 2;
+    uint32 need_next_rank_exp = 3;
+}
+
+message RankTable
+{
+    repeated RankTableRecord records = 1;
+}
