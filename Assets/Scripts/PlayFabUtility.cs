@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Google.Protobuf;
 using UnityEngine;
 using PlayFab;
 using PlayFab.CloudScriptModels;
+using UniRx.Async;
 
 namespace MokomoGames
 {
     public class PlayFabUtility
     {
-        public static PlayFab.CloudScriptModels.EntityKey CreateEntityKey()
+        private static PlayFab.CloudScriptModels.EntityKey CreateEntityKey()
         {
             return new PlayFab.CloudScriptModels.EntityKey()
             {
@@ -38,8 +40,18 @@ namespace MokomoGames
                 },
                 GenerateErrorReport);
         }
-        
-        public static void GenerateErrorReport(PlayFabError error)
+
+        public static UniTask<T> ExecuteFunctionAsync<T>(string functionName, Dictionary<string, string> functionParameter) where T : IMessage<T>,new()
+        {
+            var taskCompletionSource = new UniTaskCompletionSource<T>();
+            ExecuteFunction<T>(functionName,functionParameter,callBack: message =>
+            {
+                taskCompletionSource.TrySetResult(message);
+            });
+            return taskCompletionSource.Task;
+        }
+
+        private static void GenerateErrorReport(PlayFabError error)
         {
             Debug.Log($"Opps Something went wrong: {error.GenerateErrorReport()}");
             Debug.Log(error.HttpCode);

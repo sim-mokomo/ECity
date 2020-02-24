@@ -9,11 +9,13 @@ using PlayFab;
 using PlayFab.ClientModels;
 using TMPro;
 using MokomoGames.Protobuf;
+using Zenject;
 
 public class MainGameController : MonoBehaviour
 {
     private MasterSequencer masterSequencer;
     public static UserDataContainer UserDataContainer { get; private set; }
+    [Inject] private IMasterDataRepository _masterDataRepository;
 
     private void Start()
     {
@@ -23,6 +25,10 @@ public class MainGameController : MonoBehaviour
         void OnLoggedIn(LoginResult result)
         {
             UserDataContainer = new UserDataContainer(result.PlayFabId,result.AuthenticationContext);
+            _masterDataRepository.LoadAllTable();
+            masterSequencer.ChangeSequenceWithLoading(
+                () => _masterDataRepository.AllLoaded,
+                MasterSequencer.SequencerType.Title);
         }
 
         void OnError(PlayFabError error)
