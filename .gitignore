@@ -183,3 +183,4 @@ temp/
 # End of https://www.gitignore.io/api/node
 Assets/Plugins
 Assets/Plugins.meta
+GoogleSpreadSheet/Table/.clasp.json
