@@ -18,3 +18,15 @@ function createJson(tableName:string) : string{
     var json = JSON.stringify(table)
     return json
 }
+
+function createJsonFile(tableName:string,json:string) {
+    var folder = getOutputFolder()
+    var contentType = "text/json"
+    var charset = "utf-8"
+    
+    var blob = Utilities
+    .newBlob("",contentType,tableName)
+    .setDataFromString(json,charset)
+    
+    folder.createFile(blob)
+}
