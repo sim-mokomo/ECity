@@ -14,7 +14,7 @@ function createJson(tableName:string) : string{
         })
         return obj
     })
-    table[`${tableName}Record`] = records
+    table[`records`] = records
     var json = JSON.stringify(table)
     return json
 }
