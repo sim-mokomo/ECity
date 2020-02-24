@@ -28,15 +28,19 @@ namespace MokomoGames.Protobuf {
             "bmFSZXF1ZXN0EgwKBGRpZmYYASABKAUiLwoVVXBkYXRlU3RhbWluYVJlc3Bv",
             "bnNlEhYKDmN1cnJlbnRTdGFtaW5hGAEgASgNIkQKGUdldFBsYXllclNhdmVE",
             "YXRhUmVzcG9uc2USJwoIc2F2ZURhdGEYASABKAsyFS5lY2l0eS5QbGF5ZXJT",
-            "YXZlRGF0YSJOCg5QbGF5ZXJTYXZlRGF0YRIPCgdzdGFtaW5hGAEgASgNEg8K",
-            "B3l1a2ljaGkYAiABKA0SDAoEY29pbhgDIAEoDRIMCgRtaXp1GAQgASgNQheq",
-            "AhRNb2tvbW9HYW1lcy5Qcm90b2J1ZmIGcHJvdG8z"));
+            "YXZlRGF0YSIiCiBSZWNvdmVyeVN0YW1pbmFCeVdhaXRUaW1lUmVxdWVzdCI+",
+            "CiFSZWNvdmVyeVN0YW1pbmFCeVdhaXRUaW1lUmVzcG9uc2USGQoRcmVjb3Zl",
+            "cmllZFN0YW1pbmEYASABKA0iTgoOUGxheWVyU2F2ZURhdGESDwoHc3RhbWlu",
+            "YRgBIAEoDRIPCgd5dWtpY2hpGAIgASgNEgwKBGNvaW4YAyABKA0SDAoEbWl6",
+            "dRgEIAEoDUIXqgIUTW9rb21vR2FtZXMuUHJvdG9idWZiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.UpdateStaminaRequest), global::MokomoGames.Protobuf.UpdateStaminaRequest.Parser, new[]{ "Diff" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.UpdateStaminaResponse), global::MokomoGames.Protobuf.UpdateStaminaResponse.Parser, new[]{ "CurrentStamina" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.GetPlayerSaveDataResponse), global::MokomoGames.Protobuf.GetPlayerSaveDataResponse.Parser, new[]{ "SaveData" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.RecoveryStaminaByWaitTimeRequest), global::MokomoGames.Protobuf.RecoveryStaminaByWaitTimeRequest.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.RecoveryStaminaByWaitTimeResponse), global::MokomoGames.Protobuf.RecoveryStaminaByWaitTimeResponse.Parser, new[]{ "RecoveriedStamina" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.PlayerSaveData), global::MokomoGames.Protobuf.PlayerSaveData.Parser, new[]{ "Stamina", "Yukichi", "Coin", "Mizu" }, null, null, null, null)
           }));
     }
@@ -437,6 +441,236 @@ namespace MokomoGames.Protobuf {
 
   }
 
+  public sealed partial class RecoveryStaminaByWaitTimeRequest : pb::IMessage<RecoveryStaminaByWaitTimeRequest> {
+    private static readonly pb::MessageParser<RecoveryStaminaByWaitTimeRequest> _parser = new pb::MessageParser<RecoveryStaminaByWaitTimeRequest>(() => new RecoveryStaminaByWaitTimeRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<RecoveryStaminaByWaitTimeRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::MokomoGames.Protobuf.UserDataReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RecoveryStaminaByWaitTimeRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RecoveryStaminaByWaitTimeRequest(RecoveryStaminaByWaitTimeRequest other) : this() {
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RecoveryStaminaByWaitTimeRequest Clone() {
+      return new RecoveryStaminaByWaitTimeRequest(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as RecoveryStaminaByWaitTimeRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(RecoveryStaminaByWaitTimeRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(RecoveryStaminaByWaitTimeRequest other) {
+      if (other == null) {
+        return;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class RecoveryStaminaByWaitTimeResponse : pb::IMessage<RecoveryStaminaByWaitTimeResponse> {
+    private static readonly pb::MessageParser<RecoveryStaminaByWaitTimeResponse> _parser = new pb::MessageParser<RecoveryStaminaByWaitTimeResponse>(() => new RecoveryStaminaByWaitTimeResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<RecoveryStaminaByWaitTimeResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::MokomoGames.Protobuf.UserDataReflection.Descriptor.MessageTypes[4]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RecoveryStaminaByWaitTimeResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RecoveryStaminaByWaitTimeResponse(RecoveryStaminaByWaitTimeResponse other) : this() {
+      recoveriedStamina_ = other.recoveriedStamina_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RecoveryStaminaByWaitTimeResponse Clone() {
+      return new RecoveryStaminaByWaitTimeResponse(this);
+    }
+
+    /// <summary>Field number for the "recoveriedStamina" field.</summary>
+    public const int RecoveriedStaminaFieldNumber = 1;
+    private uint recoveriedStamina_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint RecoveriedStamina {
+      get { return recoveriedStamina_; }
+      set {
+        recoveriedStamina_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as RecoveryStaminaByWaitTimeResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(RecoveryStaminaByWaitTimeResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (RecoveriedStamina != other.RecoveriedStamina) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (RecoveriedStamina != 0) hash ^= RecoveriedStamina.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (RecoveriedStamina != 0) {
+        output.WriteRawTag(8);
+        output.WriteUInt32(RecoveriedStamina);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (RecoveriedStamina != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(RecoveriedStamina);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(RecoveryStaminaByWaitTimeResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.RecoveriedStamina != 0) {
+        RecoveriedStamina = other.RecoveriedStamina;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            RecoveriedStamina = input.ReadUInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class PlayerSaveData : pb::IMessage<PlayerSaveData> {
     private static readonly pb::MessageParser<PlayerSaveData> _parser = new pb::MessageParser<PlayerSaveData>(() => new PlayerSaveData());
     private pb::UnknownFieldSet _unknownFields;
@@ -445,7 +679,7 @@ namespace MokomoGames.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::MokomoGames.Protobuf.UserDataReflection.Descriptor.MessageTypes[3]; }
+      get { return global::MokomoGames.Protobuf.UserDataReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

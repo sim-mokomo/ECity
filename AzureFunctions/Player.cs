@@ -62,6 +62,38 @@ namespace MokomoGames.Function
             return JsonFormatter.Default.Format(saveDataResponse);
         }
 
+        const UInt32 RecoveriedStaminaValuePerTime = 1u; 
+
+        [FunctionName("recoveryStaminaByWaitTime")]
+        public static async Task<dynamic> RecoveryStaminaByWaitTime(
+            [HttpTrigger(AuthorizationLevel.Function,"get", "post", Route = null)] HttpRequestMessage req,
+            ILogger log)
+        {
+            var context = await FunctionContext<dynamic>.Create(req);
+            var args = context.FunctionArgument;
+
+            InitializePlayFabSettings(context);
+            
+            string json = args["json"];
+            var request = RecoveryStaminaByWaitTimeRequest.Parser.ParseJson(json);
+            if(request == null)
+            {
+                return null;
+            }
+
+            var currentPlayerId = CurrentPlayerId(context);
+            var saveData = await GetUserDataElement<PlayerSaveData>(currentPlayerId);
+            saveData.Stamina += RecoveriedStaminaValuePerTime;
+            await UpdateUserDataElement<PlayerSaveData>(currentPlayerId,saveData);
+
+            var retResponse = new RecoveryStaminaByWaitTimeResponse()
+            {
+                RecoveriedStamina = saveData.Stamina
+            };
+            
+            return JsonFormatter.Default.Format(retResponse);
+        }
+
         public static async Task<T> GetUserDataElement<T>(string masterPlayerAccountId) where T :class,IMessage<T>,new()
         {
             var getUserDataRequest = new GetUserDataRequest()

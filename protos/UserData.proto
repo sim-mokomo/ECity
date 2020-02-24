@@ -18,6 +18,16 @@ message GetPlayerSaveDataResponse
     PlayerSaveData saveData = 1;
 }
 
+message RecoveryStaminaByWaitTimeRequest
+{
+    
+}
+
+message RecoveryStaminaByWaitTimeResponse
+{
+    uint32 recoveriedStamina = 1;
+}
+
 message PlayerSaveData
 {
     uint32 stamina = 1;
