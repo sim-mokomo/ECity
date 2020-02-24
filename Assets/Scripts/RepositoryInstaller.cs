@@ -18,6 +18,8 @@ namespace MokomoGames
             {
                 PlayerSaveDataRepositoryInstaller.Install(Container);
             }
+            
+            MasterDataRepositoryInstaller.Install(Container);
         }
     }
 }

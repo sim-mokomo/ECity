@@ -184,3 +184,5 @@ temp/
 Assets/Plugins
 Assets/Plugins.meta
 GoogleSpreadSheet/Table/.clasp.json
+Assets/UniRx.Async
+Assets/UniRx.Async.meta
