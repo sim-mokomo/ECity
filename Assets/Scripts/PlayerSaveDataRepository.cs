@@ -16,21 +16,10 @@ namespace MokomoGames
     {
         public static void GetPlayerSaveData(Action<PlayerSaveData> onEndGetSaveData)
         {
-            PlayFabCloudScriptAPI.ExecuteFunction(
-                new ExecuteFunctionRequest()
-                {
-                    Entity = PlayFabUtility.CreateEntityKey(),
-                    FunctionName = "getPlayerSaveData",
-                    FunctionParameter = null,
-                    GeneratePlayStreamEvent = true
-                },
-                result =>
-                {
-                    Debug.Log(result.FunctionResult.ToString());
-                    var response = GetPlayerSaveDataResponse.Parser.ParseJson(result.FunctionResult.ToString());
-                    onEndGetSaveData?.Invoke(response.SaveData);
-                },
-                PlayFabUtility.GenerateErrorReport);
+            PlayFabUtility.ExecuteFunction<GetPlayerSaveDataResponse>(
+                functionName: "getPlayerSaveData",
+                functionParameter: null,
+                callBack: response => { onEndGetSaveData?.Invoke(response.SaveData); });
         }
     }
 }
