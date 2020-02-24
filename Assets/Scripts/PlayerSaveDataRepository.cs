@@ -6,8 +6,7 @@ using Google.Protobuf;
 using PlayFab;
 using PlayFab.ClientModels;
 using MokomoGames.Protobuf;
-using PlayFab.CloudScriptModels;
-using PlayFab.Json;
+using PlayFab.CloudScriptModels;using PlayFab.Json;
 using UnityEngine;
 
 namespace MokomoGames
@@ -20,6 +19,15 @@ namespace MokomoGames
                 functionName: "getPlayerSaveData",
                 functionParameter: null,
                 callBack: response => { onEndGetSaveData?.Invoke(response.SaveData); });
+        }
+
+        public static void RecoveryStaminaByWaitTime(Action<RecoveryStaminaByWaitTimeResponse> onEnd)
+        {
+            PlayFabUtility.ExecuteFunction<RecoveryStaminaByWaitTimeResponse>(
+                functionName: "recoveryStaminaByWaitTime",
+                functionParameter: null,
+                callBack: onEnd
+                );
         }
     }
 }

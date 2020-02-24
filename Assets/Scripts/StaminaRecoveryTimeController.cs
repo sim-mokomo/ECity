@@ -32,7 +32,8 @@ namespace MokomoGames
             var timer = new Timer(RecoverySeconds);
             timer.OnEnded += () =>
             {
-                // TODO: スタミナ回復
+                PlayerSaveDataRepository.RecoveryStaminaByWaitTime(null);
+                OnRecoveriedStamina?.Invoke();
             };
             timer.OnClocked += (_) => OnClock?.Invoke();
             return timer;
