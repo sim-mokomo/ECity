@@ -42,22 +42,44 @@ namespace MokomoGames.Function
 
             InitializePlayFabSettings(context);
             
-            var saveData = await GetUserDataElement<PlayerSaveData>(CurrentPlayerId(context));
-            // デフォルト値設定
-            if(saveData == null)
+            var userDataResponse = await PlayFabServerAPI.GetUserDataAsync(new GetUserDataRequest()
             {
-                await UpdateUserDataElement<PlayerSaveData>(CurrentPlayerId(context),new PlayerSaveData()
+                PlayFabId = CurrentPlayerId(context),
+                Keys = new List<string>()
                 {
-                    Stamina = 20,
-                    Coin = 0,
-                    Mizu = 0,
-                    Yukichi = 0,
-                });
-            }
+                    "stamina",
+                    "yukichi",
+                    "coin",
+                    "mizu",
+                    "rank",
+                    "exp"
+                }
+            });
+            var userDataResponseDic = userDataResponse.Result.Data;
+
+            var rankValue = userDataResponseDic.ContainsKey("rank") ? uint.Parse(userDataResponseDic["rank"].Value) : 0;
+            var rankTable = await GetRankTableInstance();
+            var rankRecord = rankTable.Records.FirstOrDefault(x => x.Rank == rankValue);
+
+            var staminaValue = userDataResponseDic.ContainsKey("stamina") ? uint.Parse(userDataResponseDic["stamina"].Value) : rankRecord.MaxFuel;
+            var yukichiValue = userDataResponseDic.ContainsKey("yukichi") ? uint.Parse(userDataResponseDic["yukichi"].Value) : 0;
+            var coinValue = userDataResponseDic.ContainsKey("coin") ? uint.Parse(userDataResponseDic["coin"].Value) : 0;
+            var mizuValue = userDataResponseDic.ContainsKey("mizu") ? uint.Parse(userDataResponseDic["mizu"].Value) : 0;
+            var expValue = userDataResponseDic.ContainsKey("exp") ? uint.Parse(userDataResponseDic["exp"].Value) : 0;
+
+            var playerSaveData = new PlayerSaveData()
+            {
+                Stamina = staminaValue,
+                Coin = coinValue,
+                Mizu = mizuValue,
+                Rank = rankValue,
+                Yukichi = yukichiValue,
+                Exp = expValue,
+            };
 
             var saveDataResponse = new GetPlayerSaveDataResponse()
             {
-                SaveData = saveData
+                SaveData = playerSaveData
             };
             return JsonFormatter.Default.Format(saveDataResponse);
         }
@@ -141,6 +163,13 @@ namespace MokomoGames.Function
             var json = titleDataResponse.Result.Data["RankTable"];
             log.LogInformation(json);
             return json;
+        }
+
+        public static async Task<RankTable> GetRankTableInstance()
+        {
+            var titleDataRequest = await PlayFabServerAPI.GetTitleDataAsync(new GetTitleDataRequest());
+            var rankTable = RankTable.Parser.ParseJson(titleDataRequest.Result.Data["RankTable"]);
+            return rankTable;
         }
     }
 
