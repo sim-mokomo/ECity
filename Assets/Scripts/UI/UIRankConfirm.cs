@@ -25,7 +25,7 @@ namespace MokomoGames.UI
 
         public void SetStaminaGauge(uint minutes,uint seconds,uint maxRecoverySeconds)
         {
-            staminaGauge.SetRemainingValue($"あと{minutes}:{seconds}");
+            staminaGauge.SetRemainingValue($"あと{minutes:00}:{seconds:00}");
             staminaGauge.SetRemainingSliderValue(minutes * 60 + seconds,maxRecoverySeconds);
         }
     }
