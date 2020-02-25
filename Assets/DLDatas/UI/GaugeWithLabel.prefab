@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab11186297922054eaa5766c14265175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  remainingValueText: {fileID: 8316164309978227208}
+  remainingValueText: {fileID: 1760941271447629478}
   remainingSlider: {fileID: 3080202563103499101}
 --- !u!1 &2866480576434273306
 GameObject:

@@ -10,10 +10,12 @@ public class PlayerSaveDataDebugRepository : IPlayerSaveDataRepository
     {
         onEnd?.Invoke( new PlayerSaveData()
         {
-            Coin = 1,
-            Mizu = 1,
-            Stamina = 1,
-            Yukichi = 1,
+            Coin = 100,
+            Mizu = 56,
+            Stamina = 10,
+            Yukichi = 2,
+            Exp = 6,
+            Rank = 1
         });
     }
 

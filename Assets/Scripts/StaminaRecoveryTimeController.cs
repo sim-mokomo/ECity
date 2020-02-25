@@ -10,7 +10,7 @@ namespace MokomoGames
     public class StaminaRecoveryTimeController
     {        
         private Timer recoveryTimer;
-        public readonly uint RecoverySeconds = 10;
+        public readonly uint RecoverySeconds = 180;
         public uint Minutes => recoveryTimer.CurrentSecond / 60;
         public uint Seconds => recoveryTimer.CurrentSecond % 60;
         [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;

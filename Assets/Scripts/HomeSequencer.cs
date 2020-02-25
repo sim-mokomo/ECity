@@ -36,6 +36,10 @@ namespace MokomoGames
                 headerUi.SetStaminaTime(
                     staminaRecoveryTimeController.Minutes,
                     staminaRecoveryTimeController.Seconds);
+                rankConfirm.SetStaminaGauge(
+                    staminaRecoveryTimeController.Minutes,
+                    staminaRecoveryTimeController.Seconds,
+                    staminaRecoveryTimeController.RecoverySeconds);
             };
             staminaRecoveryTimeController.Begin();
             
@@ -46,7 +50,6 @@ namespace MokomoGames
                 
                 //TODO: タップしている間にのみ表示する
                 var rankRecord = _masterDataRepository.RankTable.Records.FirstOrDefault(x => x.Rank == saveData.Rank);
-                rankConfirm.gameObject.SetActive(true);
                 rankConfirm.SetCurrentRank(rankRecord.Rank);
                 rankConfirm.SetExpGauge(rankRecord.NeedNextRankExp - saveData.Exp ,rankRecord.NeedNextRankExp);
                 rankConfirm.SetStaminaGauge(
@@ -58,7 +61,8 @@ namespace MokomoGames
 
         public void Tick()
         {
-            
+            var touchType = CommonInput.GetTouch();
+            rankConfirm.gameObject.SetActive(touchType == TouchType.Moved);
         }
 
         public void End()
