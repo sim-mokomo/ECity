@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using MokomoGames.Protobuf;
 using MokomoGames.UI;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace MokomoGames
         [SerializeField] private UIHeader headerUi;
         [SerializeField] private UIRankConfirm rankConfirm;
         [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
+        [Inject] private IMasterDataRepository _masterDataRepository;
         private StaminaRecoveryTimeController staminaRecoveryTimeController;
         private PlayerSaveData saveData;
         public event Action<MasterSequencer.SequencerType, bool, Func<bool>> OnLeave;
@@ -37,20 +39,20 @@ namespace MokomoGames
             };
             staminaRecoveryTimeController.Begin();
             
-            //TODO: タップしている間にのみ表示する
-            //TODO: SaveDataとしてランクを保存する
-            rankConfirm.gameObject.SetActive(true);
-            rankConfirm.SetCurrentRank(saveData.Coin);
-            rankConfirm.SetExpGauge(0,0);
-            rankConfirm.SetStaminaGauge(
-                staminaRecoveryTimeController.Minutes,
-                staminaRecoveryTimeController.Seconds,
-                staminaRecoveryTimeController.RecoverySeconds);
-
             _playerSaveDataRepository.GetPlayerSaveData(responseSaveData =>
             {
                 saveData = responseSaveData;
                 Refresh(saveData);
+                
+                //TODO: タップしている間にのみ表示する
+                var rankRecord = _masterDataRepository.RankTable.Records.FirstOrDefault(x => x.Rank == saveData.Rank);
+                rankConfirm.gameObject.SetActive(true);
+                rankConfirm.SetCurrentRank(rankRecord.Rank);
+                rankConfirm.SetExpGauge(rankRecord.NeedNextRankExp - saveData.Exp ,rankRecord.NeedNextRankExp);
+                rankConfirm.SetStaminaGauge(
+                    staminaRecoveryTimeController.Minutes,
+                    staminaRecoveryTimeController.Seconds,
+                    staminaRecoveryTimeController.RecoverySeconds);
             });
         }
 
