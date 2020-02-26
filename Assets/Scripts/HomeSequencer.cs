@@ -77,7 +77,8 @@ namespace MokomoGames
         
         private void Refresh(PlayerSaveData save)
         {
-            headerUi.SetStamina(save.Stamina,999);
+            var rankRecord = _masterDataRepository.RankTable.Records.FirstOrDefault(x => x.Rank == saveData.Rank);
+            headerUi.SetStamina(save.Stamina,rankRecord.MaxFuel);
             headerUi.SetCoinNum(save.Coin);
             headerUi.SetMizuNum(save.Mizu);
             headerUi.SetYukichiNum(save.Yukichi);
