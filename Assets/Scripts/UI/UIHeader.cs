@@ -14,11 +14,18 @@ namespace MokomoGames
           [SerializeField] private TextMeshProUGUI yukichiNumText;
           [SerializeField] private TextMeshProUGUI coinNumText;
           [SerializeField] private TextMeshProUGUI mizuNumText;
+          [SerializeField] private UIGaugeWithUpperLabel expGauge;
 
           private void Awake()
           {
                staminaUi.OnTapedRecoveryButton += () => { recoveryStaminaDialog.Open(); };
                recoveryStaminaDialog.OnTappedCloseButton += () => { recoveryStaminaDialog.Close(); };
+          }
+
+          public void SetRank(uint rank,uint currentExp,uint needNextRankExp)
+          {
+               expGauge.SetRemainingValue(rank.ToString());
+               expGauge.SetRemainingSliderValue(currentExp,needNextRankExp);
           }
 
           public void SetStamina(uint stamina,uint maxStamina)

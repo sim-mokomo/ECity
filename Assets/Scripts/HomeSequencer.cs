@@ -82,6 +82,7 @@ namespace MokomoGames
             headerUi.SetCoinNum(save.Coin);
             headerUi.SetMizuNum(save.Mizu);
             headerUi.SetYukichiNum(save.Yukichi);
+            headerUi.SetRank(save.Rank,save.Exp,rankRecord.NeedNextRankExp);
         }
     }
 }
