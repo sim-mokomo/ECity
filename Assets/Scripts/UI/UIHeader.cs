@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using MokomoGames;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MokomoGames
 {
@@ -14,11 +16,20 @@ namespace MokomoGames
           [SerializeField] private TextMeshProUGUI yukichiNumText;
           [SerializeField] private TextMeshProUGUI coinNumText;
           [SerializeField] private TextMeshProUGUI mizuNumText;
+          [SerializeField] private UIGaugeWithUpperLabel expGauge;
+          public event Action OnTap;
+          public event Action OnRelease;
 
           private void Awake()
           {
                staminaUi.OnTapedRecoveryButton += () => { recoveryStaminaDialog.Open(); };
                recoveryStaminaDialog.OnTappedCloseButton += () => { recoveryStaminaDialog.Close(); };
+          }
+
+          public void SetRank(uint rank,uint currentExp,uint needNextRankExp)
+          {
+               expGauge.SetRemainingValue(rank.ToString());
+               expGauge.SetRemainingSliderValue(currentExp,needNextRankExp);
           }
 
           public void SetStamina(uint stamina,uint maxStamina)
@@ -49,6 +60,25 @@ namespace MokomoGames
           public void SetStaminaTime(uint minutes, uint seconds)
           {
                staminaUi.SetRecoveryTime(minutes,seconds);
+          }
+
+          public void Tick()
+          {
+               if (CommonInput.GetTouch() == TouchType.Began)
+               {
+                    var objs = CommonInput.GetTouchUIObjs();
+                    var hitMe = objs.Any(x => x.gameObject.GetComponent<UIHeader>());
+                    var hitButton = objs.Any(x => x.GetComponent<Button>());
+                    if (hitMe && !hitButton)
+                    {
+                         OnTap?.Invoke();
+                    }
+               }
+
+               if (CommonInput.GetTouch() == TouchType.Ended)
+               {
+                    OnRelease?.Invoke();
+               }
           }
      }
 }

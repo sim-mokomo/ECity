@@ -7,10 +7,11 @@ namespace MokomoGames
 {
     public class RepositoryInstaller : MonoInstaller
     {
-        [SerializeField] private bool useDebug;
+        [SerializeField] private bool useDebugPlayerRepo;
+        [SerializeField] private bool useDebugMasterRepo;
         public override void InstallBindings()
         {
-            if (useDebug)
+            if (useDebugPlayerRepo)
             {
                 PlayerSaveDataDebugRepositoryInstaller.Install(Container);
             }
@@ -18,8 +19,15 @@ namespace MokomoGames
             {
                 PlayerSaveDataRepositoryInstaller.Install(Container);
             }
-            
-            MasterDataRepositoryInstaller.Install(Container);
+
+            if (useDebugMasterRepo)
+            {
+                MasterDataDebugRepositoryInstaller.Install(Container);
+            }
+            else
+            {
+                MasterDataRepositoryInstaller.Install(Container);
+            }
         }
     }
 }

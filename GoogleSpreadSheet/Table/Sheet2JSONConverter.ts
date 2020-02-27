@@ -25,14 +25,14 @@ function createJsonFile(tableName:string,json:string) {
     var charset = "utf-8"
     
     var blob = Utilities
-    .newBlob("",contentType,tableName)
+    .newBlob("",contentType,`${tableName}.json`)
     .setDataFromString(json,charset)
     
     folder.createFile(blob)
 }
 
 function deleteJsonFile(rootFolder:GoogleAppsScript.Drive.Folder,jsonFileName:string) {
-    var files = rootFolder.getFilesByName(jsonFileName)
+    var files = rootFolder.getFilesByName(`${jsonFileName}.json`)
     while(files.hasNext())
     {
         var file = files.next()

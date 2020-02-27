@@ -11,5 +11,5 @@ if [[ ! -d OUT_DIR ]];then
     mkdir OUT_DIR
 fi
 
-protoc --csharp_out="${OUT_DIR}" $1
+protoc --proto_path "./protos" --csharp_out="${OUT_DIR}" $1
 
