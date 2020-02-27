@@ -47,22 +47,26 @@ namespace MokomoGames
             {
                 saveData = responseSaveData;
                 Refresh(saveData);
-                
-                //TODO: タップしている間にのみ表示する
+            });
+
+            headerUi.OnTap += () =>
+            {
                 var rankRecord = _masterDataRepository.RankTable.Records.FirstOrDefault(x => x.Rank == saveData.Rank);
+                rankConfirm.gameObject.SetActive(true);
                 rankConfirm.SetCurrentRank(rankRecord.Rank);
                 rankConfirm.SetExpGauge(rankRecord.NeedNextRankExp - saveData.Exp ,rankRecord.NeedNextRankExp);
                 rankConfirm.SetStaminaGauge(
                     staminaRecoveryTimeController.Minutes,
                     staminaRecoveryTimeController.Seconds,
                     staminaRecoveryTimeController.RecoverySeconds);
-            });
+            };
+
+            headerUi.OnRelease += () => { rankConfirm.gameObject.SetActive(false); };
         }
 
         public void Tick()
         {
-            var touchType = CommonInput.GetTouch();
-            rankConfirm.gameObject.SetActive(touchType == TouchType.Moved);
+            headerUi.Tick();
         }
 
         public void End()

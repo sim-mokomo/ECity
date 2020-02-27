@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace MokomoGames
 {
@@ -47,7 +49,23 @@ namespace MokomoGames
         {
             return cam.ScreenToWorldPoint(GetTouchPosition());
         }
+        
+        public static List<GameObject> GetTouchUIObjs()
+        {
+            var pointer = new PointerEventData(EventSystem.current)
+            {
+                position = GetTouchPosition()
+            };
+            var results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointer,results);
+
+            return results
+                .Select(x => x.gameObject)
+                .ToList();
+        }
     }
+    
+    
 
     public enum TouchType
     {
