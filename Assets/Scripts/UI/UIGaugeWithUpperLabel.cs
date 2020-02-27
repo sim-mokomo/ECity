@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,6 +11,11 @@ namespace MokomoGames
     {
         [SerializeField] private TextMeshProUGUI remainingValueText;
         [SerializeField] private Slider remainingSlider;
+
+        public void Awake()
+        {
+            remainingSlider.interactable = false;
+        }
 
         public void SetRemainingValue(string valueStr)
         {
