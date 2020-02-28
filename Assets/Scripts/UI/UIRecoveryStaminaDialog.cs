@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using MokomoGames;
+using MokomoGames.UI;
 using TMPro;
 using UnityEditor.UI;
 using UnityEngine;
@@ -9,7 +10,7 @@ using UnityEngine.UI;
 
 namespace MokomoGames
 {
-    public class UIRecoveryStaminaDialog : MonoBehaviour
+    public class UIRecoveryStaminaDialog : MonoBehaviour,IOpenable
     {
         [SerializeField] private TextMeshProUGUI hasYukichiNumText;
         [SerializeField] private UIStamina stamina;
