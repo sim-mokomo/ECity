@@ -5,6 +5,7 @@ using System.Linq;
 using MokomoGames.Protobuf;
 using MokomoGames.UI;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace MokomoGames
@@ -17,6 +18,8 @@ namespace MokomoGames
         [SerializeField] private UIRankConfirm rankConfirm;
         [SerializeField] private UIFillWarningStaminaDialog fillWarningStaminaDialog;
         [SerializeField] private UIRecoveryStaminaDialog recoveryStaminaDialog;
+        [SerializeField] private Toggle soulLaboToggle;
+        [SerializeField] private UIMenuList soulLaboMenuList;
         [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
         [Inject] private IMasterDataRepository _masterDataRepository;
         private StaminaRecoveryTimeController staminaRecoveryTimeController;
@@ -92,6 +95,14 @@ namespace MokomoGames
             };
             fillWarningStaminaDialog.OnTappedClose += fillWarningStaminaDialog.Close;
             fillWarningStaminaDialog.OnTappedConfirm += fillWarningStaminaDialog.Close;
+
+            soulLaboToggle.onValueChanged.AddListener(isOn =>
+            {
+                if(isOn)
+                    soulLaboMenuList.Open();
+                else
+                    soulLaboMenuList.Close();
+            });
         }
 
         public void Tick()
