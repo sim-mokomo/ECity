@@ -14,6 +14,7 @@ namespace MokomoGames
         [SerializeField] private Button recoveryButton;
         [SerializeField] private TextMeshProUGUI toRemainingTimeText;
         [SerializeField] private TextMeshProUGUI currentValueText;
+        [SerializeField] private TextMeshProUGUI maxValueText;
 
         public event Action OnTapedRecoveryButton;
         
@@ -25,7 +26,9 @@ namespace MokomoGames
 
         public void SetCurrentValue(uint stamina,uint maxStamina)
         {
-            currentValueText.text = $"{stamina}/{maxStamina}";
+            currentValueText.text = $"{stamina}";
+            currentValueText.color = stamina > maxStamina ? Color.cyan : Color.white;
+            maxValueText.text = $"/{maxStamina}";
             valueSlider.maxValue = maxStamina;
             valueSlider.value = stamina;
         }
