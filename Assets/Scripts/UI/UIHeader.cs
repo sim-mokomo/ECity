@@ -12,19 +12,15 @@ namespace MokomoGames
      public class UIHeader : MonoBehaviour
      {
           [SerializeField] private UIStamina staminaUi;
-          [SerializeField] private UIRecoveryStaminaDialog recoveryStaminaDialog;
           [SerializeField] private TextMeshProUGUI yukichiNumText;
           [SerializeField] private TextMeshProUGUI coinNumText;
           [SerializeField] private TextMeshProUGUI mizuNumText;
           [SerializeField] private UIGaugeWithUpperLabel expGauge;
+
+          public UIStamina StaminaUi => staminaUi;
+
           public event Action OnTap;
           public event Action OnRelease;
-
-          private void Awake()
-          {
-               staminaUi.OnTapedRecoveryButton += () => { recoveryStaminaDialog.Open(); };
-               recoveryStaminaDialog.OnTappedCloseButton += () => { recoveryStaminaDialog.Close(); };
-          }
 
           public void SetRank(uint rank,uint currentExp,uint needNextRankExp)
           {
@@ -35,11 +31,6 @@ namespace MokomoGames
           public void SetStamina(uint stamina,uint maxStamina)
           {
                staminaUi.SetCurrentValue(stamina,maxStamina);
-               recoveryStaminaDialog.Initialize(
-                    stamina,
-                    maxStamina,
-                    1,
-                    1);
           }
 
           public void SetCoinNum(uint coinNum)
