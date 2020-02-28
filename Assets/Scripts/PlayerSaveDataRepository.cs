@@ -7,27 +7,41 @@ using PlayFab;
 using PlayFab.ClientModels;
 using MokomoGames.Protobuf;
 using PlayFab.CloudScriptModels;using PlayFab.Json;
+using UniRx.Async;
 using UnityEngine;
 
 namespace MokomoGames
 {
     public class PlayerSaveDataRepository : IPlayerSaveDataRepository
     {
-        public void GetPlayerSaveData(Action<PlayerSaveData> onEndGetSaveData)
+        public async UniTask<PlayerSaveData> GetPlayerSaveData()
         {
-            PlayFabUtility.ExecuteFunction<GetPlayerSaveDataResponse>(
-                functionName: "getPlayerSaveData",
-                functionParameter: null,
-                callBack: response => { onEndGetSaveData?.Invoke(response.SaveData); });
+            var response = await PlayFabUtility.ExecuteFunctionAsync<GetPlayerSaveDataResponse>
+            (
+                functionName:"getPlayerSaveData",
+                functionParameter: null
+            );
+            return response.SaveData;
         }
 
-        public void RecoveryStaminaByWaitTime(Action<RecoveryStaminaByWaitTimeResponse> onEnd)
+        public async UniTask<RecoveryFuelByYukichiResponse> RecoveryFuelByYukichi()
         {
-            PlayFabUtility.ExecuteFunction<RecoveryStaminaByWaitTimeResponse>(
+            var response = await PlayFabUtility.ExecuteFunctionAsync<RecoveryFuelByYukichiResponse>
+            (
+                functionName: "recoveryFuelByYukichi",
+                functionParameter: null
+            );
+            return response;
+        }
+
+        public async UniTask<RecoveryStaminaByWaitTimeResponse> RecoveryStaminaByWaitTime()
+        {
+            var response = await PlayFabUtility.ExecuteFunctionAsync<RecoveryStaminaByWaitTimeResponse>
+            (
                 functionName: "recoveryStaminaByWaitTime",
-                functionParameter: null,
-                callBack: onEnd
-                );
+                functionParameter: null
+            );
+            return response;
         }
     }
 }

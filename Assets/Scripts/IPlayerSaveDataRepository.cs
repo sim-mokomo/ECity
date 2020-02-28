@@ -2,10 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using MokomoGames.Protobuf;
+using UniRx.Async;
 using UnityEngine;
 
 public interface IPlayerSaveDataRepository
 {
-    void GetPlayerSaveData(Action<PlayerSaveData> onEnd);
-    void RecoveryStaminaByWaitTime(Action<RecoveryStaminaByWaitTimeResponse> onEnd);
+    UniTask<PlayerSaveData> GetPlayerSaveData();
+    UniTask<RecoveryFuelByYukichiResponse> RecoveryFuelByYukichi();
+    UniTask<RecoveryStaminaByWaitTimeResponse> RecoveryStaminaByWaitTime();
 }

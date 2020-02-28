@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using MokomoGames;
 using MokomoGames.Protobuf;
+using UniRx.Async;
 using UnityEngine;
+using Zenject;
 
 public class PlayerSaveDataDebugRepository : IPlayerSaveDataRepository
 {
-    public void GetPlayerSaveData(Action<PlayerSaveData> onEnd)
+    [Inject] private IMasterDataRepository _masterDataRepository;
+    [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
+
+    public UniTask<PlayerSaveData> GetPlayerSaveData()
     {
-        onEnd?.Invoke( new PlayerSaveData()
+        return new UniTask<PlayerSaveData>(new PlayerSaveData()
         {
             Coin = 100,
             Mizu = 56,
@@ -19,11 +25,19 @@ public class PlayerSaveDataDebugRepository : IPlayerSaveDataRepository
         });
     }
 
-    public void RecoveryStaminaByWaitTime(Action<RecoveryStaminaByWaitTimeResponse> onEnd)
+    public UniTask<RecoveryFuelByYukichiResponse> RecoveryFuelByYukichi()
     {
-        onEnd?.Invoke(new RecoveryStaminaByWaitTimeResponse()
+        return new UniTask<RecoveryFuelByYukichiResponse>(new RecoveryFuelByYukichiResponse()
         {
-            RecoveriedStamina = 2
+            Fuel = 100,
+        });
+    }
+
+    public UniTask<RecoveryStaminaByWaitTimeResponse> RecoveryStaminaByWaitTime()
+    {
+        return new UniTask<RecoveryStaminaByWaitTimeResponse>(new RecoveryStaminaByWaitTimeResponse()
+        {
+            RecoveriedStamina = 1
         });
     }
 }

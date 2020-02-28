@@ -32,8 +32,9 @@ namespace MokomoGames.Protobuf {
             "ZXJ5U3RhbWluYUJ5V2FpdFRpbWVSZXNwb25zZRIZChFyZWNvdmVyaWVkU3Rh",
             "bWluYRgBIAEoDSJpCg5QbGF5ZXJTYXZlRGF0YRIPCgdzdGFtaW5hGAEgASgN",
             "Eg8KB3l1a2ljaGkYAiABKA0SDAoEY29pbhgDIAEoDRIMCgRtaXp1GAQgASgN",
-            "EgwKBHJhbmsYBSABKA0SCwoDZXhwGAYgASgNQheqAhRNb2tvbW9HYW1lcy5Q",
-            "cm90b2J1ZmIGcHJvdG8z"));
+            "EgwKBHJhbmsYBSABKA0SCwoDZXhwGAYgASgNIi0KHVJlY292ZXJ5RnVlbEJ5",
+            "WXVraWNoaVJlc3BvbnNlEgwKBGZ1ZWwYASABKA1CF6oCFE1va29tb0dhbWVz",
+            "LlByb3RvYnVmYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -42,7 +43,8 @@ namespace MokomoGames.Protobuf {
             new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.GetPlayerSaveDataResponse), global::MokomoGames.Protobuf.GetPlayerSaveDataResponse.Parser, new[]{ "SaveData" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.RecoveryStaminaByWaitTimeRequest), global::MokomoGames.Protobuf.RecoveryStaminaByWaitTimeRequest.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.RecoveryStaminaByWaitTimeResponse), global::MokomoGames.Protobuf.RecoveryStaminaByWaitTimeResponse.Parser, new[]{ "RecoveriedStamina" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.PlayerSaveData), global::MokomoGames.Protobuf.PlayerSaveData.Parser, new[]{ "Stamina", "Yukichi", "Coin", "Mizu", "Rank", "Exp" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.PlayerSaveData), global::MokomoGames.Protobuf.PlayerSaveData.Parser, new[]{ "Stamina", "Yukichi", "Coin", "Mizu", "Rank", "Exp" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.RecoveryFuelByYukichiResponse), global::MokomoGames.Protobuf.RecoveryFuelByYukichiResponse.Parser, new[]{ "Fuel" }, null, null, null, null)
           }));
     }
     #endregion
@@ -933,6 +935,135 @@ namespace MokomoGames.Protobuf {
           }
           case 48: {
             Exp = input.ReadUInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class RecoveryFuelByYukichiResponse : pb::IMessage<RecoveryFuelByYukichiResponse> {
+    private static readonly pb::MessageParser<RecoveryFuelByYukichiResponse> _parser = new pb::MessageParser<RecoveryFuelByYukichiResponse>(() => new RecoveryFuelByYukichiResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<RecoveryFuelByYukichiResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::MokomoGames.Protobuf.UserDataReflection.Descriptor.MessageTypes[6]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RecoveryFuelByYukichiResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RecoveryFuelByYukichiResponse(RecoveryFuelByYukichiResponse other) : this() {
+      fuel_ = other.fuel_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RecoveryFuelByYukichiResponse Clone() {
+      return new RecoveryFuelByYukichiResponse(this);
+    }
+
+    /// <summary>Field number for the "fuel" field.</summary>
+    public const int FuelFieldNumber = 1;
+    private uint fuel_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint Fuel {
+      get { return fuel_; }
+      set {
+        fuel_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as RecoveryFuelByYukichiResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(RecoveryFuelByYukichiResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Fuel != other.Fuel) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Fuel != 0) hash ^= Fuel.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Fuel != 0) {
+        output.WriteRawTag(8);
+        output.WriteUInt32(Fuel);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Fuel != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Fuel);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(RecoveryFuelByYukichiResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Fuel != 0) {
+        Fuel = other.Fuel;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Fuel = input.ReadUInt32();
             break;
           }
         }

@@ -15,21 +15,27 @@ namespace MokomoGames
         
         [SerializeField] private UIHeader headerUi;
         [SerializeField] private UIRankConfirm rankConfirm;
+        [SerializeField] private UIFillWarningStaminaDialog fillWarningStaminaDialog;
+        [SerializeField] private UIRecoveryStaminaDialog recoveryStaminaDialog;
         [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
         [Inject] private IMasterDataRepository _masterDataRepository;
         private StaminaRecoveryTimeController staminaRecoveryTimeController;
-        private PlayerSaveData saveData;
+        private PlayerSaveDataContainer _playerSaveDataContainer;
         public event Action<MasterSequencer.SequencerType, bool, Func<bool>> OnLeave;
         
-        public void Begin()
+        public async void Begin()
         {
             Display(true);
+            
+            var saveData = await _playerSaveDataRepository.GetPlayerSaveData();
+            _playerSaveDataContainer = new PlayerSaveDataContainer(_masterDataRepository,saveData);
+            Refresh(_playerSaveDataContainer);
 
             staminaRecoveryTimeController = new StaminaRecoveryTimeController(_playerSaveDataRepository);
             staminaRecoveryTimeController.OnRecoveriedStamina += () =>
             {
-                saveData.Stamina += 1;
-                Refresh(saveData);
+                _playerSaveDataContainer.Fuel += 1;
+                Refresh(_playerSaveDataContainer);
             };
             staminaRecoveryTimeController.OnClock += () =>
             {
@@ -42,26 +48,50 @@ namespace MokomoGames
                     staminaRecoveryTimeController.RecoverySeconds);
             };
             staminaRecoveryTimeController.Begin();
-            
-            _playerSaveDataRepository.GetPlayerSaveData(responseSaveData =>
-            {
-                saveData = responseSaveData;
-                Refresh(saveData);
-            });
 
             headerUi.OnTap += () =>
             {
-                var rankRecord = _masterDataRepository.RankTable.Records.FirstOrDefault(x => x.Rank == saveData.Rank);
                 rankConfirm.gameObject.SetActive(true);
-                rankConfirm.SetCurrentRank(rankRecord.Rank);
-                rankConfirm.SetExpGauge(rankRecord.NeedNextRankExp - saveData.Exp ,rankRecord.NeedNextRankExp);
+                rankConfirm.SetCurrentRank(_playerSaveDataContainer.Rank);
+                rankConfirm.SetExpGauge(
+                    _playerSaveDataContainer.GetNeedNextRankExp() - _playerSaveDataContainer.Exp ,
+                    _playerSaveDataContainer.GetNeedNextRankExp());
                 rankConfirm.SetStaminaGauge(
                     staminaRecoveryTimeController.Minutes,
                     staminaRecoveryTimeController.Seconds,
                     staminaRecoveryTimeController.RecoverySeconds);
             };
-
+            headerUi.StaminaUi.OnTapedRecoveryButton += () =>
+            {
+                recoveryStaminaDialog.Initialize(
+                        _playerSaveDataContainer.Fuel,
+                        _playerSaveDataContainer.GetMaxFuel(),
+                        _playerSaveDataContainer.Yukichi,
+                        1
+                    );
+                recoveryStaminaDialog.Open();
+            };
             headerUi.OnRelease += () => { rankConfirm.gameObject.SetActive(false); };
+            
+            recoveryStaminaDialog.OnTappedCloseButton += recoveryStaminaDialog.Close;
+            recoveryStaminaDialog.OnTappedNoButton += recoveryStaminaDialog.Close;
+            recoveryStaminaDialog.OnTappedYesButton += () =>
+            {
+                fillWarningStaminaDialog.Open();
+                fillWarningStaminaDialog.ShowMaxFuelMessage(_playerSaveDataContainer.IsMaxFuel);
+                if (!_playerSaveDataContainer.IsMaxFuel)
+                {
+                    saveData.Stamina += _playerSaveDataContainer.GetMaxFuel();
+                    saveData.Yukichi--;
+                    _playerSaveDataRepository.RecoveryFuelByYukichi();
+                    Refresh(_playerSaveDataContainer);
+                }
+                fillWarningStaminaDialog.SetStamina(saveData.Stamina,_playerSaveDataContainer.GetMaxFuel());
+                fillWarningStaminaDialog.SetYukichiNum(saveData.Yukichi);
+                recoveryStaminaDialog.Close();
+            };
+            fillWarningStaminaDialog.OnTappedClose += fillWarningStaminaDialog.Close;
+            fillWarningStaminaDialog.OnTappedConfirm += fillWarningStaminaDialog.Close;
         }
 
         public void Tick()
@@ -76,17 +106,29 @@ namespace MokomoGames
 
         public void Display(bool show)
         {
+            var openables = GetComponentsInChildren<IOpenable>();
+            foreach (var openable in openables)
+            {
+                if(show)
+                    openable.Open();
+                else
+                    openable.Close();
+            }
             gameObject.SetActive(show);
         }
         
-        private void Refresh(PlayerSaveData save)
+        private void Refresh(PlayerSaveDataContainer saveDataContainer)
         {
-            var rankRecord = _masterDataRepository.RankTable.Records.FirstOrDefault(x => x.Rank == saveData.Rank);
-            headerUi.SetStamina(save.Stamina,rankRecord.MaxFuel);
-            headerUi.SetCoinNum(save.Coin);
-            headerUi.SetMizuNum(save.Mizu);
-            headerUi.SetYukichiNum(save.Yukichi);
-            headerUi.SetRank(save.Rank,save.Exp,rankRecord.NeedNextRankExp);
+            headerUi.SetStamina(
+                saveDataContainer.Fuel,
+                saveDataContainer.GetMaxFuel());
+            headerUi.SetCoinNum(saveDataContainer.Coin);
+            headerUi.SetMizuNum(saveDataContainer.Mizu);
+            headerUi.SetYukichiNum(saveDataContainer.Yukichi);
+            headerUi.SetRank(
+                saveDataContainer.Rank,
+                saveDataContainer.Exp,
+                saveDataContainer.GetNeedNextRankExp());
         }
     }
 }

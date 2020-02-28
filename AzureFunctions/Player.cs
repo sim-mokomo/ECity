@@ -58,7 +58,7 @@ namespace MokomoGames.Function
             var userDataResponseDic = userDataResponse.Result.Data;
 
             var rankValue = userDataResponseDic.ContainsKey("rank") ? uint.Parse(userDataResponseDic["rank"].Value) : 0;
-            var rankTable = await GetRankTableInstance();
+            var rankTable = await GetRankTableInstanceAsync();
             var rankRecord = rankTable.Records.FirstOrDefault(x => x.Rank == rankValue);
 
             var staminaValue = userDataResponseDic.ContainsKey("stamina") ? uint.Parse(userDataResponseDic["stamina"].Value) : rankRecord.MaxFuel;
@@ -150,6 +150,30 @@ namespace MokomoGames.Function
             var userDataResponse = await PlayFabServerAPI.UpdateUserDataAsync(updateUserDataRequest);
         }
 
+        [FunctionName("recoveryFuelByYukichi")]
+        public static async Task<dynamic> RecoveryFuelByYukichi(
+            [HttpTrigger(AuthorizationLevel.Function,"get", "post", Route = null)] HttpRequestMessage req,
+            ILogger log)
+        {
+            var context = await FunctionContext<dynamic>.Create(req);
+            var args = context.FunctionArgument;
+            InitializePlayFabSettings(context);
+
+            var rankTable = await GetRankTableInstanceAsync();
+            var playerId = CurrentPlayerId(context);
+            var saveData = await GetUserDataElement<PlayerSaveData>(playerId);
+            saveData.Stamina += rankTable.Records.FirstOrDefault(x => x.Rank == saveData.Rank).MaxFuel;
+            saveData.Yukichi--;
+            await UpdateUserDataElement<PlayerSaveData>(playerId,saveData);
+
+            var response = new RecoveryFuelByYukichiResponse()
+            {
+                Fuel = saveData.Stamina
+            };
+            return JsonFormatter.Default.Format(response);
+        }
+        
+
         [FunctionName("getRankTable")]
         public static async Task<dynamic> GetRankTable(
             [HttpTrigger(AuthorizationLevel.Function,"get", "post", Route = null)] HttpRequestMessage req,
@@ -165,7 +189,7 @@ namespace MokomoGames.Function
             return json;
         }
 
-        public static async Task<RankTable> GetRankTableInstance()
+        public static async Task<RankTable> GetRankTableInstanceAsync()
         {
             var titleDataRequest = await PlayFabServerAPI.GetTitleDataAsync(new GetTitleDataRequest());
             var rankTable = RankTable.Parser.ParseJson(titleDataRequest.Result.Data["RankTable"]);
