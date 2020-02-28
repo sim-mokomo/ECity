@@ -40,7 +40,7 @@ namespace MokomoGames
             var timer = new Timer(RecoverySeconds);
             timer.OnEnded += () =>
             {
-                _playerSaveDataRepository.RecoveryStaminaByWaitTime(null);
+                _playerSaveDataRepository.RecoveryStaminaByWaitTime();
                 OnRecoveriedStamina?.Invoke();
             };
             timer.OnClocked += (_) => OnClock?.Invoke();

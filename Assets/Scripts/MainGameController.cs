@@ -16,13 +16,13 @@ public class MainGameController : MonoBehaviour
     private MasterSequencer masterSequencer;
     public static UserDataContainer UserDataContainer { get; private set; }
     [Inject] private IMasterDataRepository _masterDataRepository;
-
+    
     private void Start()
     {
         masterSequencer = FindObjectOfType<MasterSequencer>();
         masterSequencer.AllDisplay(false);
 
-        void OnLoggedIn(LoginResult result)
+        async void OnLoggedIn(LoginResult result)
         {
             UserDataContainer = new UserDataContainer(result.PlayFabId,result.AuthenticationContext);
             _masterDataRepository.LoadAllTable();
