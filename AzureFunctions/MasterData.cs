@@ -42,5 +42,51 @@ namespace MokomoGames.Function
             var rankTable = RankTable.Parser.ParseJson(titleDataRequest.Result.Data["RankTable"]);
             return rankTable;
         }
+
+        [FunctionName("getSoulTable")]
+        public static async Task<dynamic> GetSoulTable(
+            [HttpTrigger(AuthorizationLevel.Function,"get", "post", Route = null)] HttpRequestMessage req,
+            ILogger log)
+        {
+            var context = await FunctionContext<dynamic>.Create(req);
+            var args = context.FunctionArgument;
+            context.PreparePlayFabAPI();
+
+            var titleDataResponse = await PlayFabServerAPI.GetTitleDataAsync(new GetTitleDataRequest());
+            var json = titleDataResponse.Result.Data["SoulTable"];
+            log.LogInformation(json);
+
+            return json;
+        }
+
+        public static async Task<RankTable> GetSoulTableInstanceAsync()
+        {
+            var titleDataRequest = await PlayFabServerAPI.GetTitleDataAsync(new GetTitleDataRequest());
+            var soulTable = RankTable.Parser.ParseJson(titleDataRequest.Result.Data["SoulTable"]);
+            return soulTable;
+        }
+
+        [FunctionName("getSoulLevelTable")]
+        public static async Task<dynamic> GetSoulLevelTable(
+            [HttpTrigger(AuthorizationLevel.Function,"get", "post", Route = null)] HttpRequestMessage req,
+            ILogger log)
+        {
+            var context = await FunctionContext<dynamic>.Create(req);
+            var args = context.FunctionArgument;
+            context.PreparePlayFabAPI();
+
+            var titleDataResponse = await PlayFabServerAPI.GetTitleDataAsync(new GetTitleDataRequest());
+            var json = titleDataResponse.Result.Data["SoulLevelTable"];
+            log.LogInformation(json);
+
+            return json;
+        }
+
+        public static async Task<RankTable> GetSoulLevelTableInstanceAsync()
+        {
+            var titleDataRequest = await PlayFabServerAPI.GetTitleDataAsync(new GetTitleDataRequest());
+            var soulTable = RankTable.Parser.ParseJson(titleDataRequest.Result.Data["SoulLeveTable"]);
+            return soulTable;
+        }
     }
 }
