@@ -7,7 +7,9 @@ public interface IOpenable
 {
     bool IsOpening { get; }
     event Action OnOpen;
+    event Action OnOpened;
     event Action OnClose;
+    event Action OnClosed;
     void Open();
     void Close();
 }
