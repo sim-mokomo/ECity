@@ -1,0 +1,28 @@
+syntax = "proto3";
+package ecity;
+
+option csharp_namespace = "MokomoGames.Protobuf";
+
+enum Attribute
+{
+    ATTRIBUTE_UNKNOWN = 0;
+    FIRE = 1;
+    WATER = 2;
+    WOOD = 3;
+    LIGHT = 4;
+    SHADOW = 5;
+}
+
+enum SoulType
+{
+    SOULTYPE_UNKNOWN = 0;
+    ART = 1;
+    UNDERGROUND = 2;
+    CURE = 3;
+    TOUGHNESS = 4;
+    TRANSCENDENCE = 5;
+    BALANCE = 6;
+    REINFORCED_SYNTHESIS = 7;
+    EVOLUTION = 8;
+    SALE = 9;
+}

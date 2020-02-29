@@ -1,0 +1,24 @@
+syntax = "proto3";
+package ecity;
+
+option csharp_namespace = "MokomoGames.Protobuf";
+import "Battle.proto";
+
+message SoulTableRecord
+{
+    uint32 no = 1;
+    string another_name = 2;
+    string name = 3;
+    SoulType soul_type = 4;
+    uint32 rarity = 5;
+    Attribute attribute = 6;
+    string cv = 7;
+    uint32 cost = 8;
+    uint32 normal_skill_type = 9;
+    uint32 reader_skill_type = 10;
+}
+
+message SoulTable
+{
+    repeated SoulTableRecord records = 1;
+}
