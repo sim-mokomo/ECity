@@ -18,14 +18,16 @@ namespace MokomoGames
         [SerializeField] private UIRankConfirm rankConfirm;
         [SerializeField] private UIFillWarningStaminaDialog fillWarningStaminaDialog;
         [SerializeField] private UIRecoveryStaminaDialog recoveryStaminaDialog;
-        [SerializeField] private Toggle soulLaboToggle;
-        [SerializeField] private UIMenuList soulLaboMenuList;
+        [SerializeField] private Button soulLaboToggle;
+        [SerializeField] private UISoulLaboMenu soulLaboMenu;
+        [SerializeField] private UISoulListMenu soulListMenu;
         [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
         [Inject] private IMasterDataRepository _masterDataRepository;
         private StaminaRecoveryTimeController staminaRecoveryTimeController;
         private PlayerSaveDataContainer _playerSaveDataContainer;
+        private UIMenuListContainer _menuListContainer = new UIMenuListContainer();
         public event Action<MasterSequencer.SequencerType, bool, Func<bool>> OnLeave;
-        
+
         public async void Begin()
         {
             Display(true);
@@ -95,19 +97,26 @@ namespace MokomoGames
             };
             fillWarningStaminaDialog.OnTappedClose += fillWarningStaminaDialog.Close;
             fillWarningStaminaDialog.OnTappedConfirm += fillWarningStaminaDialog.Close;
-
-            soulLaboToggle.onValueChanged.AddListener(isOn =>
+            
+            soulLaboToggle.onClick.AddListener(() =>
             {
-                if(isOn)
-                    soulLaboMenuList.Open();
-                else
-                    soulLaboMenuList.Close();
+                _menuListContainer.Add(soulLaboMenu);
             });
+            soulLaboMenu.ListButton.onClick.AddListener(() =>
+            {
+                _menuListContainer.Add(soulListMenu);
+            });
+            
+            soulLaboMenu.Close();
+            soulListMenu.Close();
+            recoveryStaminaDialog.gameObject.SetActive(false);
+            fillWarningStaminaDialog.gameObject.SetActive(false);
         }
 
         public void Tick()
         {
             headerUi.Tick();
+            _menuListContainer.Tick();
         }
 
         public void End()
@@ -117,14 +126,6 @@ namespace MokomoGames
 
         public void Display(bool show)
         {
-            var openables = GetComponentsInChildren<IOpenable>();
-            foreach (var openable in openables)
-            {
-                if(show)
-                    openable.Open();
-                else
-                    openable.Close();
-            }
             gameObject.SetActive(show);
         }
         
