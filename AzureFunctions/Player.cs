@@ -26,12 +26,6 @@ namespace MokomoGames.Function
             return context.CallerEntityProfile.Lineage.MasterPlayerAccountId;
         }
 
-        public static void InitializePlayFabSettings(FunctionContext<dynamic> context)
-        {
-            PlayFabSettings.staticSettings.DeveloperSecretKey = context.ApiSettings.DeveloperSecretKey;
-            PlayFabSettings.staticSettings.TitleId = context.ApiSettings.TitleId;
-        }
-
         [FunctionName("getPlayerSaveData")]
         public static async Task<dynamic> GetPlayerSaveData(
             [HttpTrigger(AuthorizationLevel.Function,"get", "post", Route = null)] HttpRequestMessage req,
@@ -39,8 +33,7 @@ namespace MokomoGames.Function
         {
             var context = await FunctionContext<dynamic>.Create(req);
             var args = context.FunctionArgument;
-
-            InitializePlayFabSettings(context);
+            context.PreparePlayFabAPI();
             
             var userDataResponse = await PlayFabServerAPI.GetUserDataAsync(new GetUserDataRequest()
             {
@@ -93,8 +86,7 @@ namespace MokomoGames.Function
         {
             var context = await FunctionContext<dynamic>.Create(req);
             var args = context.FunctionArgument;
-
-            InitializePlayFabSettings(context);
+            context.PreparePlayFabAPI();
             
             string json = args["json"];
             var request = RecoveryStaminaByWaitTimeRequest.Parser.ParseJson(json);
@@ -157,7 +149,7 @@ namespace MokomoGames.Function
         {
             var context = await FunctionContext<dynamic>.Create(req);
             var args = context.FunctionArgument;
-            InitializePlayFabSettings(context);
+            context.PreparePlayFabAPI();
 
             var rankTable = await GetRankTableInstanceAsync();
             var playerId = CurrentPlayerId(context);
