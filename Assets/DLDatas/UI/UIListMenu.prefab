@@ -52,7 +52,7 @@ MonoBehaviour:
   moveDistXWhenOpen: 0
   moveDistXWhenClose: 1300
   moveDurationWhenOpen: 0.1
-  moveDurationWhenClose: 0.1
+  moveDurationWhenClose: 0.3
   moveRectTransform: {fileID: 1455523916779774326}
   soulListButton: {fileID: 1757791830778622332}
   artifactButton: {fileID: 1757791830795033429}
@@ -1262,7 +1262,7 @@ PrefabInstance:
     - target: {fileID: 889426914848735169, guid: 8877ce4563f74154bafb990ece460bf6,
         type: 3}
       propertyPath: m_Size
-      value: 1
+      value: 0.9955391
       objectReference: {fileID: 0}
     - target: {fileID: 889426915414555744, guid: 8877ce4563f74154bafb990ece460bf6,
         type: 3}
@@ -1397,7 +1397,7 @@ PrefabInstance:
     - target: {fileID: 889426916204243036, guid: 8877ce4563f74154bafb990ece460bf6,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000061035156
+      value: 0.00016989645
       objectReference: {fileID: 0}
     - target: {fileID: 889426916204243036, guid: 8877ce4563f74154bafb990ece460bf6,
         type: 3}

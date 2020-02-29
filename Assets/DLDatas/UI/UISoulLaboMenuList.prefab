@@ -23,7 +23,7 @@ MonoBehaviour:
   moveDistXWhenOpen: 0
   moveDistXWhenClose: 1300
   moveDurationWhenOpen: 0.1
-  moveDurationWhenClose: 0.1
+  moveDurationWhenClose: 0.3
   moveRectTransform: {fileID: 1326616916547176039}
   listButton: {fileID: 2179449885132763205}
 --- !u!114 &2179449886394654810
