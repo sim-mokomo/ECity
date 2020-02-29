@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -10,14 +11,33 @@ public class UIMenuList : MonoBehaviour,IOpenable
     public float duration;
     public float value;
     public float d;
+    private bool isOpening;
     [SerializeField] private RectTransform _rectTransform;
-    public void Open()
+
+    public bool IsOpening => isOpening;
+    public event Action OnOpen;
+    public event Action OnClose;
+
+    protected virtual void Awake()
     {
-        _rectTransform.DOLocalMoveX(endvalue, duration, snapping: true);
+        OnOpen += () =>  _rectTransform.DOLocalMoveX(endvalue, duration, snapping: true);
+        OnClose += () => _rectTransform.DOLocalMoveX(value, d, snapping: true);
     }
 
-    public void Close()
+    public virtual void Open()
     {
-        _rectTransform.DOLocalMoveX(value, d, snapping: true);
+        isOpening = true;
+        OnOpen?.Invoke();
+    }
+
+    public virtual void Close()
+    {
+        OnClose?.Invoke();
+        isOpening = false;
+    }
+
+    public virtual void Tick()
+    {
+        
     }
 }
