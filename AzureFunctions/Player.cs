@@ -51,7 +51,7 @@ namespace MokomoGames.Function
             var userDataResponseDic = userDataResponse.Result.Data;
 
             var rankValue = userDataResponseDic.ContainsKey("rank") ? uint.Parse(userDataResponseDic["rank"].Value) : 0;
-            var rankTable = await GetRankTableInstanceAsync();
+            var rankTable = await MasterData.GetRankTableInstanceAsync();
             var rankRecord = rankTable.Records.FirstOrDefault(x => x.Rank == rankValue);
 
             var staminaValue = userDataResponseDic.ContainsKey("stamina") ? uint.Parse(userDataResponseDic["stamina"].Value) : rankRecord.MaxFuel;
@@ -151,7 +151,7 @@ namespace MokomoGames.Function
             var args = context.FunctionArgument;
             context.PreparePlayFabAPI();
 
-            var rankTable = await GetRankTableInstanceAsync();
+            var rankTable = await MasterData.GetRankTableInstanceAsync();
             var playerId = CurrentPlayerId(context);
             var saveData = await GetUserDataElement<PlayerSaveData>(playerId);
             saveData.Stamina += rankTable.Records.FirstOrDefault(x => x.Rank == saveData.Rank).MaxFuel;
@@ -163,29 +163,6 @@ namespace MokomoGames.Function
                 Fuel = saveData.Stamina
             };
             return JsonFormatter.Default.Format(response);
-        }
-        
-
-        [FunctionName("getRankTable")]
-        public static async Task<dynamic> GetRankTable(
-            [HttpTrigger(AuthorizationLevel.Function,"get", "post", Route = null)] HttpRequestMessage req,
-            ILogger log)
-        {
-            var context = await FunctionContext<dynamic>.Create(req);
-            var args = context.FunctionArgument;
-
-            InitializePlayFabSettings(context);
-            var titleDataResponse = await PlayFabServerAPI.GetTitleDataAsync(new GetTitleDataRequest());
-            var json = titleDataResponse.Result.Data["RankTable"];
-            log.LogInformation(json);
-            return json;
-        }
-
-        public static async Task<RankTable> GetRankTableInstanceAsync()
-        {
-            var titleDataRequest = await PlayFabServerAPI.GetTitleDataAsync(new GetTitleDataRequest());
-            var rankTable = RankTable.Parser.ParseJson(titleDataRequest.Result.Data["RankTable"]);
-            return rankTable;
         }
     }
 
