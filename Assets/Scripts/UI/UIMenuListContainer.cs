@@ -9,15 +9,17 @@ public class UIMenuListContainer
 {
     private readonly List<UIMenuList> _menuLists = new List<UIMenuList>();
     private UIMenuList Tail => _menuLists.LastOrDefault();
+    private const float OffsetBetweenMenu = 200f;
+    private const float OffsetMoveDuration = 0.1f;
 
     public void Add(UIMenuList menuList)
     {
         if (_menuLists.Contains(menuList))
             return;
-        for (var i = 0; i < _menuLists.Count; i++)
+        foreach (var menuGroup in _menuLists.Select((x, i) => new {menu = x, index = i}))
         {
-            var menu = _menuLists[i];
-            menu.transform.DOLocalMoveX(menu.endvalue - (200f * (i + 1)), 0.1f, true);
+            var menu = menuGroup.menu;
+            menu.transform.DOLocalMoveX(menu.MoveDurationWhenOpen - OffsetBetweenMenu * (menuGroup.index + 1), OffsetMoveDuration, true);
         }
         _menuLists.Add(menuList);
         menuList.OnClose -= RemoveTail;
@@ -30,10 +32,10 @@ public class UIMenuListContainer
         if(!_menuLists.Contains(menulist))
             return;
         _menuLists.Remove(menulist);
-        for (var i = 0; i < _menuLists.Count; i++)
+        foreach (var menuGroup in _menuLists.Select( (x,i) => new {menu=x,index=i}))
         {
-            var menu = _menuLists[i];
-            menu.transform.DOLocalMoveX(menu.endvalue - (200f * i), 0.1f, true);
+            var menu = menuGroup.menu;
+            menu.transform.DOLocalMoveX(menu.MoveDurationWhenOpen - (OffsetBetweenMenu * menuGroup.index), OffsetMoveDuration, true);
         }
     }
 
