@@ -7,6 +7,8 @@ namespace MokomoGames
     {
         bool AllLoaded { get; }
         RankTable RankTable { get; }
+        SoulTable SoulTable { get; }
+        SoulLevelTable SoulLevelTable { get; }
         void LoadAllTable();
     }
 }

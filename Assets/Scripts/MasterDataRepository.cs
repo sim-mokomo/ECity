@@ -10,14 +10,22 @@ namespace MokomoGames
     public class MasterDataRepository : IMasterDataRepository
     {
         private RankTable _rankTable;
+        private SoulTable _soulTable;
+        private SoulLevelTable _soulLevelTable;
         public RankTable RankTable => _rankTable;
+        public SoulTable SoulTable => _soulTable;
+        public SoulLevelTable SoulLevelTable => _soulLevelTable;
 
-        public bool AllLoaded => RankTable != null;
+        public bool AllLoaded =>
+            RankTable != null &&
+            SoulTable != null &&
+            SoulLevelTable != null;
 
-        public void LoadAllTable()
+        public async void LoadAllTable()
         {
-            PlayFabUtility.ExecuteFunction<RankTable>("getRankTable", null, table => { _rankTable = table; });
-            //_rankTable = await PlayFabUtility.ExecuteFunctionAsync<RankTable>("getRankTable",null);
+            _rankTable = await PlayFabUtility.ExecuteFunctionAsync<RankTable>("getRankTable", null);
+            _soulTable = await PlayFabUtility.ExecuteFunctionAsync<SoulTable>("getSoulTable", null);
+            _soulLevelTable = await PlayFabUtility.ExecuteFunctionAsync<SoulLevelTable>("getSoulLevelTable", null);
         }
     }
 }

@@ -14,15 +14,22 @@ namespace MokomoGames
     public class MasterDataDebugRepository : IMasterDataRepository
     {
         private RankTable _rankTable;
+        private SoulTable _soulTable;
+        private SoulLevelTable _soulLevelTable;
         public RankTable RankTable => _rankTable;
+        public SoulTable SoulTable => _soulTable;
+        public SoulLevelTable SoulLevelTable => _soulLevelTable;
 
-        public bool AllLoaded => RankTable != null;
+        public bool AllLoaded => 
+            RankTable != null &&
+        SoulTable != null &&
+        SoulLevelTable != null;
 
         public void LoadAllTable()
         {
             _rankTable = RankTable.Parser.ParseJson(File.ReadAllText("./Assets/Debug/Json/RankTable.json"));
-            //PlayFabUtility.ExecuteFunction<RankTable>("getRankTable", null, table => { _rankTable = table; });
-            //_rankTable = await PlayFabUtility.ExecuteFunctionAsync<RankTable>("getRankTable",null);
+            _soulTable = SoulTable.Parser.ParseJson(File.ReadAllText("./Assets/Debug/Json/SoulTable.json"));
+            _soulLevelTable = SoulLevelTable.Parser.ParseJson(File.ReadAllText("./Assets/Debug/Json/SoulLevelTable.json"));
         }
     }
 }
