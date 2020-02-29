@@ -63,6 +63,12 @@ namespace MokomoGames
                 .Select(x => x.gameObject)
                 .ToList();
         }
+
+        public static bool IsTouchedUI<T>() where T: MonoBehaviour
+        {
+            var objs = GetTouchUIObjs();
+            return objs.Any(x => x.GetComponent<T>());
+        }
     }
     
     
