@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace MokomoGames.UI
 {
-    public class UIFillWarningStaminaDialog : MonoBehaviour,IOpenable
+    public class UIFillWarningStaminaDialog : MonoBehaviour
     {
         [SerializeField] private UIStamina uiStamina;
         [SerializeField] private UIHasYukichi hasYukichi;

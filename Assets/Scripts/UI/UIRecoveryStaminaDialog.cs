@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace MokomoGames
 {
-    public class UIRecoveryStaminaDialog : MonoBehaviour,IOpenable
+    public class UIRecoveryStaminaDialog : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI hasYukichiNumText;
         [SerializeField] private UIStamina stamina;
@@ -32,6 +32,7 @@ namespace MokomoGames
             yesButton.onClick.AddListener( () => OnTappedYesButton?.Invoke());
             closeButton.onClick.AddListener( () => OnTappedCloseButton?.Invoke());
         }
+        
 
         public void Open()
         {
