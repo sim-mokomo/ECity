@@ -323,8 +323,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u30DC\u30BF\u30F3\u540D"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4d8ca075369634f038e19cb8740db959, type: 2}
-  m_sharedMaterial: {fileID: 6328000466737147073, guid: 4d8ca075369634f038e19cb8740db959,
+  m_fontAsset: {fileID: 11400000, guid: 6032402356e79fd47b9cd199703ed342, type: 2}
+  m_sharedMaterial: {fileID: 4990013876727588594, guid: 6032402356e79fd47b9cd199703ed342,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
