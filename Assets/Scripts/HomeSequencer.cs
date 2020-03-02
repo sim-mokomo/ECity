@@ -21,6 +21,7 @@ namespace MokomoGames
         [SerializeField] private Button soulLaboToggle;
         [SerializeField] private UISoulLaboMenu soulLaboMenu;
         [SerializeField] private UISoulListMenu soulListMenu;
+        [SerializeField] private UISoulListPage soulListPage;
         [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
         [Inject] private IMasterDataRepository _masterDataRepository;
         private StaminaRecoveryTimeController staminaRecoveryTimeController;
@@ -107,10 +108,22 @@ namespace MokomoGames
                 _menuListContainer.Add(soulListMenu);
             });
             
+            foreach (var page in GetComponentsInChildren<IPage>())
+            {
+                page.OnTappedHomeButton -= ReleaseAllMenuList;
+                page.OnTappedHomeButton += ReleaseAllMenuList;
+            }
+
             soulLaboMenu.Close();
             soulListMenu.Close();
             recoveryStaminaDialog.gameObject.SetActive(false);
             fillWarningStaminaDialog.gameObject.SetActive(false);
+            soulListPage.gameObject.SetActive(false);
+        }
+
+        public void ReleaseAllMenuList()
+        {
+            _menuListContainer.RemoveAll();
         }
 
         public void Tick()
