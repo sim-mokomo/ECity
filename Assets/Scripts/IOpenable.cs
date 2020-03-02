@@ -10,6 +10,6 @@ public interface IOpenable
     event Action OnOpened;
     event Action OnClose;
     event Action OnClosed;
-    void Open();
-    void Close();
+    void Open(bool immediately=false);
+    void Close(bool immediately=false);
 }

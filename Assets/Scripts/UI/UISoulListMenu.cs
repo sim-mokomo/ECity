@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using MokomoGames;
+using MokomoGames.UI;
 using UnityEngine;
 using UnityEngine.UI;
 using TouchType = MokomoGames.TouchType;
@@ -18,6 +20,7 @@ public class UISoulListMenu : UIMenuList
         {
             if (!CommonInput.IsTouchedUI<UISoulListMenu>())
             {
+                OnRequestedClose?.Invoke();
                 Close();
             }
         }

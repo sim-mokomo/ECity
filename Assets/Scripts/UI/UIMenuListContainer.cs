@@ -22,8 +22,8 @@ public class UIMenuListContainer
             menu.transform.DOLocalMoveX(menu.MoveDurationWhenOpen - OffsetBetweenMenu * (menuGroup.index + 1), OffsetMoveDuration, true);
         }
         _menuLists.Add(menuList);
-        menuList.OnClose -= RemoveTail;
-        menuList.OnClose += RemoveTail;
+        menuList.OnRequestedClose -= RemoveTail;
+        menuList.OnRequestedClose += RemoveTail;
         menuList.Open();
     }
 
@@ -32,6 +32,8 @@ public class UIMenuListContainer
         if(!_menuLists.Contains(menulist))
             return;
         _menuLists.Remove(menulist);
+        menulist.Close();
+
         foreach (var menuGroup in _menuLists.Select( (x,i) => new {menu=x,index=i}))
         {
             var menu = menuGroup.menu;
@@ -42,6 +44,12 @@ public class UIMenuListContainer
     private void RemoveTail()
     {
         Remove(Tail);
+    }
+
+    public void RemoveAll()
+    {
+        _menuLists.ForEach(x => x.Close(true));
+        _menuLists.Clear();
     }
 
     public void Tick()

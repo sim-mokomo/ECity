@@ -20,7 +20,7 @@ public class UISoulLaboMenu : UIMenuList
         {
             if (!CommonInput.IsTouchedUI<UISoulLaboMenu>())
             {
-                Close();
+                OnRequestedClose?.Invoke();
             }
         }
     }
