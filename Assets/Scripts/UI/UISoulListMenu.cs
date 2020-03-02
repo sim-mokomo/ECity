@@ -12,10 +12,22 @@ public class UISoulListMenu : UIMenuList
 {
     [SerializeField] private Button soulListButton;
     [SerializeField] private Button artifactButton;
-    
+    [SerializeField] private UISoulListPage soulListPage;
+
+    private void Awake()
+    {
+        soulListButton.onClick.AddListener(() =>
+        {
+            soulListPage.gameObject.SetActive(true);
+        });
+    }
+
     public override void Tick()
     {
         base.Tick();
+        if (soulListPage.gameObject.activeSelf)
+            return;
+        
         if (CommonInput.GetTouch() == TouchType.Began)
         {
             if (!CommonInput.IsTouchedUI<UISoulListMenu>())
