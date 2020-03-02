@@ -25,37 +25,36 @@ public class UIMenuList : MonoBehaviour,IOpenable
     public event Action OnOpened;
     public event Action OnClose;
     public event Action OnClosed;
+    public Action OnRequestedClose;
 
-    private UniTask PlayOpenAnimation()
+    private UniTask PlayOpenAnimation(bool immediately=false)
     {
         var taskCompletionSource = new UniTaskCompletionSource();
-        openTweenerCore = moveRectTransform.DOLocalMoveX(moveDistXWhenOpen, moveDurationWhenOpen, snapping: true);
+        openTweenerCore = moveRectTransform.DOLocalMoveX(moveDistXWhenOpen, immediately ? 0f : moveDurationWhenOpen, snapping: true);
         openTweenerCore.onComplete += () => { taskCompletionSource.TrySetResult(); };
         return taskCompletionSource.Task;
     }
-    
-    private UniTask PlayCloseAnimation()
+
+    private UniTask PlayCloseAnimation(bool immediately = false)
     {
         var taskCompletionSource = new UniTaskCompletionSource();
-        closeTweenerCore = moveRectTransform.DOLocalMoveX(moveDistXWhenClose, moveDurationWhenClose, snapping: true);
-        closeTweenerCore.onComplete += () =>
-        {
-            taskCompletionSource.TrySetResult();
-        };
+        closeTweenerCore = moveRectTransform.DOLocalMoveX(moveDistXWhenClose, immediately ? 0f : moveDurationWhenClose,
+            snapping: true);
+        closeTweenerCore.onComplete += () => { taskCompletionSource.TrySetResult(); };
         return taskCompletionSource.Task;
     }
 
-    public virtual async void Open()
+    public virtual async void Open(bool immediately=false)
     {
         OnOpen?.Invoke();
-        await PlayOpenAnimation();
+        await PlayOpenAnimation(immediately);
         OnOpened?.Invoke();
     }
 
-    public virtual async void Close()
+    public virtual async void Close(bool immediately=false)
     {
         OnClose?.Invoke();
-        await PlayCloseAnimation();
+        await PlayCloseAnimation(immediately);
         OnClosed?.Invoke();
     }
 
