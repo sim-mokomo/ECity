@@ -19,6 +19,7 @@ public class UISoulListMenu : UIMenuList
         soulListButton.onClick.AddListener(() =>
         {
             soulListPage.gameObject.SetActive(true);
+            soulListPage.Begin();
         });
     }
 
