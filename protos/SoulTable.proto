@@ -16,6 +16,7 @@ message SoulTableRecord
     uint32 cost = 8;
     uint32 normal_skill_type = 9;
     uint32 reader_skill_type = 10;
+    string character_icon_name = 11;
 }
 
 message SoulTable
