@@ -357,6 +357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attributeIcon: {fileID: 7243454542971281016}
+  attributeBackgroundImage: {fileID: 7172418903409082697}
   characterIcon: {fileID: 9036691985061776269}
   stars: {fileID: 3041807584635576690}
 --- !u!114 &1400568858893259448
