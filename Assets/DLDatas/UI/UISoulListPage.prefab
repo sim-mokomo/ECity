@@ -1348,7 +1348,8 @@ MonoBehaviour:
   soulToggle: {fileID: 1811924963446080930}
   materialToggle: {fileID: 5089578066158735395}
   cellRow: {fileID: 1637426051785474238, guid: 8e1f245a8c0ee3a448f271c812d88e93, type: 3}
-  contentRoot: {fileID: 7061719348334468299}
+  contentRoot: {fileID: 7606849439721908671}
+  verticalRoot: {fileID: 2070449089992329503}
   soulCellPrefab: {fileID: 7357323121437638111, guid: 10f2c1cc342cf98408d873eb1b6ef66f,
     type: 3}
 --- !u!1 &2121451880947392182
@@ -3045,7 +3046,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 0
+  m_Spacing: 20
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
