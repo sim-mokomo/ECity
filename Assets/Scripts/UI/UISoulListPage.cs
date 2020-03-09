@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using MokomoGames.Protobuf;
+using TMPro;
+using UniRx.Async;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -20,10 +22,13 @@ namespace MokomoGames.UI
         [SerializeField] private RectTransform contentRoot;
         [SerializeField] private VerticalLayoutGroup verticalRoot;
         [SerializeField] private UISoulCell soulCellPrefab;
+        [SerializeField] private TextMeshProUGUI hasSoulNum;
         private List<UISoulCell> _soulCells = new List<UISoulCell>();
         private Tab CurrentTab => soulToggle.isOn == true ? Tab.Soul : Tab.Material;
         private ColorBlock selectingColorBlock;
         private ColorBlock unSelectingColorBlock;
+        private PlayerSaveDataContainer _playerSaveDataContainer;
+        [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
         [Inject] private IMasterDataRepository _masterDataRepository;
         public event Action OnTappedHomeButton;
         
@@ -69,13 +74,18 @@ namespace MokomoGames.UI
             soulToggle.isOn = true;
         }
 
-        private List<UISoulCell> MakeCells(List<SoulTableRecord> records)
+        public void Prepare(PlayerSaveDataContainer _playerSaveDataContainer)
+        {
+            this._playerSaveDataContainer = _playerSaveDataContainer;
+        }
 
         private void UpdateHasSoulNum(int currentCount)
         {
             var hasSoulCapacity = 999;
             hasSoulNum.text = $"{currentCount}/{hasSoulCapacity}";
         }
+
+        private List<UISoulCell> MakeCells(List<UserSoulDataContainer> records)
         {
             const int cellNumPerRow = 6;
             var rowNum = Mathf.CeilToInt((float)records.Count / cellNumPerRow);
