@@ -1,0 +1,15 @@
+syntax = "proto3";
+package ecity;
+
+option csharp_namespace = "MokomoGames.Protobuf";
+
+message NormalSkillLevelTableRecord
+{
+    uint32 level = 1;
+    uint32 need_next_level_exp = 2;
+}
+
+message NormalSkillLevelTable
+{
+    repeated NormalSkillLevelTableRecord records = 1;
+}
