@@ -126,9 +126,8 @@ namespace MokomoGames.UI
 
         private void OnChangedTab(bool isOn)
         {
-            soulToggle.colors = soulToggle.isOn == isOn ? selectingColorBlock : unSelectingColorBlock;
-            materialToggle.colors = materialToggle.isOn == isOn ? selectingColorBlock : unSelectingColorBlock;
-
+            UpdateTabColor(CurrentTab);
+            
             if (CurrentTab == Tab.Material)
             {
                 DestroyCells();
@@ -143,6 +142,12 @@ namespace MokomoGames.UI
                 UpdateHasSoulNum(souls.Count());
                 MakeCells(souls.ToList());
             }
+        }
+
+        private void UpdateTabColor(Tab focusTab)
+        {
+            soulToggle.colors = focusTab == Tab.Soul ? selectingColorBlock : unSelectingColorBlock;
+            materialToggle.colors = focusTab == Tab.Material ? selectingColorBlock : unSelectingColorBlock;
         }
     }
 }
