@@ -19,17 +19,21 @@ namespace MokomoGames
         public RankTable RankTable => _rankTable;
         public SoulTable SoulTable => _soulTable;
         public SoulLevelTable SoulLevelTable => _soulLevelTable;
+        private NormalSkillLevelTable _normalSkillLevelTable;
+        public NormalSkillLevelTable NormalSkillLevelTable => _normalSkillLevelTable;
 
-        public bool AllLoaded => 
+        public bool AllLoaded =>
             RankTable != null &&
-        SoulTable != null &&
-        SoulLevelTable != null;
+            SoulTable != null &&
+            SoulLevelTable != null &&
+            NormalSkillLevelTable != null;
 
         public void LoadAllTable()
         {
             _rankTable = RankTable.Parser.ParseJson(File.ReadAllText("./Assets/Debug/Json/RankTable.json"));
             _soulTable = SoulTable.Parser.ParseJson(File.ReadAllText("./Assets/Debug/Json/SoulTable.json"));
             _soulLevelTable = SoulLevelTable.Parser.ParseJson(File.ReadAllText("./Assets/Debug/Json/SoulLevelTable.json"));
+            _normalSkillLevelTable = NormalSkillLevelTable.Parser.ParseJson(File.ReadAllText("./Assets/Debug/Json/NormalSkillLevelTable.json"));
         }
     }
 }
