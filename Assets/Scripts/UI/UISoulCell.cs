@@ -17,6 +17,7 @@ namespace MokomoGames.UI
         [SerializeField] private Image attributeBackgroundImage;
         [SerializeField] private Image characterIcon;
         [SerializeField] private UIStars stars;
+        private UserSoulDataContainer _soulDataContainer;
         
         //TODO: sprite に置き換えられる予定
         private static readonly Dictionary<Attribute,Color> attributeColorTable = new Dictionary<Attribute, Color>()
@@ -40,6 +41,8 @@ namespace MokomoGames.UI
             attributeColorTable.TryGetValue(soulDataContainer.BaseConfig.Attribute,out var backgroundColor);
             attributeBackgroundImage.color = backgroundColor; 
             stars.Show(soulDataContainer.BaseConfig.Rarity);
+
+            _soulDataContainer = soulDataContainer;
         }
         
         public void Show(bool show)
