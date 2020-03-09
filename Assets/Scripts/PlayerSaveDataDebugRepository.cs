@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using MokomoGames;
 using MokomoGames.Protobuf;
 using UniRx.Async;
@@ -39,5 +40,17 @@ public class PlayerSaveDataDebugRepository : IPlayerSaveDataRepository
         {
             RecoveriedStamina = 1
         });
+    }
+
+    public UniTask<GetUserSoulDataListResponse> GetUserSoulDataList()
+    {
+        var soulList = _masterDataRepository.SoulTable.Records.Select(x => new UserSoulData()
+        {
+            Guid = Guid.NewGuid().ToString(),
+            SoulNo = x.No,
+            TotalLevelExp = 1,
+            TotalSkillExp = 1,
+        });
+        return new UniTask<GetUserSoulDataListResponse>(new GetUserSoulDataListResponse(){Souls = { soulList}});
     }
 }
