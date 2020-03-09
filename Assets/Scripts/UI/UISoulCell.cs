@@ -33,13 +33,13 @@ namespace MokomoGames.UI
             _rectTransform = GetComponent<RectTransform>();
         }
 
-        public void Begin(SoulTableRecord record)
+        public void Begin(UserSoulDataContainer soulDataContainer)
         {
-            attributeIcon.sprite = SpriteResourcesProvider.GetAttributeIcon(record.Attribute);
-            characterIcon.sprite = SpriteResourcesProvider.GetCharacterIcon(record.CharacterIconName);
-            attributeColorTable.TryGetValue(record.Attribute,out var backgroundColor);
+            attributeIcon.sprite = SpriteResourcesProvider.GetAttributeIcon(soulDataContainer.BaseConfig.Attribute);
+            characterIcon.sprite = SpriteResourcesProvider.GetCharacterIcon(soulDataContainer.BaseConfig.CharacterIconName);
+            attributeColorTable.TryGetValue(soulDataContainer.BaseConfig.Attribute,out var backgroundColor);
             attributeBackgroundImage.color = backgroundColor; 
-            stars.Show(record.Rarity);
+            stars.Show(soulDataContainer.BaseConfig.Rarity);
         }
         
         public void Show(bool show)
