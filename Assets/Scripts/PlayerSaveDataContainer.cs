@@ -13,11 +13,24 @@ public class PlayerSaveDataContainer
 {
     private PlayerSaveData _playerSaveData;
     private IMasterDataRepository _masterDataRepository;
-    
-    public PlayerSaveDataContainer(IMasterDataRepository masterDataRepository,PlayerSaveData playerSaveData)
+    private IPlayerSaveDataRepository _playerSaveDataRepository;
+    private IEnumerable<UserSoulDataContainer> _userSoulDataContainers;
+
+    public IEnumerable<UserSoulDataContainer> UserSoulDataContainers => _userSoulDataContainers;
+
+    public PlayerSaveDataContainer(IMasterDataRepository masterDataRepository,IPlayerSaveDataRepository playerSaveDataRepository)
     {
-        _masterDataRepository = masterDataRepository;
-        _playerSaveData = playerSaveData;
+        this._masterDataRepository = masterDataRepository;
+        this._playerSaveDataRepository = playerSaveDataRepository;
+    }
+
+    public async UniTask Load()
+    {
+        _playerSaveData = await _playerSaveDataRepository.GetPlayerSaveData();
+        _userSoulDataContainers = new List<UserSoulDataContainer>();
+        var saveSoulDataList = await _playerSaveDataRepository.GetUserSoulDataList();
+        _userSoulDataContainers = saveSoulDataList.Souls.Select(x =>
+            new UserSoulDataContainer(x, _masterDataRepository, _playerSaveDataRepository));
     }
 
     public bool IsMaxFuel => _playerSaveData.Stamina >= GetMaxFuel();
