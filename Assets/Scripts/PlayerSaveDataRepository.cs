@@ -43,5 +43,15 @@ namespace MokomoGames
             );
             return response;
         }
+
+        public async UniTask<GetUserSoulDataListResponse> GetUserSoulDataList()
+        {
+            var response = await PlayFabUtility.ExecuteFunctionAsync<GetUserSoulDataListResponse>
+            (
+                functionName: "getUserSoulDataList",
+                functionParameter: null
+            );
+            return response;
+        }
     }
 }

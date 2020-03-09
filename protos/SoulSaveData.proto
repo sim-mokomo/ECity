@@ -1,0 +1,33 @@
+syntax = "proto3";
+package ecity;
+
+option csharp_namespace = "MokomoGames.Protobuf";
+
+message UserSoulData
+{
+    string guid = 1;
+    uint32 soul_no = 2;
+    uint32 total_level_exp = 3;
+    uint32 total_skill_exp = 4;
+}
+
+// 通信API
+message UpdateUserSoulDataRequest
+{
+    UserSoulData souls = 1;
+}
+
+message UpdateUserSoulDataResponse
+{
+    repeated UserSoulData souls = 1;
+}
+
+message GetUserSoulDataListRequest
+{
+    
+}
+
+message GetUserSoulDataListResponse
+{
+    repeated UserSoulData souls = 1;
+}

@@ -10,4 +10,5 @@ public interface IPlayerSaveDataRepository
     UniTask<PlayerSaveData> GetPlayerSaveData();
     UniTask<RecoveryFuelByYukichiResponse> RecoveryFuelByYukichi();
     UniTask<RecoveryStaminaByWaitTimeResponse> RecoveryStaminaByWaitTime();
+    UniTask<GetUserSoulDataListResponse> GetUserSoulDataList();
 }
