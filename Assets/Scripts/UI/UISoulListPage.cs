@@ -70,6 +70,12 @@ namespace MokomoGames.UI
         }
 
         private List<UISoulCell> MakeCells(List<SoulTableRecord> records)
+
+        private void UpdateHasSoulNum(int currentCount)
+        {
+            var hasSoulCapacity = 999;
+            hasSoulNum.text = $"{currentCount}/{hasSoulCapacity}";
+        }
         {
             const int cellNumPerRow = 6;
             var rowNum = Mathf.CeilToInt((float)records.Count / cellNumPerRow);
@@ -116,17 +122,20 @@ namespace MokomoGames.UI
             if (CurrentTab == Tab.Material)
             {
                 DestroyCells();
-                var materials = _masterDataRepository.SoulTable.Records
-                    .Where(x => x.IsMaterial())
+                var materials = _playerSaveDataContainer.UserSoulDataContainers
+                    .Where(x => x.BaseConfig.SoulType.IsMaterial())
                     .ToList();
+                
+                UpdateHasSoulNum(materials.Count);
                 MakeCells(materials);
             }
             else if(CurrentTab == Tab.Soul)
             {
                 DestroyCells();
-                var souls = _masterDataRepository.SoulTable.Records
-                    .Where(x => !x.IsMaterial())
+                var souls = _playerSaveDataContainer.UserSoulDataContainers
+                    .Where(x => !x.BaseConfig.SoulType.IsMaterial())
                     .ToList();
+                UpdateHasSoulNum(souls.Count);
                 MakeCells(souls);
             }
         }
