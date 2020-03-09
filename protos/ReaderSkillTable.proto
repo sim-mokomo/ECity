@@ -1,0 +1,16 @@
+﻿syntax = "proto3";
+package ecity;
+
+option csharp_namespace = "MokomoGames.Protobuf";
+
+message ReaderSkillTableRecord
+{
+    uint32 no = 1;
+    string name = 2;
+    string description = 3;
+}
+
+message ReaderSkillTable
+{
+    repeated ReaderSkillTableRecord records = 1;
+}

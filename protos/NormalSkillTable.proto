@@ -1,0 +1,18 @@
+﻿syntax = "proto3";
+package ecity;
+
+option csharp_namespace = "MokomoGames.Protobuf";
+
+message NormalSkillTableRecord
+{
+    uint32 no = 1;
+    string name = 2;
+    string description = 3;
+    uint32 max_level = 4;
+    uint32 base_turn = 5;
+}
+
+message NormalSkillTable
+{
+    repeated NormalSkillTableRecord records = 1;
+}
