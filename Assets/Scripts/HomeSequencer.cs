@@ -33,8 +33,9 @@ namespace MokomoGames
         {
             Display(true);
             
-            var saveData = await _playerSaveDataRepository.GetPlayerSaveData();
-            _playerSaveDataContainer = new PlayerSaveDataContainer(_masterDataRepository,saveData);
+            _playerSaveDataContainer = new PlayerSaveDataContainer(_masterDataRepository,_playerSaveDataRepository);
+            await _playerSaveDataContainer.Load();
+            soulListPage.Prepare(_playerSaveDataContainer);
             Refresh(_playerSaveDataContainer);
 
             staminaRecoveryTimeController = new StaminaRecoveryTimeController(_playerSaveDataRepository);
