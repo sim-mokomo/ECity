@@ -10,6 +10,7 @@ message SoulLevelTableRecord
     uint32 hp = 3;
     uint32 recovery_power = 4;
     uint32 power = 5;
+    uint32 need_next_level_exp = 6;
 }
 
 message SoulLevelTable

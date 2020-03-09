@@ -24,16 +24,16 @@ namespace MokomoGames.Protobuf {
     static SoulLevelTableReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChRTb3VsTGV2ZWxUYWJsZS5wcm90bxIFZWNpdHkiZAoUU291bExldmVsVGFi",
-            "bGVSZWNvcmQSCgoCbm8YASABKA0SDQoFbGV2ZWwYAiABKA0SCgoCaHAYAyAB",
-            "KA0SFgoOcmVjb3ZlcnlfcG93ZXIYBCABKA0SDQoFcG93ZXIYBSABKA0iPgoO",
-            "U291bExldmVsVGFibGUSLAoHcmVjb3JkcxgBIAMoCzIbLmVjaXR5LlNvdWxM",
-            "ZXZlbFRhYmxlUmVjb3JkQheqAhRNb2tvbW9HYW1lcy5Qcm90b2J1ZmIGcHJv",
-            "dG8z"));
+            "ChRTb3VsTGV2ZWxUYWJsZS5wcm90bxIFZWNpdHkigQEKFFNvdWxMZXZlbFRh",
+            "YmxlUmVjb3JkEgoKAm5vGAEgASgNEg0KBWxldmVsGAIgASgNEgoKAmhwGAMg",
+            "ASgNEhYKDnJlY292ZXJ5X3Bvd2VyGAQgASgNEg0KBXBvd2VyGAUgASgNEhsK",
+            "E25lZWRfbmV4dF9sZXZlbF9leHAYBiABKA0iPgoOU291bExldmVsVGFibGUS",
+            "LAoHcmVjb3JkcxgBIAMoCzIbLmVjaXR5LlNvdWxMZXZlbFRhYmxlUmVjb3Jk",
+            "QheqAhRNb2tvbW9HYW1lcy5Qcm90b2J1ZmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.SoulLevelTableRecord), global::MokomoGames.Protobuf.SoulLevelTableRecord.Parser, new[]{ "No", "Level", "Hp", "RecoveryPower", "Power" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.SoulLevelTableRecord), global::MokomoGames.Protobuf.SoulLevelTableRecord.Parser, new[]{ "No", "Level", "Hp", "RecoveryPower", "Power", "NeedNextLevelExp" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.SoulLevelTable), global::MokomoGames.Protobuf.SoulLevelTable.Parser, new[]{ "Records" }, null, null, null, null)
           }));
     }
@@ -71,6 +71,7 @@ namespace MokomoGames.Protobuf {
       hp_ = other.hp_;
       recoveryPower_ = other.recoveryPower_;
       power_ = other.power_;
+      needNextLevelExp_ = other.needNextLevelExp_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -134,6 +135,17 @@ namespace MokomoGames.Protobuf {
       }
     }
 
+    /// <summary>Field number for the "need_next_level_exp" field.</summary>
+    public const int NeedNextLevelExpFieldNumber = 6;
+    private uint needNextLevelExp_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint NeedNextLevelExp {
+      get { return needNextLevelExp_; }
+      set {
+        needNextLevelExp_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as SoulLevelTableRecord);
@@ -152,6 +164,7 @@ namespace MokomoGames.Protobuf {
       if (Hp != other.Hp) return false;
       if (RecoveryPower != other.RecoveryPower) return false;
       if (Power != other.Power) return false;
+      if (NeedNextLevelExp != other.NeedNextLevelExp) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -163,6 +176,7 @@ namespace MokomoGames.Protobuf {
       if (Hp != 0) hash ^= Hp.GetHashCode();
       if (RecoveryPower != 0) hash ^= RecoveryPower.GetHashCode();
       if (Power != 0) hash ^= Power.GetHashCode();
+      if (NeedNextLevelExp != 0) hash ^= NeedNextLevelExp.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -196,6 +210,10 @@ namespace MokomoGames.Protobuf {
         output.WriteRawTag(40);
         output.WriteUInt32(Power);
       }
+      if (NeedNextLevelExp != 0) {
+        output.WriteRawTag(48);
+        output.WriteUInt32(NeedNextLevelExp);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -218,6 +236,9 @@ namespace MokomoGames.Protobuf {
       }
       if (Power != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Power);
+      }
+      if (NeedNextLevelExp != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(NeedNextLevelExp);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -244,6 +265,9 @@ namespace MokomoGames.Protobuf {
       }
       if (other.Power != 0) {
         Power = other.Power;
+      }
+      if (other.NeedNextLevelExp != 0) {
+        NeedNextLevelExp = other.NeedNextLevelExp;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -274,6 +298,10 @@ namespace MokomoGames.Protobuf {
           }
           case 40: {
             Power = input.ReadUInt32();
+            break;
+          }
+          case 48: {
+            NeedNextLevelExp = input.ReadUInt32();
             break;
           }
         }
