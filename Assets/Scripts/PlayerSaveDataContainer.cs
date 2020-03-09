@@ -33,6 +33,18 @@ public class PlayerSaveDataContainer
             new UserSoulDataContainer(x, _masterDataRepository, _playerSaveDataRepository));
     }
 
+    public IEnumerable<UserSoulDataContainer> GetMaterialSoul()
+    {
+        return _userSoulDataContainers
+            .Where(x => !x.BaseConfig.SoulType.IsMaterial());
+    }
+
+    public IEnumerable<UserSoulDataContainer> GetBattleSoul()
+    {
+        return _userSoulDataContainers
+            .Where(x => x.BaseConfig.SoulType.IsMaterial());
+    }
+
     public bool IsMaxFuel => _playerSaveData.Stamina >= GetMaxFuel();
     public uint Fuel
     {

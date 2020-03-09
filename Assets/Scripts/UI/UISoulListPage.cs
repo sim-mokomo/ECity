@@ -132,21 +132,16 @@ namespace MokomoGames.UI
             if (CurrentTab == Tab.Material)
             {
                 DestroyCells();
-                var materials = _playerSaveDataContainer.UserSoulDataContainers
-                    .Where(x => x.BaseConfig.SoulType.IsMaterial())
-                    .ToList();
-                
-                UpdateHasSoulNum(materials.Count);
-                MakeCells(materials);
+                var materials = _playerSaveDataContainer.GetMaterialSoul();
+                UpdateHasSoulNum(materials.Count());
+                MakeCells(materials.ToList());
             }
             else if(CurrentTab == Tab.Soul)
             {
                 DestroyCells();
-                var souls = _playerSaveDataContainer.UserSoulDataContainers
-                    .Where(x => !x.BaseConfig.SoulType.IsMaterial())
-                    .ToList();
-                UpdateHasSoulNum(souls.Count);
-                MakeCells(souls);
+                var souls = _playerSaveDataContainer.GetBattleSoul();
+                UpdateHasSoulNum(souls.Count());
+                MakeCells(souls.ToList());
             }
         }
     }
