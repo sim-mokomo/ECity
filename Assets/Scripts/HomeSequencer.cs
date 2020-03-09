@@ -87,13 +87,14 @@ namespace MokomoGames
                 fillWarningStaminaDialog.ShowMaxFuelMessage(_playerSaveDataContainer.IsMaxFuel);
                 if (!_playerSaveDataContainer.IsMaxFuel)
                 {
-                    saveData.Stamina += _playerSaveDataContainer.GetMaxFuel();
-                    saveData.Yukichi--;
+                    
+                    _playerSaveDataContainer.Fuel += _playerSaveDataContainer.GetMaxFuel();
+                    _playerSaveDataContainer.Yukichi--;
                     _playerSaveDataRepository.RecoveryFuelByYukichi();
                     Refresh(_playerSaveDataContainer);
                 }
-                fillWarningStaminaDialog.SetStamina(saveData.Stamina,_playerSaveDataContainer.GetMaxFuel());
-                fillWarningStaminaDialog.SetYukichiNum(saveData.Yukichi);
+                fillWarningStaminaDialog.SetStamina(_playerSaveDataContainer.Fuel,_playerSaveDataContainer.GetMaxFuel());
+                fillWarningStaminaDialog.SetYukichiNum(_playerSaveDataContainer.Yukichi);
                 recoveryStaminaDialog.Close();
             };
             fillWarningStaminaDialog.OnTappedClose += fillWarningStaminaDialog.Close;
