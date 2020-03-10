@@ -164,6 +164,45 @@ namespace MokomoGames.Function
             };
             return JsonFormatter.Default.Format(response);
         }
+
+        [FunctionName("updateUserSoulData")]
+        public static async Task<dynamic> UpdateUserSoulData(
+            [HttpTrigger(AuthorizationLevel.Function,"get", "post", Route = null)] HttpRequestMessage req,
+            ILogger log)
+        {
+            var context = await FunctionContext<dynamic>.Create(req);
+            var args = context.FunctionArgument;
+            context.PreparePlayFabAPI();
+
+            string json = args["json"];
+            var request = UpdateUserSoulDataRequest.Parser.ParseJson(json);
+
+            var playerId = CurrentPlayerId(context);
+            var userSoulDataList = await GetUserDataElement<UserSoulDataList>(playerId);
+            userSoulDataList.Souls.Add(request.Soul);
+            await UpdateUserDataElement<UserSoulDataList>(playerId,userSoulDataList);
+            
+            var response = new UpdateUserSoulDataResponse();
+            response.Souls.AddRange(userSoulDataList.Souls);
+            return JsonFormatter.Default.Format(response);
+        }
+        
+        [FunctionName("getUserSoulDataList")]
+        public static async Task<dynamic> GetUserSoulDataList(
+            [HttpTrigger(AuthorizationLevel.Function,"get", "post", Route = null)] HttpRequestMessage req,
+            ILogger log)
+        {
+            var context = await FunctionContext<dynamic>.Create(req);
+            var args = context.FunctionArgument;
+            context.PreparePlayFabAPI();
+            
+            string json = args["json"];
+            var request = GetUserSoulDataListRequest.Parser.ParseJson(json);
+            var userSoulDataList = await GetUserDataElement<UserSoulDataList>(json);
+            var response = new GetUserSoulDataListResponse();
+            response.Souls.AddRange(userSoulDataList.Souls);
+            return JsonFormatter.Default.Format(response);
+        }        
     }
 
 }
