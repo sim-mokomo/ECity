@@ -24,25 +24,30 @@ namespace MokomoGames.Protobuf {
     static SoulSaveDataReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChJTb3VsU2F2ZURhdGEucHJvdG8SBWVjaXR5Il8KDFVzZXJTb3VsRGF0YRIM",
+            "ChJTb3VsU2F2ZURhdGEucHJvdG8SBWVjaXR5InEKDFVzZXJTb3VsRGF0YRIM",
             "CgRndWlkGAEgASgJEg8KB3NvdWxfbm8YAiABKA0SFwoPdG90YWxfbGV2ZWxf",
-            "ZXhwGAMgASgNEhcKD3RvdGFsX3NraWxsX2V4cBgEIAEoDSI2ChBVc2VyU291",
-            "bERhdGFMaXN0EiIKBXNvdWxzGAEgAygLMhMuZWNpdHkuVXNlclNvdWxEYXRh",
-            "Ij4KGVVwZGF0ZVVzZXJTb3VsRGF0YVJlcXVlc3QSIQoEc291bBgBIAEoCzIT",
-            "LmVjaXR5LlVzZXJTb3VsRGF0YSJAChpVcGRhdGVVc2VyU291bERhdGFSZXNw",
-            "b25zZRIiCgVzb3VscxgBIAMoCzITLmVjaXR5LlVzZXJTb3VsRGF0YSIcChpH",
-            "ZXRVc2VyU291bERhdGFMaXN0UmVxdWVzdCJBChtHZXRVc2VyU291bERhdGFM",
-            "aXN0UmVzcG9uc2USIgoFc291bHMYASADKAsyEy5lY2l0eS5Vc2VyU291bERh",
-            "dGFCF6oCFE1va29tb0dhbWVzLlByb3RvYnVmYgZwcm90bzM="));
+            "ZXhwGAMgASgNEhcKD3RvdGFsX3NraWxsX2V4cBgEIAEoDRIQCghmYXZvcml0",
+            "ZRgFIAEoCCI2ChBVc2VyU291bERhdGFMaXN0EiIKBXNvdWxzGAEgAygLMhMu",
+            "ZWNpdHkuVXNlclNvdWxEYXRhIj4KGVVwZGF0ZVVzZXJTb3VsRGF0YVJlcXVl",
+            "c3QSIQoEc291bBgBIAEoCzITLmVjaXR5LlVzZXJTb3VsRGF0YSJAChpVcGRh",
+            "dGVVc2VyU291bERhdGFSZXNwb25zZRIiCgVzb3VscxgBIAMoCzITLmVjaXR5",
+            "LlVzZXJTb3VsRGF0YSIcChpHZXRVc2VyU291bERhdGFMaXN0UmVxdWVzdCJB",
+            "ChtHZXRVc2VyU291bERhdGFMaXN0UmVzcG9uc2USIgoFc291bHMYASADKAsy",
+            "Ey5lY2l0eS5Vc2VyU291bERhdGEiQwohVXBkYXRlVXNlclNvdWxEYXRhRmF2",
+            "b3JpdGVSZXF1ZXN0EgwKBGd1aWQYASABKAkSEAoIZmF2b3JpdGUYAiABKAgi",
+            "NgoiVXBkYXRlVXNlclNvdWxEYXRhRmF2b3JpdGVSZXNwb25zZRIQCghmYXZv",
+            "cml0ZRgBIAEoCEIXqgIUTW9rb21vR2FtZXMuUHJvdG9idWZiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.UserSoulData), global::MokomoGames.Protobuf.UserSoulData.Parser, new[]{ "Guid", "SoulNo", "TotalLevelExp", "TotalSkillExp" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.UserSoulData), global::MokomoGames.Protobuf.UserSoulData.Parser, new[]{ "Guid", "SoulNo", "TotalLevelExp", "TotalSkillExp", "Favorite" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.UserSoulDataList), global::MokomoGames.Protobuf.UserSoulDataList.Parser, new[]{ "Souls" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.UpdateUserSoulDataRequest), global::MokomoGames.Protobuf.UpdateUserSoulDataRequest.Parser, new[]{ "Soul" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.UpdateUserSoulDataResponse), global::MokomoGames.Protobuf.UpdateUserSoulDataResponse.Parser, new[]{ "Souls" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.GetUserSoulDataListRequest), global::MokomoGames.Protobuf.GetUserSoulDataListRequest.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.GetUserSoulDataListResponse), global::MokomoGames.Protobuf.GetUserSoulDataListResponse.Parser, new[]{ "Souls" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.GetUserSoulDataListResponse), global::MokomoGames.Protobuf.GetUserSoulDataListResponse.Parser, new[]{ "Souls" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.UpdateUserSoulDataFavoriteRequest), global::MokomoGames.Protobuf.UpdateUserSoulDataFavoriteRequest.Parser, new[]{ "Guid", "Favorite" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.UpdateUserSoulDataFavoriteResponse), global::MokomoGames.Protobuf.UpdateUserSoulDataFavoriteResponse.Parser, new[]{ "Favorite" }, null, null, null, null)
           }));
     }
     #endregion
@@ -78,6 +83,7 @@ namespace MokomoGames.Protobuf {
       soulNo_ = other.soulNo_;
       totalLevelExp_ = other.totalLevelExp_;
       totalSkillExp_ = other.totalSkillExp_;
+      favorite_ = other.favorite_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -130,6 +136,17 @@ namespace MokomoGames.Protobuf {
       }
     }
 
+    /// <summary>Field number for the "favorite" field.</summary>
+    public const int FavoriteFieldNumber = 5;
+    private bool favorite_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Favorite {
+      get { return favorite_; }
+      set {
+        favorite_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as UserSoulData);
@@ -147,6 +164,7 @@ namespace MokomoGames.Protobuf {
       if (SoulNo != other.SoulNo) return false;
       if (TotalLevelExp != other.TotalLevelExp) return false;
       if (TotalSkillExp != other.TotalSkillExp) return false;
+      if (Favorite != other.Favorite) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -157,6 +175,7 @@ namespace MokomoGames.Protobuf {
       if (SoulNo != 0) hash ^= SoulNo.GetHashCode();
       if (TotalLevelExp != 0) hash ^= TotalLevelExp.GetHashCode();
       if (TotalSkillExp != 0) hash ^= TotalSkillExp.GetHashCode();
+      if (Favorite != false) hash ^= Favorite.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -186,6 +205,10 @@ namespace MokomoGames.Protobuf {
         output.WriteRawTag(32);
         output.WriteUInt32(TotalSkillExp);
       }
+      if (Favorite != false) {
+        output.WriteRawTag(40);
+        output.WriteBool(Favorite);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -205,6 +228,9 @@ namespace MokomoGames.Protobuf {
       }
       if (TotalSkillExp != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(TotalSkillExp);
+      }
+      if (Favorite != false) {
+        size += 1 + 1;
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -228,6 +254,9 @@ namespace MokomoGames.Protobuf {
       }
       if (other.TotalSkillExp != 0) {
         TotalSkillExp = other.TotalSkillExp;
+      }
+      if (other.Favorite != false) {
+        Favorite = other.Favorite;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -254,6 +283,10 @@ namespace MokomoGames.Protobuf {
           }
           case 32: {
             TotalSkillExp = input.ReadUInt32();
+            break;
+          }
+          case 40: {
+            Favorite = input.ReadBool();
             break;
           }
         }
@@ -856,6 +889,292 @@ namespace MokomoGames.Protobuf {
             break;
           case 10: {
             souls_.AddEntriesFrom(input, _repeated_souls_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class UpdateUserSoulDataFavoriteRequest : pb::IMessage<UpdateUserSoulDataFavoriteRequest> {
+    private static readonly pb::MessageParser<UpdateUserSoulDataFavoriteRequest> _parser = new pb::MessageParser<UpdateUserSoulDataFavoriteRequest>(() => new UpdateUserSoulDataFavoriteRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<UpdateUserSoulDataFavoriteRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::MokomoGames.Protobuf.SoulSaveDataReflection.Descriptor.MessageTypes[6]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UpdateUserSoulDataFavoriteRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UpdateUserSoulDataFavoriteRequest(UpdateUserSoulDataFavoriteRequest other) : this() {
+      guid_ = other.guid_;
+      favorite_ = other.favorite_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UpdateUserSoulDataFavoriteRequest Clone() {
+      return new UpdateUserSoulDataFavoriteRequest(this);
+    }
+
+    /// <summary>Field number for the "guid" field.</summary>
+    public const int GuidFieldNumber = 1;
+    private string guid_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Guid {
+      get { return guid_; }
+      set {
+        guid_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "favorite" field.</summary>
+    public const int FavoriteFieldNumber = 2;
+    private bool favorite_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Favorite {
+      get { return favorite_; }
+      set {
+        favorite_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as UpdateUserSoulDataFavoriteRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(UpdateUserSoulDataFavoriteRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Guid != other.Guid) return false;
+      if (Favorite != other.Favorite) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Guid.Length != 0) hash ^= Guid.GetHashCode();
+      if (Favorite != false) hash ^= Favorite.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Guid.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Guid);
+      }
+      if (Favorite != false) {
+        output.WriteRawTag(16);
+        output.WriteBool(Favorite);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Guid.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Guid);
+      }
+      if (Favorite != false) {
+        size += 1 + 1;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(UpdateUserSoulDataFavoriteRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Guid.Length != 0) {
+        Guid = other.Guid;
+      }
+      if (other.Favorite != false) {
+        Favorite = other.Favorite;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Guid = input.ReadString();
+            break;
+          }
+          case 16: {
+            Favorite = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class UpdateUserSoulDataFavoriteResponse : pb::IMessage<UpdateUserSoulDataFavoriteResponse> {
+    private static readonly pb::MessageParser<UpdateUserSoulDataFavoriteResponse> _parser = new pb::MessageParser<UpdateUserSoulDataFavoriteResponse>(() => new UpdateUserSoulDataFavoriteResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<UpdateUserSoulDataFavoriteResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::MokomoGames.Protobuf.SoulSaveDataReflection.Descriptor.MessageTypes[7]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UpdateUserSoulDataFavoriteResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UpdateUserSoulDataFavoriteResponse(UpdateUserSoulDataFavoriteResponse other) : this() {
+      favorite_ = other.favorite_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UpdateUserSoulDataFavoriteResponse Clone() {
+      return new UpdateUserSoulDataFavoriteResponse(this);
+    }
+
+    /// <summary>Field number for the "favorite" field.</summary>
+    public const int FavoriteFieldNumber = 1;
+    private bool favorite_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Favorite {
+      get { return favorite_; }
+      set {
+        favorite_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as UpdateUserSoulDataFavoriteResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(UpdateUserSoulDataFavoriteResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Favorite != other.Favorite) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Favorite != false) hash ^= Favorite.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Favorite != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(Favorite);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Favorite != false) {
+        size += 1 + 1;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(UpdateUserSoulDataFavoriteResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Favorite != false) {
+        Favorite = other.Favorite;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Favorite = input.ReadBool();
             break;
           }
         }

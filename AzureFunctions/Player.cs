@@ -202,7 +202,30 @@ namespace MokomoGames.Function
             var response = new GetUserSoulDataListResponse();
             response.Souls.AddRange(userSoulDataList.Souls);
             return JsonFormatter.Default.Format(response);
-        }        
+        }      
+
+        [FunctionName("updateUserSoulDataFavorite")]
+        public static async Task<dynamic> UpdateUserSoulDataFavorite(
+            [HttpTrigger(AuthorizationLevel.Function,"get", "post", Route = null)] HttpRequestMessage req,
+            ILogger log)
+        {
+            var context = await FunctionContext<dynamic>.Create(req);
+            var args = context.FunctionArgument;
+            context.PreparePlayFabAPI();
+
+            string json = args["json"];
+            var playerId = CurrentPlayerId(context);
+            var request = UpdateUserSoulDataFavoriteRequest.Parser.ParseJson(json);
+            
+            var userSoulDataList = await GetUserDataElement<UserSoulDataList>(json);
+            var soul = userSoulDataList.Souls.FirstOrDefault(x => x.Guid == request.Guid);
+            soul.Favorite = request.Favorite;
+            await UpdateUserDataElement<UserSoulDataList>(playerId,userSoulDataList);
+
+            var response = new UpdateUserSoulDataFavoriteResponse();
+            response.Favorite = soul.Favorite;
+            return JsonFormatter.Default.Format(response);
+        }          
     }
 
 }

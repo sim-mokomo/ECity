@@ -9,6 +9,7 @@ message UserSoulData
     uint32 soul_no = 2;
     uint32 total_level_exp = 3;
     uint32 total_skill_exp = 4;
+    bool favorite = 5;
 }
 
 message UserSoulDataList
@@ -36,3 +37,15 @@ message GetUserSoulDataListResponse
 {
     repeated UserSoulData souls = 1;
 }
+
+message UpdateUserSoulDataFavoriteRequest
+{
+    string guid = 1;
+    bool favorite = 2;
+}
+
+message UpdateUserSoulDataFavoriteResponse
+{
+    bool favorite = 1;
+}
+

@@ -53,4 +53,10 @@ public class PlayerSaveDataDebugRepository : IPlayerSaveDataRepository
         });
         return new UniTask<GetUserSoulDataListResponse>(new GetUserSoulDataListResponse(){Souls = { soulList}});
     }
+
+    public UniTask<UpdateUserSoulDataFavoriteResponse> UpdateUserSoulDataFavorite(string guid,bool favorite)
+    {
+        favorite = !favorite;
+        return new UniTask<UpdateUserSoulDataFavoriteResponse>(new UpdateUserSoulDataFavoriteResponse(){Favorite = favorite});
+    }
 }
