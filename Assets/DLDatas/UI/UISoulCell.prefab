@@ -360,6 +360,7 @@ MonoBehaviour:
   attributeBackgroundImage: {fileID: 7172418903409082697}
   characterIcon: {fileID: 9036691985061776269}
   stars: {fileID: 3041807584635576690}
+  characterIconButton: {fileID: 2993741911978305107}
 --- !u!114 &1400568858893259448
 MonoBehaviour:
   m_ObjectHideFlags: 0
