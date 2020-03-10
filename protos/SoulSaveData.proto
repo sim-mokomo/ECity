@@ -14,7 +14,7 @@ message UserSoulData
 // 通信API
 message UpdateUserSoulDataRequest
 {
-    UserSoulData souls = 1;
+    UserSoulData soul = 1;
 }
 
 message UpdateUserSoulDataResponse
