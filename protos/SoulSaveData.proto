@@ -11,6 +11,11 @@ message UserSoulData
     uint32 total_skill_exp = 4;
 }
 
+message UserSoulDataList
+{
+    repeated UserSoulData souls = 1;
+}
+
 // 通信API
 message UpdateUserSoulDataRequest
 {

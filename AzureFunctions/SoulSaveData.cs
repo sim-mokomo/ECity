@@ -26,18 +26,20 @@ namespace MokomoGames.Protobuf {
           string.Concat(
             "ChJTb3VsU2F2ZURhdGEucHJvdG8SBWVjaXR5Il8KDFVzZXJTb3VsRGF0YRIM",
             "CgRndWlkGAEgASgJEg8KB3NvdWxfbm8YAiABKA0SFwoPdG90YWxfbGV2ZWxf",
-            "ZXhwGAMgASgNEhcKD3RvdGFsX3NraWxsX2V4cBgEIAEoDSI/ChlVcGRhdGVV",
-            "c2VyU291bERhdGFSZXF1ZXN0EiIKBXNvdWxzGAEgASgLMhMuZWNpdHkuVXNl",
-            "clNvdWxEYXRhIkAKGlVwZGF0ZVVzZXJTb3VsRGF0YVJlc3BvbnNlEiIKBXNv",
-            "dWxzGAEgAygLMhMuZWNpdHkuVXNlclNvdWxEYXRhIhwKGkdldFVzZXJTb3Vs",
-            "RGF0YUxpc3RSZXF1ZXN0IkEKG0dldFVzZXJTb3VsRGF0YUxpc3RSZXNwb25z",
-            "ZRIiCgVzb3VscxgBIAMoCzITLmVjaXR5LlVzZXJTb3VsRGF0YUIXqgIUTW9r",
-            "b21vR2FtZXMuUHJvdG9idWZiBnByb3RvMw=="));
+            "ZXhwGAMgASgNEhcKD3RvdGFsX3NraWxsX2V4cBgEIAEoDSI2ChBVc2VyU291",
+            "bERhdGFMaXN0EiIKBXNvdWxzGAEgAygLMhMuZWNpdHkuVXNlclNvdWxEYXRh",
+            "Ij4KGVVwZGF0ZVVzZXJTb3VsRGF0YVJlcXVlc3QSIQoEc291bBgBIAEoCzIT",
+            "LmVjaXR5LlVzZXJTb3VsRGF0YSJAChpVcGRhdGVVc2VyU291bERhdGFSZXNw",
+            "b25zZRIiCgVzb3VscxgBIAMoCzITLmVjaXR5LlVzZXJTb3VsRGF0YSIcChpH",
+            "ZXRVc2VyU291bERhdGFMaXN0UmVxdWVzdCJBChtHZXRVc2VyU291bERhdGFM",
+            "aXN0UmVzcG9uc2USIgoFc291bHMYASADKAsyEy5lY2l0eS5Vc2VyU291bERh",
+            "dGFCF6oCFE1va29tb0dhbWVzLlByb3RvYnVmYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.UserSoulData), global::MokomoGames.Protobuf.UserSoulData.Parser, new[]{ "Guid", "SoulNo", "TotalLevelExp", "TotalSkillExp" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.UpdateUserSoulDataRequest), global::MokomoGames.Protobuf.UpdateUserSoulDataRequest.Parser, new[]{ "Souls" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.UserSoulDataList), global::MokomoGames.Protobuf.UserSoulDataList.Parser, new[]{ "Souls" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.UpdateUserSoulDataRequest), global::MokomoGames.Protobuf.UpdateUserSoulDataRequest.Parser, new[]{ "Soul" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.UpdateUserSoulDataResponse), global::MokomoGames.Protobuf.UpdateUserSoulDataResponse.Parser, new[]{ "Souls" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.GetUserSoulDataListRequest), global::MokomoGames.Protobuf.GetUserSoulDataListRequest.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.GetUserSoulDataListResponse), global::MokomoGames.Protobuf.GetUserSoulDataListResponse.Parser, new[]{ "Souls" }, null, null, null, null)
@@ -260,6 +262,127 @@ namespace MokomoGames.Protobuf {
 
   }
 
+  public sealed partial class UserSoulDataList : pb::IMessage<UserSoulDataList> {
+    private static readonly pb::MessageParser<UserSoulDataList> _parser = new pb::MessageParser<UserSoulDataList>(() => new UserSoulDataList());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<UserSoulDataList> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::MokomoGames.Protobuf.SoulSaveDataReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UserSoulDataList() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UserSoulDataList(UserSoulDataList other) : this() {
+      souls_ = other.souls_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UserSoulDataList Clone() {
+      return new UserSoulDataList(this);
+    }
+
+    /// <summary>Field number for the "souls" field.</summary>
+    public const int SoulsFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::MokomoGames.Protobuf.UserSoulData> _repeated_souls_codec
+        = pb::FieldCodec.ForMessage(10, global::MokomoGames.Protobuf.UserSoulData.Parser);
+    private readonly pbc::RepeatedField<global::MokomoGames.Protobuf.UserSoulData> souls_ = new pbc::RepeatedField<global::MokomoGames.Protobuf.UserSoulData>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::MokomoGames.Protobuf.UserSoulData> Souls {
+      get { return souls_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as UserSoulDataList);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(UserSoulDataList other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!souls_.Equals(other.souls_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= souls_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      souls_.WriteTo(output, _repeated_souls_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += souls_.CalculateSize(_repeated_souls_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(UserSoulDataList other) {
+      if (other == null) {
+        return;
+      }
+      souls_.Add(other.souls_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            souls_.AddEntriesFrom(input, _repeated_souls_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   /// <summary>
   /// 通信API
   /// </summary>
@@ -271,7 +394,7 @@ namespace MokomoGames.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::MokomoGames.Protobuf.SoulSaveDataReflection.Descriptor.MessageTypes[1]; }
+      get { return global::MokomoGames.Protobuf.SoulSaveDataReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -288,7 +411,7 @@ namespace MokomoGames.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public UpdateUserSoulDataRequest(UpdateUserSoulDataRequest other) : this() {
-      souls_ = other.souls_ != null ? other.souls_.Clone() : null;
+      soul_ = other.soul_ != null ? other.soul_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -297,14 +420,14 @@ namespace MokomoGames.Protobuf {
       return new UpdateUserSoulDataRequest(this);
     }
 
-    /// <summary>Field number for the "souls" field.</summary>
-    public const int SoulsFieldNumber = 1;
-    private global::MokomoGames.Protobuf.UserSoulData souls_;
+    /// <summary>Field number for the "soul" field.</summary>
+    public const int SoulFieldNumber = 1;
+    private global::MokomoGames.Protobuf.UserSoulData soul_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::MokomoGames.Protobuf.UserSoulData Souls {
-      get { return souls_; }
+    public global::MokomoGames.Protobuf.UserSoulData Soul {
+      get { return soul_; }
       set {
-        souls_ = value;
+        soul_ = value;
       }
     }
 
@@ -321,14 +444,14 @@ namespace MokomoGames.Protobuf {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(Souls, other.Souls)) return false;
+      if (!object.Equals(Soul, other.Soul)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (souls_ != null) hash ^= Souls.GetHashCode();
+      if (soul_ != null) hash ^= Soul.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -342,9 +465,9 @@ namespace MokomoGames.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (souls_ != null) {
+      if (soul_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(Souls);
+        output.WriteMessage(Soul);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -354,8 +477,8 @@ namespace MokomoGames.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (souls_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Souls);
+      if (soul_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Soul);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -368,11 +491,11 @@ namespace MokomoGames.Protobuf {
       if (other == null) {
         return;
       }
-      if (other.souls_ != null) {
-        if (souls_ == null) {
-          Souls = new global::MokomoGames.Protobuf.UserSoulData();
+      if (other.soul_ != null) {
+        if (soul_ == null) {
+          Soul = new global::MokomoGames.Protobuf.UserSoulData();
         }
-        Souls.MergeFrom(other.Souls);
+        Soul.MergeFrom(other.Soul);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -386,10 +509,10 @@ namespace MokomoGames.Protobuf {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            if (souls_ == null) {
-              Souls = new global::MokomoGames.Protobuf.UserSoulData();
+            if (soul_ == null) {
+              Soul = new global::MokomoGames.Protobuf.UserSoulData();
             }
-            input.ReadMessage(Souls);
+            input.ReadMessage(Soul);
             break;
           }
         }
@@ -406,7 +529,7 @@ namespace MokomoGames.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::MokomoGames.Protobuf.SoulSaveDataReflection.Descriptor.MessageTypes[2]; }
+      get { return global::MokomoGames.Protobuf.SoulSaveDataReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -527,7 +650,7 @@ namespace MokomoGames.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::MokomoGames.Protobuf.SoulSaveDataReflection.Descriptor.MessageTypes[3]; }
+      get { return global::MokomoGames.Protobuf.SoulSaveDataReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -628,7 +751,7 @@ namespace MokomoGames.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::MokomoGames.Protobuf.SoulSaveDataReflection.Descriptor.MessageTypes[4]; }
+      get { return global::MokomoGames.Protobuf.SoulSaveDataReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
