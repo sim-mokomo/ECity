@@ -15,6 +15,9 @@ namespace MokomoGames
         public RankTable RankTable => _rankTable;
         public SoulTable SoulTable => _soulTable;
         public SoulLevelTable SoulLevelTable => _soulLevelTable;
+        public NormalSkillTable NormalSkillTable => null;
+        public NormalSkillLevelTable NormalSkillLevelTable => null;
+        public ReaderSkillTable ReaderSkillTable => null;
 
         public bool AllLoaded =>
             RankTable != null &&

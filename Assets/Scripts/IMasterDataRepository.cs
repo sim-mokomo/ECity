@@ -9,6 +9,9 @@ namespace MokomoGames
         RankTable RankTable { get; }
         SoulTable SoulTable { get; }
         SoulLevelTable SoulLevelTable { get; }
+        NormalSkillTable NormalSkillTable { get; }
+        NormalSkillLevelTable NormalSkillLevelTable { get; }
+        ReaderSkillTable ReaderSkillTable { get; }
         void LoadAllTable();
     }
 }

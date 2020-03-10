@@ -15,16 +15,23 @@ namespace MokomoGames
     {
         private RankTable _rankTable;
         private SoulTable _soulTable;
+        private NormalSkillTable _normalSkillTable;
+        private ReaderSkillTable _readerSkillTable;
         private SoulLevelTable _soulLevelTable;
+        private NormalSkillLevelTable _normalSkillLevelTable;
+        
         public RankTable RankTable => _rankTable;
         public SoulTable SoulTable => _soulTable;
+        public NormalSkillTable NormalSkillTable => _normalSkillTable;
+        public ReaderSkillTable ReaderSkillTable => _readerSkillTable;
         public SoulLevelTable SoulLevelTable => _soulLevelTable;
-        private NormalSkillLevelTable _normalSkillLevelTable;
         public NormalSkillLevelTable NormalSkillLevelTable => _normalSkillLevelTable;
 
         public bool AllLoaded =>
             RankTable != null &&
             SoulTable != null &&
+            NormalSkillTable != null &&
+            ReaderSkillTable != null &&
             SoulLevelTable != null &&
             NormalSkillLevelTable != null;
 
@@ -32,6 +39,8 @@ namespace MokomoGames
         {
             _rankTable = RankTable.Parser.ParseJson(File.ReadAllText("./Assets/Debug/Json/RankTable.json"));
             _soulTable = SoulTable.Parser.ParseJson(File.ReadAllText("./Assets/Debug/Json/SoulTable.json"));
+            _normalSkillTable = NormalSkillTable.Parser.ParseJson(File.ReadAllText("./Assets/Debug/Json/NormalSkillTable.json"));
+            _readerSkillTable = ReaderSkillTable.Parser.ParseJson(File.ReadAllText("./Assets/Debug/Json/ReaderSkillTable.json"));
             _soulLevelTable = SoulLevelTable.Parser.ParseJson(File.ReadAllText("./Assets/Debug/Json/SoulLevelTable.json"));
             _normalSkillLevelTable = NormalSkillLevelTable.Parser.ParseJson(File.ReadAllText("./Assets/Debug/Json/NormalSkillLevelTable.json"));
         }
