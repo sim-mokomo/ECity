@@ -17,7 +17,9 @@ namespace MokomoGames.UI
         [SerializeField] private Image attributeBackgroundImage;
         [SerializeField] private Image characterIcon;
         [SerializeField] private UIStars stars;
+        [SerializeField] private Button characterIconButton;
         private UserSoulDataContainer _soulDataContainer;
+        public event Action<UserSoulDataContainer> OnTappedIcon;
         
         //TODO: sprite に置き換えられる予定
         private static readonly Dictionary<Attribute,Color> attributeColorTable = new Dictionary<Attribute, Color>()
@@ -32,6 +34,7 @@ namespace MokomoGames.UI
         private void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
+            characterIconButton.onClick.AddListener( () => OnTappedIcon?.Invoke(_soulDataContainer));
         }
 
         public void Begin(UserSoulDataContainer soulDataContainer)
