@@ -53,5 +53,10 @@ namespace MokomoGames
             );
             return response;
         }
+
+        public UniTask<UpdateUserSoulDataFavoriteResponse> UpdateUserSoulDataFavorite(string guid, bool favorite)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
