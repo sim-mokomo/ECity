@@ -5,6 +5,7 @@ using TMPro;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace MokomoGames.UI
 {
@@ -40,15 +41,22 @@ namespace MokomoGames.UI
         [SerializeField] private Button favoriteButton;
 
         [SerializeField] private Button backButton;
+        [SerializeField] private UIFavoriteButton _favoriteButton;
+        [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
+        private UserSoulDataContainer _soulDataContainer;
         public event Action OnTappedBackButton;
 
         private void Awake()
         {
-            favoriteButton.onClick.AddListener(() =>
+            _favoriteButton.OnTappedIcon += async () =>
             {
-                //TODO: identity id を元にお気に入り登録をする
-            });
-            
+                var response = await _playerSaveDataRepository.UpdateUserSoulDataFavorite(
+                    _soulDataContainer.UserSoulData.Guid,
+                    _soulDataContainer.UserSoulData.Favorite);
+                _soulDataContainer.UserSoulData.Favorite = response.Favorite;
+                _favoriteButton.UpdateIcon(_soulDataContainer.UserSoulData.Favorite);
+            };
+
             backButton.onClick.AddListener(() =>
             {
                 OnTappedBackButton?.Invoke();
@@ -88,6 +96,8 @@ namespace MokomoGames.UI
 
             noText.text = $"{soulDataContainer.BaseConfig.No}";
             typeText.text = $"{soulDataContainer.BaseConfig.SoulType.GetName()}";
+
+            _soulDataContainer = soulDataContainer;
         }
 
         public void Show(bool show)
