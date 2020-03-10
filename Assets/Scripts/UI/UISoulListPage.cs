@@ -23,6 +23,7 @@ namespace MokomoGames.UI
         [SerializeField] private VerticalLayoutGroup verticalRoot;
         [SerializeField] private UISoulCell soulCellPrefab;
         [SerializeField] private TextMeshProUGUI hasSoulNum;
+        [SerializeField] private UISoulDetailPage soulDetailPage;
         private List<UISoulCell> _soulCells = new List<UISoulCell>();
         private Tab CurrentTab => soulToggle.isOn == true ? Tab.Soul : Tab.Material;
         private ColorBlock selectingColorBlock;
@@ -67,6 +68,9 @@ namespace MokomoGames.UI
             unSelectingColorBlock.highlightedColor = Color.gray;
             unSelectingColorBlock.pressedColor = Color.gray;
             unSelectingColorBlock.selectedColor = Color.gray;
+
+            soulDetailPage.OnTappedBackButton += () => soulDetailPage.Show(false);
+            soulDetailPage.Show(false);
         }
 
         public void Begin()
@@ -106,6 +110,7 @@ namespace MokomoGames.UI
                         continue;
                     var soulData = records[index];
                     soulCell.Begin(soulData);
+                    soulCell.OnTappedIcon += OnTappedSoulCellIcon;
                 }
             }
 
@@ -113,6 +118,12 @@ namespace MokomoGames.UI
             height += verticalRoot.spacing;
             contentRoot.sizeDelta = new Vector2(contentRoot.sizeDelta.x,height);
             return soulCells;
+        }
+
+        private void OnTappedSoulCellIcon(UserSoulDataContainer soulDataContainer)
+        {
+            soulDetailPage.Show(true);
+            soulDetailPage.Begin(soulDataContainer);
         }
 
         private void DestroyCells()
