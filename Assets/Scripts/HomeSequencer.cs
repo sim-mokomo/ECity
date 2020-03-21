@@ -41,9 +41,11 @@ namespace MokomoGames
             Refresh(user);
 
             staminaRecoveryTimeController = new StaminaRecoveryTimeController(_playerSaveDataRepository);
-            staminaRecoveryTimeController.OnRecoveriedStamina += () =>
-            {
-                //TODO: パラメータ変更後のUserをコンテナに渡す
+            staminaRecoveryTimeController.OnRecoveriedStamina += (uint recoveriedDiff) =>
+            { 
+                var data = user.toData();
+                data.Stamina += recoveriedDiff;
+                user = new User(data,user.MaxFuel,user.NeedNextRankExp);
                 Refresh(user);
             };
             staminaRecoveryTimeController.OnClock += () =>

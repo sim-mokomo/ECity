@@ -5,6 +5,7 @@ namespace MokomoGames
 {
     public class StaminaRecoveryTimeController
     {
+        private readonly uint recoveriedDiff = 1;
         public readonly uint RecoverySeconds = 180;
         [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
         private Timer recoveryTimer;
@@ -17,7 +18,7 @@ namespace MokomoGames
         public uint Minutes => recoveryTimer.CurrentSecond / 60;
         public uint Seconds => recoveryTimer.CurrentSecond % 60;
 
-        public event Action OnRecoveriedStamina;
+        public event Action<uint> OnRecoveriedStamina;
         public event Action OnClock;
 
         public void Begin()
@@ -34,7 +35,7 @@ namespace MokomoGames
                 recoveryTimer = CreateRecoveryTimer();
                 recoveryTimer.Play();
                 _playerSaveDataRepository.RecoveryStaminaByWaitTime();
-                OnRecoveriedStamina?.Invoke();
+                OnRecoveriedStamina?.Invoke(recoveriedDiff);
             };
             timer.OnClocked += _ => OnClock?.Invoke();
             return timer;
