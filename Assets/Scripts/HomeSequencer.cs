@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using MokomoGames.Protobuf;
 using MokomoGames.UI;
+using MokomoGames.Users;
+using UniRx.Async;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -24,29 +26,29 @@ namespace MokomoGames
         [SerializeField] private UISoulListPage soulListPage;
         [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
         [Inject] private IMasterDataRepository _masterDataRepository;
+        private User user;
         private UserSoulDataContainerList _userSoulDataContainerList;
         private StaminaRecoveryTimeController staminaRecoveryTimeController;
-        private PlayerSaveDataContainer _playerSaveDataContainer;
         private UIMenuListContainer _menuListContainer = new UIMenuListContainer();
         public event Action<MasterSequencer.SequencerType, bool, Func<bool>> OnLeave;
-
+        
         public async void Begin()
         {
             Display(true);
             
-            _playerSaveDataContainer = new PlayerSaveDataContainer(_masterDataRepository,_playerSaveDataRepository);
-            await _playerSaveDataContainer.Load();
-            Refresh(_playerSaveDataContainer);
+            user = await _playerSaveDataRepository.GetPlayerSaveData();
             var soulDataList = await _playerSaveDataRepository.GetUserSoulDataList();
             _userSoulDataContainerList = new UserSoulDataContainerList(
                 soulDataList.Souls.Select(x =>
                     new UserSoulDataContainer(x, _masterDataRepository, _playerSaveDataRepository)));
+            soulListPage.SetData(_userSoulDataContainerList);
+            Refresh(user);
 
             staminaRecoveryTimeController = new StaminaRecoveryTimeController(_playerSaveDataRepository);
             staminaRecoveryTimeController.OnRecoveriedStamina += () =>
             {
-                _playerSaveDataContainer.Fuel += 1;
-                Refresh(_playerSaveDataContainer);
+                //TODO: パラメータ変更後のUserをコンテナに渡す
+                Refresh(user);
             };
             staminaRecoveryTimeController.OnClock += () =>
             {
@@ -63,10 +65,8 @@ namespace MokomoGames
             headerUi.OnTap += () =>
             {
                 rankConfirm.gameObject.SetActive(true);
-                rankConfirm.SetCurrentRank(_playerSaveDataContainer.Rank);
-                rankConfirm.SetExpGauge(
-                    _playerSaveDataContainer.GetNeedNextRankExp() - _playerSaveDataContainer.Exp ,
-                    _playerSaveDataContainer.GetNeedNextRankExp());
+                rankConfirm.SetCurrentRank(user.Rank);
+                rankConfirm.SetExpGauge(user.NeedNextRankExp - user.RankExp ,user.NeedNextRankExp);
                 rankConfirm.SetStaminaGauge(
                     staminaRecoveryTimeController.Minutes,
                     staminaRecoveryTimeController.Seconds,
@@ -74,12 +74,7 @@ namespace MokomoGames
             };
             headerUi.StaminaUi.OnTapedRecoveryButton += () =>
             {
-                recoveryStaminaDialog.Initialize(
-                        _playerSaveDataContainer.Fuel,
-                        _playerSaveDataContainer.GetMaxFuel(),
-                        _playerSaveDataContainer.Yukichi,
-                        1
-                    );
+                recoveryStaminaDialog.Initialize(user.Stamina, user.MaxFuel, user.Yukichi, 1);
                 recoveryStaminaDialog.Open();
             };
             headerUi.OnRelease += () => { rankConfirm.gameObject.SetActive(false); };
@@ -89,17 +84,17 @@ namespace MokomoGames
             recoveryStaminaDialog.OnTappedYesButton += () =>
             {
                 fillWarningStaminaDialog.Open();
-                fillWarningStaminaDialog.ShowMaxFuelMessage(_playerSaveDataContainer.IsMaxFuel);
-                if (!_playerSaveDataContainer.IsMaxFuel)
+                fillWarningStaminaDialog.ShowMaxFuelMessage(user.IsMaxFuel);
+                if (!user.IsMaxFuel)
                 {
-                    
-                    _playerSaveDataContainer.Fuel += _playerSaveDataContainer.GetMaxFuel();
-                    _playerSaveDataContainer.Yukichi--;
+                    //TODO: 消費&回復するAPIを叩く
+                    // _playerSaveDataContainer.User.Stamina += _playerSaveDataContainer.GetMaxFuel();
+                    // _playerSaveDataContainer.User.Yukichi--;
                     _playerSaveDataRepository.RecoveryFuelByYukichi();
-                    Refresh(_playerSaveDataContainer);
+                    Refresh(user);
                 }
-                fillWarningStaminaDialog.SetStamina(_playerSaveDataContainer.Fuel,_playerSaveDataContainer.GetMaxFuel());
-                fillWarningStaminaDialog.SetYukichiNum(_playerSaveDataContainer.Yukichi);
+                fillWarningStaminaDialog.SetStamina(user.Stamina,user.MaxFuel);
+                fillWarningStaminaDialog.SetYukichiNum(user.Yukichi);
                 recoveryStaminaDialog.Close();
             };
             fillWarningStaminaDialog.OnTappedClose += fillWarningStaminaDialog.Close;
@@ -148,18 +143,13 @@ namespace MokomoGames
             gameObject.SetActive(show);
         }
         
-        private void Refresh(PlayerSaveDataContainer saveDataContainer)
+        private void Refresh(User user)
         {
-            headerUi.SetStamina(
-                saveDataContainer.Fuel,
-                saveDataContainer.GetMaxFuel());
-            headerUi.SetCoinNum(saveDataContainer.Coin);
-            headerUi.SetMizuNum(saveDataContainer.Mizu);
-            headerUi.SetYukichiNum(saveDataContainer.Yukichi);
-            headerUi.SetRank(
-                saveDataContainer.Rank,
-                saveDataContainer.Exp,
-                saveDataContainer.GetNeedNextRankExp());
+            headerUi.SetStamina(user.Stamina, user.MaxFuel);
+            headerUi.SetCoinNum(user.Coin);
+            headerUi.SetMizuNum(user.Mizu);
+            headerUi.SetYukichiNum(user.Yukichi);
+            headerUi.SetRank(user.Rank, user.RankExp, user.NeedNextRankExp);
         }
     }
 }

@@ -10,11 +10,14 @@ using MokomoGames.Users;
 using PlayFab.CloudScriptModels;using PlayFab.Json;
 using UniRx.Async;
 using UnityEngine;
+using Zenject;
 
 namespace MokomoGames
 {
     public class PlayerSaveDataRepository : IPlayerSaveDataRepository
     {
+        [Inject] private IMasterDataRepository _masterDataRepository;
+        
         public async UniTask<User> GetPlayerSaveData()
         {
             var response = await PlayFabUtility.ExecuteFunctionAsync<GetPlayerSaveDataResponse>
@@ -28,7 +31,8 @@ namespace MokomoGames
 
         public User toModel(UserData data)
         {
-            return new User(data);
+            var rankTableRecord = _masterDataRepository.RankTable.Records.FirstOrDefault(x => x.Rank == data.Rank);
+            return new User(data,rankTableRecord.MaxFuel,rankTableRecord.NeedNextRankExp);
         }
 
         public UserData toData(User user)

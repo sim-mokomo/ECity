@@ -13,7 +13,7 @@ public class PlayerSaveDataDebugRepository : IPlayerSaveDataRepository
 {
     [Inject] private IMasterDataRepository _masterDataRepository;
     [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
-
+    
     public UniTask<User> GetPlayerSaveData()
     {
         var data = new UserData()
@@ -31,7 +31,8 @@ public class PlayerSaveDataDebugRepository : IPlayerSaveDataRepository
 
     public User toModel(UserData data)
     {
-        return new User(data);
+        var rankTableRecord = _masterDataRepository.RankTable.Records.FirstOrDefault(x => x.Rank == data.Rank);
+        return new User(data,rankTableRecord.MaxFuel,rankTableRecord.NeedNextRankExp);
     }
 
     public UserData toData(User user)
