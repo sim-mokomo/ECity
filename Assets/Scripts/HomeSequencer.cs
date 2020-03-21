@@ -12,7 +12,7 @@ namespace MokomoGames
         private readonly UIMenuListContainer _menuListContainer = new UIMenuListContainer();
         [Inject] private IMasterDataRepository _masterDataRepository;
         [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
-        private UserSoulDataContainerList _userSoulDataContainerList;
+        private UserSoulList _userSoulList;
         [SerializeField] private UIFillWarningStaminaDialog fillWarningStaminaDialog;
 
         [SerializeField] private UIHeader headerUi;
@@ -33,8 +33,8 @@ namespace MokomoGames
 
             user = await _playerSaveDataRepository.GetPlayerSaveData();
             var soulDataList = await _playerSaveDataRepository.GetUserSoulDataList();
-            _userSoulDataContainerList = new UserSoulDataContainerList(soulDataList.Souls, _masterDataRepository);
-            soulListPage.SetData(_userSoulDataContainerList);
+            _userSoulList = new UserSoulList(soulDataList.Souls, _masterDataRepository);
+            soulListPage.SetData(_userSoulList);
             Refresh(user);
 
             staminaRecoveryTimeController = new StaminaRecoveryTimeController(_playerSaveDataRepository);

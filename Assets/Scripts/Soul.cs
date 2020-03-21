@@ -3,27 +3,27 @@ using MokomoGames.Protobuf;
 
 namespace MokomoGames
 {
-    public class UserSoulDataContainer
+    public class Soul
     {
         private readonly IMasterDataRepository _masterDataRepository;
 
-        public UserSoulDataContainer(UserSoulData userSoulData, IMasterDataRepository masterDataRepository)
+        public Soul(UserSoulData userData, IMasterDataRepository masterDataRepository)
         {
-            UserSoulData = userSoulData;
-            BaseConfig = masterDataRepository.SoulTable.Records.FirstOrDefault(x => x.No == UserSoulData.SoulNo);
+            UserData = userData;
+            Config = masterDataRepository.SoulTable.Records.FirstOrDefault(x => x.No == UserData.SoulNo);
             _masterDataRepository = masterDataRepository;
             NormalSkillTableRecord =
-                masterDataRepository.NormalSkillTable.Records.FirstOrDefault(x => x.No == BaseConfig.NormalSkillId);
+                masterDataRepository.NormalSkillTable.Records.FirstOrDefault(x => x.No == Config.NormalSkillId);
             ReaderSkillTableRecord =
-                masterDataRepository.ReaderSkillTable.Records.FirstOrDefault(x => x.No == BaseConfig.ReaderSkillId);
-            LevelTableRecord = GetLevelRecord(masterDataRepository.SoulLevelTable, UserSoulData.TotalLevelExp);
+                masterDataRepository.ReaderSkillTable.Records.FirstOrDefault(x => x.No == Config.ReaderSkillId);
+            LevelTableRecord = GetLevelRecord(masterDataRepository.SoulLevelTable, UserData.TotalLevelExp);
             NormalSkillLevelTableRecord = GetNormalSkillLevelRecord(masterDataRepository.NormalSkillLevelTable,
-                UserSoulData.TotalSkillExp);
+                UserData.TotalSkillExp);
         }
 
-        public SoulTableRecord BaseConfig { get; }
+        public SoulTableRecord Config { get; }
 
-        public UserSoulData UserSoulData { get; }
+        public UserSoulData UserData { get; }
 
         public SoulLevelTableRecord LevelTableRecord { get; }
 
@@ -46,7 +46,7 @@ namespace MokomoGames
                 NeedNextLevelExp = 200
             };
             foreach (var record in soulLevelTable.Records
-                .Where(x => x.No == UserSoulData.SoulNo))
+                .Where(x => x.No == UserData.SoulNo))
             {
                 res = record;
                 totalExp += record.NeedNextLevelExp;
@@ -73,7 +73,7 @@ namespace MokomoGames
 
         public uint GetRemainingLevelExp()
         {
-            return GetTotalNeedLevelExp() - UserSoulData.TotalLevelExp;
+            return GetTotalNeedLevelExp() - UserData.TotalLevelExp;
         }
 
         public uint GetTotalNeedLevelExp()
@@ -87,7 +87,7 @@ namespace MokomoGames
 
         public uint GetRemainingNormalSkillExp()
         {
-            return GetTotalNeedNormalSkillLevelExp() - UserSoulData.TotalSkillExp;
+            return GetTotalNeedNormalSkillLevelExp() - UserData.TotalSkillExp;
         }
 
         public uint GetTotalNeedNormalSkillLevelExp()

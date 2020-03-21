@@ -11,7 +11,7 @@ namespace MokomoGames.UI
     {
         [SerializeField] private UIFavoriteButton _favoriteButton;
         [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
-        private UserSoulDataContainer _soulDataContainer;
+        private Soul _soul;
         [SerializeField] private TextMeshProUGUI attackText;
 
         [SerializeField] private Button backButton;
@@ -61,50 +61,50 @@ namespace MokomoGames.UI
             _favoriteButton.OnTappedIcon += async () =>
             {
                 var response = await _playerSaveDataRepository.UpdateUserSoulDataFavorite(
-                    _soulDataContainer.UserSoulData.Guid,
-                    _soulDataContainer.UserSoulData.Favorite);
-                _soulDataContainer.UserSoulData.Favorite = response.Favorite;
-                _favoriteButton.UpdateIcon(_soulDataContainer.UserSoulData.Favorite);
+                    _soul.UserData.Guid,
+                    _soul.UserData.Favorite);
+                _soul.UserData.Favorite = response.Favorite;
+                _favoriteButton.UpdateIcon(_soul.UserData.Favorite);
             };
 
             backButton.onClick.AddListener(() => { OnTappedBackButton?.Invoke(); });
         }
 
-        public void Begin(UserSoulDataContainer soulDataContainer)
+        public void Begin(Soul soul)
         {
-            subNameText.text = soulDataContainer.BaseConfig.AnotherName;
-            mainNameText.text = soulDataContainer.BaseConfig.Name;
-            rarityUI.Show(soulDataContainer.BaseConfig.Rarity);
+            subNameText.text = soul.Config.AnotherName;
+            mainNameText.text = soul.Config.Name;
+            rarityUI.Show(soul.Config.Rarity);
 
-            levelText.text = $"{soulDataContainer.LevelTableRecord.Level}/{999}";
-            hpText.text = $"{soulDataContainer.LevelTableRecord.Hp}";
-            attackText.text = $"{soulDataContainer.LevelTableRecord.Power}";
-            recoveryPowerText.text = $"{soulDataContainer.LevelTableRecord.RecoveryPower}";
-            costText.text = $"{soulDataContainer.BaseConfig.Cost}";
+            levelText.text = $"{soul.LevelTableRecord.Level}/{999}";
+            hpText.text = $"{soul.LevelTableRecord.Hp}";
+            attackText.text = $"{soul.LevelTableRecord.Power}";
+            recoveryPowerText.text = $"{soul.LevelTableRecord.RecoveryPower}";
+            costText.text = $"{soul.Config.Cost}";
 
-            elementIcon.sprite = SpriteResourcesProvider.GetAttributeIcon(soulDataContainer.BaseConfig.Attribute);
-            elementNameText.text = soulDataContainer.BaseConfig.Attribute.GetName();
-            expGauge.SetRemainingValue($"{soulDataContainer.GetRemainingLevelExp()}");
+            elementIcon.sprite = SpriteResourcesProvider.GetAttributeIcon(soul.Config.Attribute);
+            elementNameText.text = soul.Config.Attribute.GetName();
+            expGauge.SetRemainingValue($"{soul.GetRemainingLevelExp()}");
             expGauge.SetRemainingSliderValue(
-                soulDataContainer.UserSoulData.TotalLevelExp,
-                soulDataContainer.GetTotalNeedLevelExp());
+                soul.UserData.TotalLevelExp,
+                soul.GetTotalNeedLevelExp());
 
-            normalSkillNameText.text = soulDataContainer.NormalSkillTableRecord.Name;
-            normalSkillContentText.text = soulDataContainer.NormalSkillTableRecord.Description;
-            normalSkillLevelText.text = soulDataContainer.NormalSkillLevelTableRecord.Level.ToString();
-            normalSkillGauge.SetRemainingValue($"{soulDataContainer.GetRemainingNormalSkillExp()}");
+            normalSkillNameText.text = soul.NormalSkillTableRecord.Name;
+            normalSkillContentText.text = soul.NormalSkillTableRecord.Description;
+            normalSkillLevelText.text = soul.NormalSkillLevelTableRecord.Level.ToString();
+            normalSkillGauge.SetRemainingValue($"{soul.GetRemainingNormalSkillExp()}");
             normalSkillGauge.SetRemainingSliderValue(
-                soulDataContainer.UserSoulData.TotalSkillExp,
-                soulDataContainer.GetTotalNeedNormalSkillLevelExp());
-            normalSkillChargeTurnText.text = $"ターン:{soulDataContainer.NormalSkillTableRecord.BaseTurn}";
+                soul.UserData.TotalSkillExp,
+                soul.GetTotalNeedNormalSkillLevelExp());
+            normalSkillChargeTurnText.text = $"ターン:{soul.NormalSkillTableRecord.BaseTurn}";
 
-            readerSkillNameText.text = soulDataContainer.ReaderSkillTableRecord.Name;
-            readerSkillContentText.text = soulDataContainer.ReaderSkillTableRecord.Description;
+            readerSkillNameText.text = soul.ReaderSkillTableRecord.Name;
+            readerSkillContentText.text = soul.ReaderSkillTableRecord.Description;
 
-            noText.text = $"{soulDataContainer.BaseConfig.No}";
-            typeText.text = $"{soulDataContainer.BaseConfig.SoulType.GetName()}";
+            noText.text = $"{soul.Config.No}";
+            typeText.text = $"{soul.Config.SoulType.GetName()}";
 
-            _soulDataContainer = soulDataContainer;
+            _soul = soul;
         }
 
         public void Show(bool show)

@@ -31,7 +31,7 @@ namespace MokomoGames.UI
         [SerializeField] private Toggle soulToggle;
         [SerializeField] private ToggleGroup toggleGroup;
         private ColorBlock unSelectingColorBlock;
-        private UserSoulDataContainerList userSoulDataContainerList;
+        private UserSoulList _userSoulList;
         [SerializeField] private VerticalLayoutGroup verticalRoot;
         private Tab CurrentTab => soulToggle.isOn ? Tab.Soul : Tab.Material;
         public event Action OnTappedHomeButton;
@@ -75,9 +75,9 @@ namespace MokomoGames.UI
             soulToggle.isOn = true;
         }
 
-        public void SetData(UserSoulDataContainerList userSoulDataContainerList)
+        public void SetData(UserSoulList userSoulList)
         {
-            this.userSoulDataContainerList = userSoulDataContainerList;
+            this._userSoulList = userSoulList;
         }
 
         private void UpdateHasSoulNum(int currentCount)
@@ -86,7 +86,7 @@ namespace MokomoGames.UI
             hasSoulNum.text = $"{currentCount}/{hasSoulCapacity}";
         }
 
-        private List<UISoulCell> MakeCells(List<UserSoulDataContainer> records)
+        private List<UISoulCell> MakeCells(List<Soul> records)
         {
             const int cellNumPerRow = 6;
             var rowNum = Mathf.CeilToInt((float) records.Count / cellNumPerRow);
@@ -117,10 +117,10 @@ namespace MokomoGames.UI
             return soulCells;
         }
 
-        private void OnTappedSoulCellIcon(UserSoulDataContainer soulDataContainer)
+        private void OnTappedSoulCellIcon(Soul soul)
         {
             soulDetailPage.Show(true);
-            soulDetailPage.Begin(soulDataContainer);
+            soulDetailPage.Begin(soul);
         }
 
         private void DestroyCells()
@@ -140,18 +140,18 @@ namespace MokomoGames.UI
             {
                 DestroyCells();
 
-                var materials = userSoulDataContainerList.ExistMaterialSouls
-                    ? userSoulDataContainerList.GetMaterialSouls()
-                    : UserSoulDataContainerList.Empty;
+                var materials = _userSoulList.ExistMaterialSouls
+                    ? _userSoulList.GetMaterialSouls()
+                    : UserSoulList.Empty;
                 UpdateHasSoulNum(materials.Count());
                 MakeCells(materials.ToList());
             }
             else if (CurrentTab == Tab.Soul)
             {
                 DestroyCells();
-                var souls = userSoulDataContainerList.ExistBattleSouls
-                    ? userSoulDataContainerList.GetBattleSouls()
-                    : UserSoulDataContainerList.Empty;
+                var souls = _userSoulList.ExistBattleSouls
+                    ? _userSoulList.GetBattleSouls()
+                    : UserSoulList.Empty;
                 UpdateHasSoulNum(souls.Count());
                 MakeCells(souls.ToList());
             }

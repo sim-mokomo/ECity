@@ -20,7 +20,7 @@ namespace MokomoGames.UI
         };
 
         private RectTransform _rectTransform;
-        private UserSoulDataContainer _soulDataContainer;
+        private Soul _soul;
         [SerializeField] private Image attributeBackgroundImage;
         [SerializeField] private Image attributeIcon;
         [SerializeField] private Image characterIcon;
@@ -28,24 +28,24 @@ namespace MokomoGames.UI
         [SerializeField] private UIStars stars;
         public float Height => _rectTransform.rect.height;
         public float Width => _rectTransform.rect.width;
-        public event Action<UserSoulDataContainer> OnTappedIcon;
+        public event Action<Soul> OnTappedIcon;
 
         private void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
-            characterIconButton.onClick.AddListener(() => OnTappedIcon?.Invoke(_soulDataContainer));
+            characterIconButton.onClick.AddListener(() => OnTappedIcon?.Invoke(_soul));
         }
 
-        public void Begin(UserSoulDataContainer soulDataContainer)
+        public void Begin(Soul soul)
         {
-            attributeIcon.sprite = SpriteResourcesProvider.GetAttributeIcon(soulDataContainer.BaseConfig.Attribute);
+            attributeIcon.sprite = SpriteResourcesProvider.GetAttributeIcon(soul.Config.Attribute);
             characterIcon.sprite =
-                SpriteResourcesProvider.GetCharacterIcon(soulDataContainer.BaseConfig.CharacterIconName);
-            attributeColorTable.TryGetValue(soulDataContainer.BaseConfig.Attribute, out var backgroundColor);
+                SpriteResourcesProvider.GetCharacterIcon(soul.Config.CharacterIconName);
+            attributeColorTable.TryGetValue(soul.Config.Attribute, out var backgroundColor);
             attributeBackgroundImage.color = backgroundColor;
-            stars.Show(soulDataContainer.BaseConfig.Rarity);
+            stars.Show(soul.Config.Rarity);
 
-            _soulDataContainer = soulDataContainer;
+            _soul = soul;
         }
 
         public void Show(bool show)
