@@ -27,12 +27,6 @@ namespace MokomoGames
         {
             recoveryTimer = CreateRecoveryTimer();
             recoveryTimer.Play();
-
-            OnRecoveriedStamina += () =>
-            {
-                recoveryTimer = CreateRecoveryTimer();
-                recoveryTimer.Play();
-            };
         }
         
         private Timer CreateRecoveryTimer()
@@ -40,6 +34,8 @@ namespace MokomoGames
             var timer = new Timer(RecoverySeconds);
             timer.OnEnded += () =>
             {
+                recoveryTimer = CreateRecoveryTimer();
+                recoveryTimer.Play();
                 _playerSaveDataRepository.RecoveryStaminaByWaitTime();
                 OnRecoveriedStamina?.Invoke();
             };
