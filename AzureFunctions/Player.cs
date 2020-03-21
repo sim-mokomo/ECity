@@ -60,14 +60,14 @@ namespace MokomoGames.Function
             var mizuValue = userDataResponseDic.ContainsKey("mizu") ? uint.Parse(userDataResponseDic["mizu"].Value) : 0;
             var expValue = userDataResponseDic.ContainsKey("exp") ? uint.Parse(userDataResponseDic["exp"].Value) : 0;
 
-            var playerSaveData = new PlayerSaveData()
+            var playerSaveData = new UserData()
             {
                 Stamina = staminaValue,
                 Coin = coinValue,
                 Mizu = mizuValue,
                 Rank = rankValue,
                 Yukichi = yukichiValue,
-                Exp = expValue,
+                RankExp = expValue,
             };
 
             var saveDataResponse = new GetPlayerSaveDataResponse()
@@ -96,9 +96,9 @@ namespace MokomoGames.Function
             }
 
             var currentPlayerId = CurrentPlayerId(context);
-            var saveData = await GetUserDataElement<PlayerSaveData>(currentPlayerId);
+            var saveData = await GetUserDataElement<UserData>(currentPlayerId);
             saveData.Stamina += RecoveriedStaminaValuePerTime;
-            await UpdateUserDataElement<PlayerSaveData>(currentPlayerId,saveData);
+            await UpdateUserDataElement<UserData>(currentPlayerId,saveData);
 
             var retResponse = new RecoveryStaminaByWaitTimeResponse()
             {
@@ -153,10 +153,10 @@ namespace MokomoGames.Function
 
             var rankTable = await MasterData.GetRankTableInstanceAsync();
             var playerId = CurrentPlayerId(context);
-            var saveData = await GetUserDataElement<PlayerSaveData>(playerId);
+            var saveData = await GetUserDataElement<UserData>(playerId);
             saveData.Stamina += rankTable.Records.FirstOrDefault(x => x.Rank == saveData.Rank).MaxFuel;
             saveData.Yukichi--;
-            await UpdateUserDataElement<PlayerSaveData>(playerId,saveData);
+            await UpdateUserDataElement<UserData>(playerId,saveData);
 
             var response = new RecoveryFuelByYukichiResponse()
             {
