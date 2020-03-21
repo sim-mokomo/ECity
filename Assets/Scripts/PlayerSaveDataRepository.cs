@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Google.Protobuf;
 using MokomoGames.Protobuf;
 using MokomoGames.Users;
 using UniRx.Async;
@@ -16,7 +18,7 @@ namespace MokomoGames
             var response = await PlayFabUtility.ExecuteFunctionAsync<GetPlayerSaveDataResponse>
             (
                 "getPlayerSaveData",
-                null
+                new Dictionary<string, string>().JsonDictionary(new GetPlayerSaveDataRequest())
             );
             var user = toModel(response.SaveData);
             return user;
@@ -38,7 +40,7 @@ namespace MokomoGames
             var response = await PlayFabUtility.ExecuteFunctionAsync<RecoveryFuelByYukichiResponse>
             (
                 "recoveryFuelByYukichi",
-                null
+                new Dictionary<string, string>().JsonDictionary(new RecoveryFuelByYukichiRequest())
             );
             return response;
         }
@@ -48,7 +50,7 @@ namespace MokomoGames
             var response = await PlayFabUtility.ExecuteFunctionAsync<RecoveryStaminaByWaitTimeResponse>
             (
                 "recoveryStaminaByWaitTime",
-                null
+                new Dictionary<string, string>().JsonDictionary(new RecoveryFuelByYukichiRequest())
             );
             return response;
         }
@@ -58,7 +60,7 @@ namespace MokomoGames
             var response = await PlayFabUtility.ExecuteFunctionAsync<GetUserSoulDataListResponse>
             (
                 "getUserSoulDataList",
-                null
+                new Dictionary<string, string>().JsonDictionary(new GetUserSoulDataListRequest())
             );
             return response;
         }
