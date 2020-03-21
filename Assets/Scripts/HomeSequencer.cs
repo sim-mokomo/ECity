@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using MokomoGames.Protobuf;
 using MokomoGames.UI;
 using MokomoGames.Users;
-using UniRx.Async;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -14,28 +10,28 @@ namespace MokomoGames
 {
     public class HomeSequencer : MonoBehaviour, ISequencer
     {
-        public MasterSequencer.SequencerType Type => MasterSequencer.SequencerType.Home;
-        
+        [Inject] private IMasterDataRepository _masterDataRepository;
+        private readonly UIMenuListContainer _menuListContainer = new UIMenuListContainer();
+        [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
+        private UserSoulDataContainerList _userSoulDataContainerList;
+        [SerializeField] private UIFillWarningStaminaDialog fillWarningStaminaDialog;
+
         [SerializeField] private UIHeader headerUi;
         [SerializeField] private UIRankConfirm rankConfirm;
-        [SerializeField] private UIFillWarningStaminaDialog fillWarningStaminaDialog;
         [SerializeField] private UIRecoveryStaminaDialog recoveryStaminaDialog;
-        [SerializeField] private Button soulLaboToggle;
         [SerializeField] private UISoulLaboMenu soulLaboMenu;
+        [SerializeField] private Button soulLaboToggle;
         [SerializeField] private UISoulListMenu soulListMenu;
         [SerializeField] private UISoulListPage soulListPage;
-        [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
-        [Inject] private IMasterDataRepository _masterDataRepository;
-        private User user;
-        private UserSoulDataContainerList _userSoulDataContainerList;
         private StaminaRecoveryTimeController staminaRecoveryTimeController;
-        private UIMenuListContainer _menuListContainer = new UIMenuListContainer();
+        private User user;
+        public MasterSequencer.SequencerType Type => MasterSequencer.SequencerType.Home;
         public event Action<MasterSequencer.SequencerType, bool, Func<bool>> OnLeave;
-        
+
         public async void Begin()
         {
             Display(true);
-            
+
             user = await _playerSaveDataRepository.GetPlayerSaveData();
             var soulDataList = await _playerSaveDataRepository.GetUserSoulDataList();
             _userSoulDataContainerList = new UserSoulDataContainerList(
@@ -66,7 +62,7 @@ namespace MokomoGames
             {
                 rankConfirm.gameObject.SetActive(true);
                 rankConfirm.SetCurrentRank(user.Rank);
-                rankConfirm.SetExpGauge(user.NeedNextRankExp - user.RankExp ,user.NeedNextRankExp);
+                rankConfirm.SetExpGauge(user.NeedNextRankExp - user.RankExp, user.NeedNextRankExp);
                 rankConfirm.SetStaminaGauge(
                     staminaRecoveryTimeController.Minutes,
                     staminaRecoveryTimeController.Seconds,
@@ -74,11 +70,11 @@ namespace MokomoGames
             };
             headerUi.StaminaUi.OnTapedRecoveryButton += () =>
             {
-                recoveryStaminaDialog.Initialize(user.Stamina, user.MaxFuel, user.Yukichi, 1);
+                recoveryStaminaDialog.Initialize(user.Stamina, user.MaxFuel, user.Yukichi);
                 recoveryStaminaDialog.Open();
             };
             headerUi.OnRelease += () => { rankConfirm.gameObject.SetActive(false); };
-            
+
             recoveryStaminaDialog.OnTappedCloseButton += recoveryStaminaDialog.Close;
             recoveryStaminaDialog.OnTappedNoButton += recoveryStaminaDialog.Close;
             recoveryStaminaDialog.OnTappedYesButton += () =>
@@ -93,22 +89,17 @@ namespace MokomoGames
                     _playerSaveDataRepository.RecoveryFuelByYukichi();
                     Refresh(user);
                 }
-                fillWarningStaminaDialog.SetStamina(user.Stamina,user.MaxFuel);
+
+                fillWarningStaminaDialog.SetStamina(user.Stamina, user.MaxFuel);
                 fillWarningStaminaDialog.SetYukichiNum(user.Yukichi);
                 recoveryStaminaDialog.Close();
             };
             fillWarningStaminaDialog.OnTappedClose += fillWarningStaminaDialog.Close;
             fillWarningStaminaDialog.OnTappedConfirm += fillWarningStaminaDialog.Close;
-            
-            soulLaboToggle.onClick.AddListener(() =>
-            {
-                _menuListContainer.Add(soulLaboMenu);
-            });
-            soulLaboMenu.ListButton.onClick.AddListener(() =>
-            {
-                _menuListContainer.Add(soulListMenu);
-            });
-            
+
+            soulLaboToggle.onClick.AddListener(() => { _menuListContainer.Add(soulLaboMenu); });
+            soulLaboMenu.ListButton.onClick.AddListener(() => { _menuListContainer.Add(soulListMenu); });
+
             foreach (var page in GetComponentsInChildren<IPage>())
             {
                 page.OnTappedHomeButton -= ReleaseAllMenuList;
@@ -120,11 +111,6 @@ namespace MokomoGames
             recoveryStaminaDialog.gameObject.SetActive(false);
             fillWarningStaminaDialog.gameObject.SetActive(false);
             soulListPage.gameObject.SetActive(false);
-        }
-
-        public void ReleaseAllMenuList()
-        {
-            _menuListContainer.RemoveAll();
         }
 
         public void Tick()
@@ -142,7 +128,12 @@ namespace MokomoGames
         {
             gameObject.SetActive(show);
         }
-        
+
+        public void ReleaseAllMenuList()
+        {
+            _menuListContainer.RemoveAll();
+        }
+
         private void Refresh(User user)
         {
             headerUi.SetStamina(user.Stamina, user.MaxFuel);

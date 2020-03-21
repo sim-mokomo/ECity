@@ -5,38 +5,39 @@ namespace MokomoGames
 {
     public class UserSoulDataContainer
     {
-        private UserSoulData _userSoulData;
-        private SoulTableRecord _baseConfig;
-        private SoulLevelTableRecord _levelTableRecord;
-        private IMasterDataRepository _masterDataRepository;
-        private NormalSkillTableRecord _normalSkillTableRecord;
-        private NormalSkillLevelTableRecord _normalSkillLevelTableRecord;
-        private ReaderSkillTableRecord _readerSkillTableRecord;
-        public SoulTableRecord BaseConfig => _baseConfig;
-        public UserSoulData UserSoulData => _userSoulData;
-        public SoulLevelTableRecord LevelTableRecord => _levelTableRecord;
-        public NormalSkillTableRecord NormalSkillTableRecord => _normalSkillTableRecord;
-        public NormalSkillLevelTableRecord NormalSkillLevelTableRecord => _normalSkillLevelTableRecord;
-        public ReaderSkillTableRecord ReaderSkillTableRecord => _readerSkillTableRecord;
+        private readonly IMasterDataRepository _masterDataRepository;
 
-        public UserSoulDataContainer(UserSoulData userSoulData,IMasterDataRepository masterDataRepository,IPlayerSaveDataRepository playerSaveDataRepository)
+        public UserSoulDataContainer(UserSoulData userSoulData, IMasterDataRepository masterDataRepository,
+            IPlayerSaveDataRepository playerSaveDataRepository)
         {
-            _userSoulData = userSoulData;
-            _baseConfig = masterDataRepository.SoulTable.Records.FirstOrDefault(x => x.No == _userSoulData.SoulNo);
+            UserSoulData = userSoulData;
+            BaseConfig = masterDataRepository.SoulTable.Records.FirstOrDefault(x => x.No == UserSoulData.SoulNo);
             _masterDataRepository = masterDataRepository;
-            _normalSkillTableRecord =
+            NormalSkillTableRecord =
                 masterDataRepository.NormalSkillTable.Records.FirstOrDefault(x => x.No == BaseConfig.NormalSkillId);
-            _readerSkillTableRecord =
+            ReaderSkillTableRecord =
                 masterDataRepository.ReaderSkillTable.Records.FirstOrDefault(x => x.No == BaseConfig.ReaderSkillId);
-            _levelTableRecord = GetLevelRecord(masterDataRepository.SoulLevelTable,_userSoulData.TotalLevelExp);
-            _normalSkillLevelTableRecord = GetNormalSkillLevelRecord(masterDataRepository.NormalSkillLevelTable,
-                _userSoulData.TotalSkillExp);
+            LevelTableRecord = GetLevelRecord(masterDataRepository.SoulLevelTable, UserSoulData.TotalLevelExp);
+            NormalSkillLevelTableRecord = GetNormalSkillLevelRecord(masterDataRepository.NormalSkillLevelTable,
+                UserSoulData.TotalSkillExp);
         }
 
-        private SoulLevelTableRecord GetLevelRecord(SoulLevelTable soulLevelTable,uint totalLevelExp)
+        public SoulTableRecord BaseConfig { get; }
+
+        public UserSoulData UserSoulData { get; }
+
+        public SoulLevelTableRecord LevelTableRecord { get; }
+
+        public NormalSkillTableRecord NormalSkillTableRecord { get; }
+
+        public NormalSkillLevelTableRecord NormalSkillLevelTableRecord { get; }
+
+        public ReaderSkillTableRecord ReaderSkillTableRecord { get; }
+
+        private SoulLevelTableRecord GetLevelRecord(SoulLevelTable soulLevelTable, uint totalLevelExp)
         {
             var totalExp = 0u;
-            var res = new SoulLevelTableRecord()
+            var res = new SoulLevelTableRecord
             {
                 Hp = 1,
                 Level = 1,
@@ -46,19 +47,18 @@ namespace MokomoGames
                 NeedNextLevelExp = 200
             };
             foreach (var record in soulLevelTable.Records
-                .Where(x => x.No == _userSoulData.SoulNo))
+                .Where(x => x.No == UserSoulData.SoulNo))
             {
                 res = record;
                 totalExp += record.NeedNextLevelExp;
-                if (totalExp >= totalLevelExp)
-                {
-                    break;
-                }
+                if (totalExp >= totalLevelExp) break;
             }
+
             return res;
         }
-        
-        private NormalSkillLevelTableRecord GetNormalSkillLevelRecord(NormalSkillLevelTable normalSkillLevelTable,uint totalSkillExp)
+
+        private NormalSkillLevelTableRecord GetNormalSkillLevelRecord(NormalSkillLevelTable normalSkillLevelTable,
+            uint totalSkillExp)
         {
             var totalExp = 0u;
             var res = new NormalSkillLevelTableRecord();
@@ -66,37 +66,35 @@ namespace MokomoGames
             {
                 res = record;
                 totalExp += record.NeedNextLevelExp;
-                if (totalExp >= totalSkillExp)
-                {
-                    break;
-                }
+                if (totalExp >= totalSkillExp) break;
             }
+
             return res;
         }
 
         public uint GetRemainingLevelExp()
         {
-            return GetTotalNeedLevelExp() - _userSoulData.TotalLevelExp;
+            return GetTotalNeedLevelExp() - UserSoulData.TotalLevelExp;
         }
-        
+
         public uint GetTotalNeedLevelExp()
         {
             var records = _masterDataRepository.SoulLevelTable.Records
-                .Where(x => x.No == _levelTableRecord.No)
-                .Where(x => x.Level <= _levelTableRecord.Level);
-            var totalExp= records.Any() ? records.Sum(x => x.NeedNextLevelExp) : 200;
+                .Where(x => x.No == LevelTableRecord.No)
+                .Where(x => x.Level <= LevelTableRecord.Level);
+            var totalExp = records.Any() ? records.Sum(x => x.NeedNextLevelExp) : 200;
             return 200;
         }
 
         public uint GetRemainingNormalSkillExp()
         {
-            return GetTotalNeedNormalSkillLevelExp() - _userSoulData.TotalSkillExp;
+            return GetTotalNeedNormalSkillLevelExp() - UserSoulData.TotalSkillExp;
         }
 
         public uint GetTotalNeedNormalSkillLevelExp()
         {
-            return (uint)_masterDataRepository.NormalSkillLevelTable.Records
-                .Where(x => x.Level <= _normalSkillLevelTableRecord.Level)
+            return (uint) _masterDataRepository.NormalSkillLevelTable.Records
+                .Where(x => x.Level <= NormalSkillLevelTableRecord.Level)
                 .Sum(x => x.NeedNextLevelExp);
         }
     }

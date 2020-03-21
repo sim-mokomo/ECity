@@ -1,31 +1,21 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
-using Google.Protobuf;
-using MokomoGames;
+﻿using System.IO;
 using MokomoGames.Protobuf;
-using UniRx.Async;
-using UnityEngine;
 
 namespace MokomoGames
 {
     public class MasterDataDebugRepository : IMasterDataRepository
     {
-        private RankTable _rankTable;
-        private SoulTable _soulTable;
-        private NormalSkillTable _normalSkillTable;
-        private ReaderSkillTable _readerSkillTable;
-        private SoulLevelTable _soulLevelTable;
-        private NormalSkillLevelTable _normalSkillLevelTable;
-        
-        public RankTable RankTable => _rankTable;
-        public SoulTable SoulTable => _soulTable;
-        public NormalSkillTable NormalSkillTable => _normalSkillTable;
-        public ReaderSkillTable ReaderSkillTable => _readerSkillTable;
-        public SoulLevelTable SoulLevelTable => _soulLevelTable;
-        public NormalSkillLevelTable NormalSkillLevelTable => _normalSkillLevelTable;
+        public RankTable RankTable { get; private set; }
+
+        public SoulTable SoulTable { get; private set; }
+
+        public NormalSkillTable NormalSkillTable { get; private set; }
+
+        public ReaderSkillTable ReaderSkillTable { get; private set; }
+
+        public SoulLevelTable SoulLevelTable { get; private set; }
+
+        public NormalSkillLevelTable NormalSkillLevelTable { get; private set; }
 
         public bool AllLoaded =>
             RankTable != null &&
@@ -37,12 +27,17 @@ namespace MokomoGames
 
         public void LoadAllTable()
         {
-            _rankTable = RankTable.Parser.ParseJson(File.ReadAllText("./Assets/Debug/Json/RankTable.json"));
-            _soulTable = SoulTable.Parser.ParseJson(File.ReadAllText("./Assets/Debug/Json/SoulTable.json"));
-            _normalSkillTable = NormalSkillTable.Parser.ParseJson(File.ReadAllText("./Assets/Debug/Json/NormalSkillTable.json"));
-            _readerSkillTable = ReaderSkillTable.Parser.ParseJson(File.ReadAllText("./Assets/Debug/Json/ReaderSkillTable.json"));
-            _soulLevelTable = SoulLevelTable.Parser.ParseJson(File.ReadAllText("./Assets/Debug/Json/SoulLevelTable.json"));
-            _normalSkillLevelTable = NormalSkillLevelTable.Parser.ParseJson(File.ReadAllText("./Assets/Debug/Json/NormalSkillLevelTable.json"));
+            RankTable = RankTable.Parser.ParseJson(File.ReadAllText("./Assets/Debug/Json/RankTable.json"));
+            SoulTable = SoulTable.Parser.ParseJson(File.ReadAllText("./Assets/Debug/Json/SoulTable.json"));
+            NormalSkillTable =
+                NormalSkillTable.Parser.ParseJson(File.ReadAllText("./Assets/Debug/Json/NormalSkillTable.json"));
+            ReaderSkillTable =
+                ReaderSkillTable.Parser.ParseJson(File.ReadAllText("./Assets/Debug/Json/ReaderSkillTable.json"));
+            SoulLevelTable =
+                SoulLevelTable.Parser.ParseJson(File.ReadAllText("./Assets/Debug/Json/SoulLevelTable.json"));
+            NormalSkillLevelTable =
+                NormalSkillLevelTable.Parser.ParseJson(
+                    File.ReadAllText("./Assets/Debug/Json/NormalSkillLevelTable.json"));
         }
     }
 }

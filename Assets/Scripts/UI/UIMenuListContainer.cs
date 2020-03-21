@@ -1,16 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
-using UniRx.Async.Triggers;
-using UnityEngine;
 
 public class UIMenuListContainer
 {
-    private readonly List<UIMenuList> _menuLists = new List<UIMenuList>();
-    private UIMenuList Tail => _menuLists.LastOrDefault();
     private const float OffsetBetweenMenu = 200f;
     private const float OffsetMoveDuration = 0.1f;
+    private readonly List<UIMenuList> _menuLists = new List<UIMenuList>();
+    private UIMenuList Tail => _menuLists.LastOrDefault();
 
     public void Add(UIMenuList menuList)
     {
@@ -19,8 +16,10 @@ public class UIMenuListContainer
         foreach (var menuGroup in _menuLists.Select((x, i) => new {menu = x, index = i}))
         {
             var menu = menuGroup.menu;
-            menu.transform.DOLocalMoveX(menu.MoveDurationWhenOpen - OffsetBetweenMenu * (menuGroup.index + 1), OffsetMoveDuration, true);
+            menu.transform.DOLocalMoveX(menu.MoveDurationWhenOpen - OffsetBetweenMenu * (menuGroup.index + 1),
+                OffsetMoveDuration, true);
         }
+
         _menuLists.Add(menuList);
         menuList.OnRequestedClose -= RemoveTail;
         menuList.OnRequestedClose += RemoveTail;
@@ -29,15 +28,16 @@ public class UIMenuListContainer
 
     public void Remove(UIMenuList menulist)
     {
-        if(!_menuLists.Contains(menulist))
+        if (!_menuLists.Contains(menulist))
             return;
         _menuLists.Remove(menulist);
         menulist.Close();
 
-        foreach (var menuGroup in _menuLists.Select( (x,i) => new {menu=x,index=i}))
+        foreach (var menuGroup in _menuLists.Select((x, i) => new {menu = x, index = i}))
         {
             var menu = menuGroup.menu;
-            menu.transform.DOLocalMoveX(menu.MoveDurationWhenOpen - (OffsetBetweenMenu * menuGroup.index), OffsetMoveDuration, true);
+            menu.transform.DOLocalMoveX(menu.MoveDurationWhenOpen - OffsetBetweenMenu * menuGroup.index,
+                OffsetMoveDuration, true);
         }
     }
 
@@ -54,9 +54,9 @@ public class UIMenuListContainer
 
     public void Tick()
     {
-        if(Tail == null)
+        if (Tail == null)
             return;
-        if(Tail.IsOpening)
-            Tail.Tick();      
+        if (Tail.IsOpening)
+            Tail.Tick();
     }
 }

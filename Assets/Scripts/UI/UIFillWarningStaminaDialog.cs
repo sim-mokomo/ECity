@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,21 +7,21 @@ namespace MokomoGames.UI
 {
     public class UIFillWarningStaminaDialog : MonoBehaviour
     {
-        [SerializeField] private UIStamina uiStamina;
-        [SerializeField] private UIHasYukichi hasYukichi;
-        [SerializeField] private Button ConfirmButton;
-        [SerializeField] private Button CloseButton;
-        [SerializeField] private TextMeshProUGUI contentText;
         private const string fillMessage = "燃料はすでに満タンです!\n使用をキャンセルしました。";
         private const string recoveryMessage = "燃料が満タンになりました!";
-        
+        [SerializeField] private Button CloseButton;
+        [SerializeField] private Button ConfirmButton;
+        [SerializeField] private TextMeshProUGUI contentText;
+        [SerializeField] private UIHasYukichi hasYukichi;
+        [SerializeField] private UIStamina uiStamina;
+
         public event Action OnTappedConfirm;
         public event Action OnTappedClose;
 
         private void Awake()
         {
-            ConfirmButton.onClick.AddListener( () => OnTappedConfirm?.Invoke());
-            CloseButton.onClick.AddListener( () => OnTappedClose?.Invoke());
+            ConfirmButton.onClick.AddListener(() => OnTappedConfirm?.Invoke());
+            CloseButton.onClick.AddListener(() => OnTappedClose?.Invoke());
         }
 
         public void ShowMaxFuelMessage(bool isMaxFuel)
@@ -33,7 +31,7 @@ namespace MokomoGames.UI
 
         public void SetStamina(uint currentFuel, uint maxFuel)
         {
-            uiStamina.SetCurrentValue(currentFuel,maxFuel);
+            uiStamina.SetCurrentValue(currentFuel, maxFuel);
         }
 
         public void SetYukichiNum(uint yukichiNum)

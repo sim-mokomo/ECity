@@ -1,5 +1,4 @@
-﻿using System;
-using Attribute = MokomoGames.Protobuf.Attribute;
+﻿using MokomoGames.Protobuf;
 
 namespace MokomoGames
 {

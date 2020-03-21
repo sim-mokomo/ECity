@@ -1,34 +1,31 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
 using Zenject;
 
 namespace MokomoGames
 {
     public class StaminaRecoveryTimeController
-    {        
-        private Timer recoveryTimer;
+    {
         public readonly uint RecoverySeconds = 180;
-        public uint Minutes => recoveryTimer.CurrentSecond / 60;
-        public uint Seconds => recoveryTimer.CurrentSecond % 60;
         [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
-
-        public event Action OnRecoveriedStamina;
-        public event Action OnClock;
+        private Timer recoveryTimer;
 
         public StaminaRecoveryTimeController(IPlayerSaveDataRepository playerSaveDataRepository)
         {
             _playerSaveDataRepository = playerSaveDataRepository;
         }
-        
+
+        public uint Minutes => recoveryTimer.CurrentSecond / 60;
+        public uint Seconds => recoveryTimer.CurrentSecond % 60;
+
+        public event Action OnRecoveriedStamina;
+        public event Action OnClock;
+
         public void Begin()
         {
             recoveryTimer = CreateRecoveryTimer();
             recoveryTimer.Play();
         }
-        
+
         private Timer CreateRecoveryTimer()
         {
             var timer = new Timer(RecoverySeconds);
@@ -39,7 +36,7 @@ namespace MokomoGames
                 _playerSaveDataRepository.RecoveryStaminaByWaitTime();
                 OnRecoveriedStamina?.Invoke();
             };
-            timer.OnClocked += (_) => OnClock?.Invoke();
+            timer.OnClocked += _ => OnClock?.Invoke();
             return timer;
         }
     }

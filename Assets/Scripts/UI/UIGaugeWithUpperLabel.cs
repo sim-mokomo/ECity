@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,8 +6,8 @@ namespace MokomoGames
 {
     public class UIGaugeWithUpperLabel : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI remainingValueText;
         [SerializeField] private Slider remainingSlider;
+        [SerializeField] private TextMeshProUGUI remainingValueText;
 
         public void Awake()
         {

@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Google.Protobuf;
-using UnityEngine;
-using MokomoGames;
+﻿using MokomoGames;
 using PlayFab;
 using PlayFab.ClientModels;
-using TMPro;
-using MokomoGames.Protobuf;
+using UnityEngine;
 using Zenject;
 
 public class MainGameController : MonoBehaviour
 {
+    [Inject] private IMasterDataRepository _masterDataRepository;
     private MasterSequencer masterSequencer;
     public static UserDataContainer UserDataContainer { get; private set; }
-    [Inject] private IMasterDataRepository _masterDataRepository;
-    
+
     private void Start()
     {
         masterSequencer = FindObjectOfType<MasterSequencer>();
@@ -24,7 +17,7 @@ public class MainGameController : MonoBehaviour
 
         async void OnLoggedIn(LoginResult result)
         {
-            UserDataContainer = new UserDataContainer(result.PlayFabId,result.AuthenticationContext);
+            UserDataContainer = new UserDataContainer(result.PlayFabId, result.AuthenticationContext);
             _masterDataRepository.LoadAllTable();
             masterSequencer.ChangeSequenceWithLoading(
                 () => _masterDataRepository.AllLoaded,
@@ -36,7 +29,7 @@ public class MainGameController : MonoBehaviour
         }
 
 #if UNITY_EDITOR
-        LoginProvider.LoginByEditor(customId: "TestUser1", OnLoggedIn, OnError);
+        LoginProvider.LoginByEditor("TestUser1", OnLoggedIn, OnError);
 #elif UNITY_ANDROID || UNITY_IPHONE
         LoginProvider.LoginByMobile(OnLoggedIn, OnError);
 #endif

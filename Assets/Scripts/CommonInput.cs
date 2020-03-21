@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,38 +9,36 @@ namespace MokomoGames
     {
         public static TouchType GetTouch()
         {
-            if(Application.isEditor)
+            if (Application.isEditor)
             {
-                if(Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0))
                     return TouchType.Began;
-                if(Input.GetMouseButton(0))
+                if (Input.GetMouseButton(0))
                     return TouchType.Moved;
-                if(Input.GetMouseButtonUp(0))
+                if (Input.GetMouseButtonUp(0))
                     return TouchType.Ended;
                 return TouchType.None;
             }
 
-            if(Input.touchCount > 0)
-            {
-                return (TouchType)(int)Input.GetTouch(0).phase;
-            }
+            if (Input.touchCount > 0) return (TouchType) (int) Input.GetTouch(0).phase;
             return TouchType.None;
         }
 
         public static Vector3 GetTouchPosition()
         {
-            if(Application.isEditor)
+            if (Application.isEditor)
             {
-                if(GetTouch() != TouchType.None)
+                if (GetTouch() != TouchType.None)
                     return Input.mousePosition;
                 return Vector3.zero;
             }
 
-            if(Input.touchCount > 0)
+            if (Input.touchCount > 0)
             {
                 var touch = Input.GetTouch(0);
-                return new Vector3(touch.position.x,touch.position.y,0f);
+                return new Vector3(touch.position.x, touch.position.y, 0f);
             }
+
             return Vector3.zero;
         }
 
@@ -49,7 +46,7 @@ namespace MokomoGames
         {
             return cam.ScreenToWorldPoint(GetTouchPosition());
         }
-        
+
         public static List<GameObject> GetTouchUIObjs()
         {
             var pointer = new PointerEventData(EventSystem.current)
@@ -57,29 +54,28 @@ namespace MokomoGames
                 position = GetTouchPosition()
             };
             var results = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(pointer,results);
+            EventSystem.current.RaycastAll(pointer, results);
 
             return results
                 .Select(x => x.gameObject)
                 .ToList();
         }
 
-        public static bool IsTouchedUI<T>() where T: MonoBehaviour
+        public static bool IsTouchedUI<T>() where T : MonoBehaviour
         {
             var objs = GetTouchUIObjs();
             return objs.Any(x => x.GetComponent<T>());
         }
     }
-    
-    
+
 
     public enum TouchType
     {
-        None=99,
-        Began=0,
-        Moved=1,
-        Stationaruy=2,
-        Ended=3,
-        Canceld=4,
+        None = 99,
+        Began = 0,
+        Moved = 1,
+        Stationaruy = 2,
+        Ended = 3,
+        Canceld = 4
     }
 }

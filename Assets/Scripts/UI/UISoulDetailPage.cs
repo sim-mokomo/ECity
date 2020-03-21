@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UI;
 using UnityEngine;
@@ -11,39 +9,51 @@ namespace MokomoGames.UI
 {
     public class UISoulDetailPage : MonoBehaviour
     {
-        // 属性アイコン
-        [SerializeField] private TextMeshProUGUI elementNameText;
-        [SerializeField] private Image elementIcon;
-        // パラメータ群
-        [SerializeField] private TextMeshProUGUI hpText;
-        [SerializeField] private TextMeshProUGUI recoveryPowerText;
-        [SerializeField] private TextMeshProUGUI attackText;
-        [SerializeField] private TextMeshProUGUI costText;
-        // レベル
-        [SerializeField] private TextMeshProUGUI levelText;
-        [SerializeField] private UIGaugeWithUpperLabel expGauge;
-        // ノーマルスキル
-        [SerializeField] private TextMeshProUGUI normalSkillNameText;
-        [SerializeField] private UIGaugeWithUpperLabel normalSkillGauge;
-        [SerializeField] private TextMeshProUGUI normalSkillLevelText;
-        [SerializeField] private TextMeshProUGUI normalSkillContentText;
-        [SerializeField] private TextMeshProUGUI normalSkillChargeTurnText;
-        // リーダースキル
-        [SerializeField] private TextMeshProUGUI readerSkillNameText;
-        [SerializeField] private TextMeshProUGUI readerSkillContentText;
-        // 名前
-        [SerializeField] private TextMeshProUGUI subNameText;
-        [SerializeField] private TextMeshProUGUI mainNameText;
-        [SerializeField] private UIStars rarityUI;
-        // タイプ
-        [SerializeField] private TextMeshProUGUI noText;
-        [SerializeField] private TextMeshProUGUI typeText;
-        [SerializeField] private Button favoriteButton;
-
-        [SerializeField] private Button backButton;
         [SerializeField] private UIFavoriteButton _favoriteButton;
         [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
         private UserSoulDataContainer _soulDataContainer;
+        [SerializeField] private TextMeshProUGUI attackText;
+
+        [SerializeField] private Button backButton;
+        [SerializeField] private TextMeshProUGUI costText;
+
+        [SerializeField] private Image elementIcon;
+
+        // 属性アイコン
+        [SerializeField] private TextMeshProUGUI elementNameText;
+        [SerializeField] private UIGaugeWithUpperLabel expGauge;
+
+        [SerializeField] private Button favoriteButton;
+
+        // パラメータ群
+        [SerializeField] private TextMeshProUGUI hpText;
+
+        // レベル
+        [SerializeField] private TextMeshProUGUI levelText;
+        [SerializeField] private TextMeshProUGUI mainNameText;
+        [SerializeField] private TextMeshProUGUI normalSkillChargeTurnText;
+        [SerializeField] private TextMeshProUGUI normalSkillContentText;
+        [SerializeField] private UIGaugeWithUpperLabel normalSkillGauge;
+
+        [SerializeField] private TextMeshProUGUI normalSkillLevelText;
+
+        // ノーマルスキル
+        [SerializeField] private TextMeshProUGUI normalSkillNameText;
+
+        // タイプ
+        [SerializeField] private TextMeshProUGUI noText;
+        [SerializeField] private UIStars rarityUI;
+
+        [SerializeField] private TextMeshProUGUI readerSkillContentText;
+
+        // リーダースキル
+        [SerializeField] private TextMeshProUGUI readerSkillNameText;
+
+        [SerializeField] private TextMeshProUGUI recoveryPowerText;
+
+        // 名前
+        [SerializeField] private TextMeshProUGUI subNameText;
+        [SerializeField] private TextMeshProUGUI typeText;
         public event Action OnTappedBackButton;
 
         private void Awake()
@@ -57,10 +67,7 @@ namespace MokomoGames.UI
                 _favoriteButton.UpdateIcon(_soulDataContainer.UserSoulData.Favorite);
             };
 
-            backButton.onClick.AddListener(() =>
-            {
-                OnTappedBackButton?.Invoke();
-            });
+            backButton.onClick.AddListener(() => { OnTappedBackButton?.Invoke(); });
         }
 
         public void Begin(UserSoulDataContainer soulDataContainer)
@@ -74,14 +81,14 @@ namespace MokomoGames.UI
             attackText.text = $"{soulDataContainer.LevelTableRecord.Power}";
             recoveryPowerText.text = $"{soulDataContainer.LevelTableRecord.RecoveryPower}";
             costText.text = $"{soulDataContainer.BaseConfig.Cost}";
-            
+
             elementIcon.sprite = SpriteResourcesProvider.GetAttributeIcon(soulDataContainer.BaseConfig.Attribute);
             elementNameText.text = soulDataContainer.BaseConfig.Attribute.GetName();
             expGauge.SetRemainingValue($"{soulDataContainer.GetRemainingLevelExp()}");
             expGauge.SetRemainingSliderValue(
-                soulDataContainer.UserSoulData.TotalLevelExp, 
+                soulDataContainer.UserSoulData.TotalLevelExp,
                 soulDataContainer.GetTotalNeedLevelExp());
-            
+
             normalSkillNameText.text = soulDataContainer.NormalSkillTableRecord.Name;
             normalSkillContentText.text = soulDataContainer.NormalSkillTableRecord.Description;
             normalSkillLevelText.text = soulDataContainer.NormalSkillLevelTableRecord.Level.ToString();

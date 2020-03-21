@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -12,12 +11,13 @@ namespace MokomoGames
         {
             Loading,
             Title,
-            Home,
+            Home
         }
 
-        private List<ISequencer> sequencers;
         private ISequencer currentSequencer;
         private LoadingSequencer loadingSequencer;
+
+        private List<ISequencer> sequencers;
 
         private void Awake()
         {
@@ -44,18 +44,16 @@ namespace MokomoGames
             currentSequencer.OnLeave += CurrentSequencerOnLeave;
             currentSequencer.Begin();
         }
-        private void CurrentSequencerOnLeave(SequencerType distType,bool withLoad,Func<bool> loadLeaveCondition = null)
+
+        private void CurrentSequencerOnLeave(SequencerType distType, bool withLoad,
+            Func<bool> loadLeaveCondition = null)
         {
             if (withLoad)
-            {
-                ChangeSequenceWithLoading(loadLeaveCondition,distType);
-            }
+                ChangeSequenceWithLoading(loadLeaveCondition, distType);
             else
-            {
                 ChangeSequence(distType);
-            }
         }
-        
+
         public void ChangeSequenceWithLoading(Func<bool> condition, SequencerType distType)
         {
             loadingSequencer.SetConfiguraiton(condition, distType);
@@ -64,10 +62,7 @@ namespace MokomoGames
 
         public void AllDisplay(bool show)
         {
-            foreach (var sequencer in sequencers)
-            {
-                sequencer.Display(show);
-            }
+            foreach (var sequencer in sequencers) sequencer.Display(show);
         }
     }
 }

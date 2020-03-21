@@ -5,22 +5,21 @@ using UnityEngine;
 
 public class Timer
 {
-    private uint currentSecond;
-    private Coroutine _clockCoroutine;
-    private readonly Dictionary<uint, Action> _specifiedSecondEventTables = new Dictionary<uint, Action>();
     private static readonly WaitForSeconds WaitForOneSeconds = new WaitForSeconds(1);
+    private readonly Dictionary<uint, Action> _specifiedSecondEventTables = new Dictionary<uint, Action>();
+    private Coroutine _clockCoroutine;
 
-    private bool IsEnded => currentSecond <= 0;
-    public uint CurrentSecond => currentSecond;
+    public Timer(uint second)
+    {
+        CurrentSecond = second;
+    }
+
+    private bool IsEnded => CurrentSecond <= 0;
+    public uint CurrentSecond { get; private set; }
 
     public event Action OnEnded;
     public event Action OnStart;
     public event Action<uint> OnClocked;
-
-    public Timer(uint second)
-    {
-        currentSecond = second;
-    }
 
     public void Play()
     {
@@ -33,21 +32,21 @@ public class Timer
         CoroutineHandler.Instance.StopCoroutine(_clockCoroutine);
     }
 
-    public void AddSpecifiedSecondEvent(uint specifiedSecond,Action specifiedSecondEvent)
+    public void AddSpecifiedSecondEvent(uint specifiedSecond, Action specifiedSecondEvent)
     {
-        _specifiedSecondEventTables.Add(specifiedSecond,specifiedSecondEvent);
+        _specifiedSecondEventTables.Add(specifiedSecond, specifiedSecondEvent);
     }
 
-    IEnumerator ClockSequence()
+    private IEnumerator ClockSequence()
     {
         while (true)
         {
             yield return WaitForOneSeconds;
 
-            currentSecond--;
-            OnClocked?.Invoke(currentSecond);
+            CurrentSecond--;
+            OnClocked?.Invoke(CurrentSecond);
 
-            _specifiedSecondEventTables.TryGetValue(currentSecond, out var specifiedEvent);
+            _specifiedSecondEventTables.TryGetValue(CurrentSecond, out var specifiedEvent);
             specifiedEvent?.Invoke();
 
             if (IsEnded)

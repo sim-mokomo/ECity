@@ -1,5 +1,4 @@
 ﻿using MokomoGames.Protobuf;
-using UniRx.Async;
 
 namespace MokomoGames
 {

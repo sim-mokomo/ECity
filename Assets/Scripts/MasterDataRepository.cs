@@ -1,20 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using MokomoGames;
-using MokomoGames.Protobuf;
-using UniRx.Async;
-using UnityEngine;
+﻿using MokomoGames.Protobuf;
 
 namespace MokomoGames
 {
     public class MasterDataRepository : IMasterDataRepository
     {
-        private RankTable _rankTable;
-        private SoulTable _soulTable;
-        private SoulLevelTable _soulLevelTable;
-        public RankTable RankTable => _rankTable;
-        public SoulTable SoulTable => _soulTable;
-        public SoulLevelTable SoulLevelTable => _soulLevelTable;
+        public RankTable RankTable { get; private set; }
+
+        public SoulTable SoulTable { get; private set; }
+
+        public SoulLevelTable SoulLevelTable { get; private set; }
+
         public NormalSkillTable NormalSkillTable => null;
         public NormalSkillLevelTable NormalSkillLevelTable => null;
         public ReaderSkillTable ReaderSkillTable => null;
@@ -26,9 +21,9 @@ namespace MokomoGames
 
         public async void LoadAllTable()
         {
-            _rankTable = await PlayFabUtility.ExecuteFunctionAsync<RankTable>("getRankTable", null);
-            _soulTable = await PlayFabUtility.ExecuteFunctionAsync<SoulTable>("getSoulTable", null);
-            _soulLevelTable = await PlayFabUtility.ExecuteFunctionAsync<SoulLevelTable>("getSoulLevelTable", null);
+            RankTable = await PlayFabUtility.ExecuteFunctionAsync<RankTable>("getRankTable", null);
+            SoulTable = await PlayFabUtility.ExecuteFunctionAsync<SoulTable>("getSoulTable", null);
+            SoulLevelTable = await PlayFabUtility.ExecuteFunctionAsync<SoulLevelTable>("getSoulLevelTable", null);
         }
     }
 }

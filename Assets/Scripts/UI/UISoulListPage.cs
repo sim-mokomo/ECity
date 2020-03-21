@@ -1,44 +1,41 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using MokomoGames.Protobuf;
 using TMPro;
-using UniRx.Async;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
 namespace MokomoGames.UI
 {
-    public class UISoulListPage : MonoBehaviour,IPage
+    public class UISoulListPage : MonoBehaviour, IPage
     {
-        [SerializeField] private Button backButton;
-        [SerializeField] private Button homeButton;
-        [SerializeField] private ToggleGroup toggleGroup;
-        [SerializeField] private Toggle soulToggle;
-        [SerializeField] private Toggle materialToggle;
-        [SerializeField] private GameObject cellRow;
-        [SerializeField] private RectTransform contentRoot;
-        [SerializeField] private VerticalLayoutGroup verticalRoot;
-        [SerializeField] private UISoulCell soulCellPrefab;
-        [SerializeField] private TextMeshProUGUI hasSoulNum;
-        [SerializeField] private UISoulDetailPage soulDetailPage;
-        private List<UISoulCell> _soulCells = new List<UISoulCell>();
-        private Tab CurrentTab => soulToggle.isOn == true ? Tab.Soul : Tab.Material;
-        private ColorBlock selectingColorBlock;
-        private ColorBlock unSelectingColorBlock;
-        private UserSoulDataContainerList userSoulDataContainerList;
-        [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
-        [Inject] private IMasterDataRepository _masterDataRepository;
-        public event Action OnTappedHomeButton;
-        
         public enum Tab
         {
             Soul,
-            Material,
+            Material
         }
-        
+
+        [Inject] private IMasterDataRepository _masterDataRepository;
+        [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
+        private List<UISoulCell> _soulCells = new List<UISoulCell>();
+        [SerializeField] private Button backButton;
+        [SerializeField] private GameObject cellRow;
+        [SerializeField] private RectTransform contentRoot;
+        [SerializeField] private TextMeshProUGUI hasSoulNum;
+        [SerializeField] private Button homeButton;
+        [SerializeField] private Toggle materialToggle;
+        private ColorBlock selectingColorBlock;
+        [SerializeField] private UISoulCell soulCellPrefab;
+        [SerializeField] private UISoulDetailPage soulDetailPage;
+        [SerializeField] private Toggle soulToggle;
+        [SerializeField] private ToggleGroup toggleGroup;
+        private ColorBlock unSelectingColorBlock;
+        private UserSoulDataContainerList userSoulDataContainerList;
+        [SerializeField] private VerticalLayoutGroup verticalRoot;
+        private Tab CurrentTab => soulToggle.isOn ? Tab.Soul : Tab.Material;
+        public event Action OnTappedHomeButton;
+
         private void Awake()
         {
             foreach (var toggle in toggleGroup.GetComponentsInChildren<Toggle>())
@@ -47,21 +44,21 @@ namespace MokomoGames.UI
                 toggle.onValueChanged.AddListener(OnChangedTab);
             }
 
-            backButton.onClick.AddListener( () => gameObject.SetActive(false));
-            homeButton.onClick.AddListener( () =>
+            backButton.onClick.AddListener(() => gameObject.SetActive(false));
+            homeButton.onClick.AddListener(() =>
             {
                 DestroyCells();
                 gameObject.SetActive(false);
                 OnTappedHomeButton?.Invoke();
             });
-            
+
             selectingColorBlock = new ColorBlock();
             selectingColorBlock.colorMultiplier = 1f;
             selectingColorBlock.normalColor = Color.yellow;
             selectingColorBlock.highlightedColor = Color.yellow;
             selectingColorBlock.pressedColor = Color.yellow;
             selectingColorBlock.selectedColor = Color.yellow;
-            
+
             unSelectingColorBlock = new ColorBlock();
             unSelectingColorBlock.colorMultiplier = 1f;
             unSelectingColorBlock.normalColor = Color.gray;
@@ -92,14 +89,14 @@ namespace MokomoGames.UI
         private List<UISoulCell> MakeCells(List<UserSoulDataContainer> records)
         {
             const int cellNumPerRow = 6;
-            var rowNum = Mathf.CeilToInt((float)records.Count / cellNumPerRow);
+            var rowNum = Mathf.CeilToInt((float) records.Count / cellNumPerRow);
             var soulCells = new List<UISoulCell>();
-            for (int i = 0; i < rowNum; i++)
+            for (var i = 0; i < rowNum; i++)
             {
                 var row = Instantiate(cellRow);
                 row.transform.SetParent(verticalRoot.transform);
                 row.transform.localScale = Vector3.one;
-                for (int j = 0; j < row.transform.childCount; j++)
+                for (var j = 0; j < row.transform.childCount; j++)
                 {
                     var index = i * cellNumPerRow + j;
                     var soulCell = row.transform.GetChild(j).gameObject.GetComponent<UISoulCell>();
@@ -116,7 +113,7 @@ namespace MokomoGames.UI
 
             var height = rowNum * soulCells[0]?.Height ?? 0f;
             height += verticalRoot.spacing;
-            contentRoot.sizeDelta = new Vector2(contentRoot.sizeDelta.x,height);
+            contentRoot.sizeDelta = new Vector2(contentRoot.sizeDelta.x, height);
             return soulCells;
         }
 
@@ -128,7 +125,7 @@ namespace MokomoGames.UI
 
         private void DestroyCells()
         {
-            for (int i = 0; i < verticalRoot.transform.childCount; i++)
+            for (var i = 0; i < verticalRoot.transform.childCount; i++)
             {
                 var obj = verticalRoot.transform.GetChild(i).gameObject;
                 Destroy(obj);
@@ -138,7 +135,7 @@ namespace MokomoGames.UI
         private void OnChangedTab(bool isOn)
         {
             UpdateTabColor(CurrentTab);
-            
+
             if (CurrentTab == Tab.Material)
             {
                 DestroyCells();
@@ -149,7 +146,7 @@ namespace MokomoGames.UI
                 UpdateHasSoulNum(materials.Count());
                 MakeCells(materials.ToList());
             }
-            else if(CurrentTab == Tab.Soul)
+            else if (CurrentTab == Tab.Soul)
             {
                 DestroyCells();
                 var souls = userSoulDataContainerList.ExistBattleSouls

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public interface IOpenable
 {
@@ -10,6 +7,6 @@ public interface IOpenable
     event Action OnOpened;
     event Action OnClose;
     event Action OnClosed;
-    void Open(bool immediately=false);
-    void Close(bool immediately=false);
+    void Open(bool immediately = false);
+    void Close(bool immediately = false);
 }

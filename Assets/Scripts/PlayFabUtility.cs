@@ -1,29 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Google.Protobuf;
-using UnityEngine;
 using PlayFab;
 using PlayFab.CloudScriptModels;
 using UniRx.Async;
+using UnityEngine;
 
 namespace MokomoGames
 {
     public class PlayFabUtility
     {
-        private static PlayFab.CloudScriptModels.EntityKey CreateEntityKey()
+        private static EntityKey CreateEntityKey()
         {
-            return new PlayFab.CloudScriptModels.EntityKey()
+            return new EntityKey
             {
                 Id = MainGameController.UserDataContainer.PlayFabAuthenticationContext.EntityId,
                 Type = MainGameController.UserDataContainer.PlayFabAuthenticationContext.EntityType
             };
         }
 
-        public static void ExecuteFunction<T>(string functionName, Dictionary<string, string> functionParameter,Action<T> callBack) where T : IMessage<T>,new()
+        public static void ExecuteFunction<T>(string functionName, Dictionary<string, string> functionParameter,
+            Action<T> callBack) where T : IMessage<T>, new()
         {
             PlayFabCloudScriptAPI.ExecuteFunction(
-                new ExecuteFunctionRequest()
+                new ExecuteFunctionRequest
                 {
                     Entity = CreateEntityKey(),
                     FunctionName = functionName,
@@ -34,20 +34,19 @@ namespace MokomoGames
                 {
                     var json = result.FunctionResult.ToString();
                     Debug.Log(json);
-                    var parser = new MessageParser<T>( () => new T());
+                    var parser = new MessageParser<T>(() => new T());
                     var response = parser.ParseJson(json);
                     callBack?.Invoke(response);
                 },
                 GenerateErrorReport);
         }
 
-        public static UniTask<T> ExecuteFunctionAsync<T>(string functionName, Dictionary<string, string> functionParameter) where T : IMessage<T>,new()
+        public static UniTask<T> ExecuteFunctionAsync<T>(string functionName,
+            Dictionary<string, string> functionParameter) where T : IMessage<T>, new()
         {
             var taskCompletionSource = new UniTaskCompletionSource<T>();
-            ExecuteFunction<T>(functionName,functionParameter,callBack: message =>
-            {
-                taskCompletionSource.TrySetResult(message);
-            });
+            ExecuteFunction<T>(functionName, functionParameter,
+                message => { taskCompletionSource.TrySetResult(message); });
             return taskCompletionSource.Task;
         }
 
@@ -56,12 +55,9 @@ namespace MokomoGames
             Debug.Log($"Opps Something went wrong: {error.GenerateErrorReport()}");
             Debug.Log(error.HttpCode);
             Debug.Log(error.HttpStatus);
-            if(error.ErrorDetails == null)
+            if (error.ErrorDetails == null)
                 return;
-            foreach (var detail in error.ErrorDetails)
-            {
-                Debug.Log($"{detail.Key}/{detail.Value}");
-            }
+            foreach (var detail in error.ErrorDetails) Debug.Log($"{detail.Key}/{detail.Value}");
         }
     }
 }

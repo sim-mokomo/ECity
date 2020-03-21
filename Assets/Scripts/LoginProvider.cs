@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 
@@ -7,20 +6,21 @@ namespace MokomoGames
 {
     public class LoginProvider
     {
-        public static void LoginByEditor(string customId,Action<LoginResult> onLoggedIn, Action<PlayFabError> onError = null)
+        public static void LoginByEditor(string customId, Action<LoginResult> onLoggedIn,
+            Action<PlayFabError> onError = null)
         {
-            PlayFabClientAPI.ForgetAllCredentials ();
+            PlayFabClientAPI.ForgetAllCredentials();
             var loginRequest = new LoginWithCustomIDRequest
             {
                 CustomId = customId,
-                CreateAccount = true,
+                CreateAccount = true
             };
-            PlayFabClientAPI.LoginWithCustomID (loginRequest, onLoggedIn, onError);
+            PlayFabClientAPI.LoginWithCustomID(loginRequest, onLoggedIn, onError);
         }
 
-        public static void LoginByMobile (Action<LoginResult> onLoggedIn, Action<PlayFabError> onError = null)
+        public static void LoginByMobile(Action<LoginResult> onLoggedIn, Action<PlayFabError> onError = null)
         {
-    #if UNITY_ANDROID
+#if UNITY_ANDROID
             AndroidJavaClass clsUnity = new AndroidJavaClass ("com.unity3d.player.UnityPlayer");
             AndroidJavaObject objActivity = clsUnity.GetStatic<AndroidJavaObject> ("currentActivity");
             AndroidJavaObject objResolver = objActivity.Call<AndroidJavaObject> ("getContentResolver");
@@ -32,14 +32,14 @@ namespace MokomoGames
                 CreateAccount = true,
             };
             PlayFabClientAPI.LoginWithAndroidDeviceID (loginRequest, OnLoggedIn, OnError);
-    #elif UNITY_IPHONE
+#elif UNITY_IPHONE
             var loginRequest = new LoginWithIOSDeviceIDRequest
             {
                 DeviceId = UnityEngine.iOS.Device.vendorIdentifier,
                 CreateAccount = true,
             };
             PlayFabClientAPI.LoginWithIOSDeviceID (loginRequest, OnLoggedIn, OnError);
-    #endif
+#endif
         }
     }
 }

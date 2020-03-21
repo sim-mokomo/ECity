@@ -1,17 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using PlayFab;
-using PlayFab.ClientModels;
-using UnityEngine;
+﻿using PlayFab;
 
 public class UserDataContainer
 {
-    public string PlayFabId { get; }
-    public PlayFabAuthenticationContext PlayFabAuthenticationContext { get; }
-
-    public UserDataContainer(string playFabId,PlayFabAuthenticationContext playFabAuthenticationContext = null)
+    public UserDataContainer(string playFabId, PlayFabAuthenticationContext playFabAuthenticationContext = null)
     {
         PlayFabId = playFabId;
         PlayFabAuthenticationContext = playFabAuthenticationContext;
     }
+
+    public string PlayFabId { get; }
+    public PlayFabAuthenticationContext PlayFabAuthenticationContext { get; }
 }
