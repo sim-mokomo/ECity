@@ -2,8 +2,15 @@
 
 namespace MokomoGames
 {
-    public static class SoulTypeEnumExtensions
+    public static class SoulTypeExtensions
     {
+        public static bool IsMaterial(this SoulType self)
+        {
+            return self == SoulType.Evolution ||
+                   self == SoulType.Sale ||
+                   self == SoulType.ReinforcedSynthesis;
+        }
+        
         public static string GetName(this SoulType self)
         {
             switch (self)
