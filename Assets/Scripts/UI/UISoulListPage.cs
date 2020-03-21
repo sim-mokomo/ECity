@@ -28,7 +28,7 @@ namespace MokomoGames.UI
         private Tab CurrentTab => soulToggle.isOn == true ? Tab.Soul : Tab.Material;
         private ColorBlock selectingColorBlock;
         private ColorBlock unSelectingColorBlock;
-        private PlayerSaveDataContainer _playerSaveDataContainer;
+        private UserSoulDataContainerList userSoulDataContainerList;
         [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
         [Inject] private IMasterDataRepository _masterDataRepository;
         public event Action OnTappedHomeButton;
@@ -78,9 +78,9 @@ namespace MokomoGames.UI
             soulToggle.isOn = true;
         }
 
-        public void Prepare(PlayerSaveDataContainer _playerSaveDataContainer)
+        public void SetData(UserSoulDataContainerList userSoulDataContainerList)
         {
-            this._playerSaveDataContainer = _playerSaveDataContainer;
+            this.userSoulDataContainerList = userSoulDataContainerList;
         }
 
         private void UpdateHasSoulNum(int currentCount)
@@ -142,14 +142,19 @@ namespace MokomoGames.UI
             if (CurrentTab == Tab.Material)
             {
                 DestroyCells();
-                var materials = _playerSaveDataContainer.GetMaterialSoul();
+
+                var materials = userSoulDataContainerList.ExistMaterialSouls
+                    ? userSoulDataContainerList.GetMaterialSouls()
+                    : UserSoulDataContainerList.Empty;
                 UpdateHasSoulNum(materials.Count());
                 MakeCells(materials.ToList());
             }
             else if(CurrentTab == Tab.Soul)
             {
                 DestroyCells();
-                var souls = _playerSaveDataContainer.GetBattleSoul();
+                var souls = userSoulDataContainerList.ExistBattleSouls
+                    ? userSoulDataContainerList.GetBattleSouls()
+                    : UserSoulDataContainerList.Empty;
                 UpdateHasSoulNum(souls.Count());
                 MakeCells(souls.ToList());
             }
