@@ -3,14 +3,9 @@ package ecity;
 
 option csharp_namespace = "MokomoGames.Protobuf";
 
-message UpdateStaminaRequest 
+message GetPlayerSaveDataRequest
 {
-    int32 diff = 1;
-}
-
-message UpdateStaminaResponse
-{
-    uint32 currentStamina = 1;
+    
 }
 
 message GetPlayerSaveDataResponse
@@ -28,6 +23,16 @@ message RecoveryStaminaByWaitTimeResponse
     uint32 recoveriedStamina = 1;
 }
 
+message RecoveryFuelByYukichiRequest
+{
+    
+}
+
+message RecoveryFuelByYukichiResponse
+{
+    uint32 fuel = 1;
+}
+
 message UserData
 {
     uint32 stamina = 1;
@@ -38,7 +43,3 @@ message UserData
     uint32 rank_exp = 6;
 }
 
-message RecoveryFuelByYukichiResponse
-{
-    uint32 fuel = 1;
-}

@@ -24,38 +24,37 @@ namespace MokomoGames.Protobuf {
     static UserDataReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg5Vc2VyRGF0YS5wcm90bxIFZWNpdHkiJAoUVXBkYXRlU3RhbWluYVJlcXVl",
-            "c3QSDAoEZGlmZhgBIAEoBSIvChVVcGRhdGVTdGFtaW5hUmVzcG9uc2USFgoO",
-            "Y3VycmVudFN0YW1pbmEYASABKA0iPgoZR2V0UGxheWVyU2F2ZURhdGFSZXNw",
-            "b25zZRIhCghzYXZlRGF0YRgBIAEoCzIPLmVjaXR5LlVzZXJEYXRhIiIKIFJl",
-            "Y292ZXJ5U3RhbWluYUJ5V2FpdFRpbWVSZXF1ZXN0Ij4KIVJlY292ZXJ5U3Rh",
-            "bWluYUJ5V2FpdFRpbWVSZXNwb25zZRIZChFyZWNvdmVyaWVkU3RhbWluYRgB",
-            "IAEoDSJoCghVc2VyRGF0YRIPCgdzdGFtaW5hGAEgASgNEg8KB3l1a2ljaGkY",
-            "AiABKA0SDAoEY29pbhgDIAEoDRIMCgRtaXp1GAQgASgNEgwKBHJhbmsYBSAB",
-            "KA0SEAoIcmFua19leHAYBiABKA0iLQodUmVjb3ZlcnlGdWVsQnlZdWtpY2hp",
-            "UmVzcG9uc2USDAoEZnVlbBgBIAEoDUIXqgIUTW9rb21vR2FtZXMuUHJvdG9i",
-            "dWZiBnByb3RvMw=="));
+            "Cg5Vc2VyRGF0YS5wcm90bxIFZWNpdHkiGgoYR2V0UGxheWVyU2F2ZURhdGFS",
+            "ZXF1ZXN0Ij4KGUdldFBsYXllclNhdmVEYXRhUmVzcG9uc2USIQoIc2F2ZURh",
+            "dGEYASABKAsyDy5lY2l0eS5Vc2VyRGF0YSIiCiBSZWNvdmVyeVN0YW1pbmFC",
+            "eVdhaXRUaW1lUmVxdWVzdCI+CiFSZWNvdmVyeVN0YW1pbmFCeVdhaXRUaW1l",
+            "UmVzcG9uc2USGQoRcmVjb3ZlcmllZFN0YW1pbmEYASABKA0iHgocUmVjb3Zl",
+            "cnlGdWVsQnlZdWtpY2hpUmVxdWVzdCItCh1SZWNvdmVyeUZ1ZWxCeVl1a2lj",
+            "aGlSZXNwb25zZRIMCgRmdWVsGAEgASgNImgKCFVzZXJEYXRhEg8KB3N0YW1p",
+            "bmEYASABKA0SDwoHeXVraWNoaRgCIAEoDRIMCgRjb2luGAMgASgNEgwKBG1p",
+            "enUYBCABKA0SDAoEcmFuaxgFIAEoDRIQCghyYW5rX2V4cBgGIAEoDUIXqgIU",
+            "TW9rb21vR2FtZXMuUHJvdG9idWZiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.UpdateStaminaRequest), global::MokomoGames.Protobuf.UpdateStaminaRequest.Parser, new[]{ "Diff" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.UpdateStaminaResponse), global::MokomoGames.Protobuf.UpdateStaminaResponse.Parser, new[]{ "CurrentStamina" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.GetPlayerSaveDataRequest), global::MokomoGames.Protobuf.GetPlayerSaveDataRequest.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.GetPlayerSaveDataResponse), global::MokomoGames.Protobuf.GetPlayerSaveDataResponse.Parser, new[]{ "SaveData" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.RecoveryStaminaByWaitTimeRequest), global::MokomoGames.Protobuf.RecoveryStaminaByWaitTimeRequest.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.RecoveryStaminaByWaitTimeResponse), global::MokomoGames.Protobuf.RecoveryStaminaByWaitTimeResponse.Parser, new[]{ "RecoveriedStamina" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.UserData), global::MokomoGames.Protobuf.UserData.Parser, new[]{ "Stamina", "Yukichi", "Coin", "Mizu", "Rank", "RankExp" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.RecoveryFuelByYukichiResponse), global::MokomoGames.Protobuf.RecoveryFuelByYukichiResponse.Parser, new[]{ "Fuel" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.RecoveryFuelByYukichiRequest), global::MokomoGames.Protobuf.RecoveryFuelByYukichiRequest.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.RecoveryFuelByYukichiResponse), global::MokomoGames.Protobuf.RecoveryFuelByYukichiResponse.Parser, new[]{ "Fuel" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.UserData), global::MokomoGames.Protobuf.UserData.Parser, new[]{ "Stamina", "Yukichi", "Coin", "Mizu", "Rank", "RankExp" }, null, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class UpdateStaminaRequest : pb::IMessage<UpdateStaminaRequest> {
-    private static readonly pb::MessageParser<UpdateStaminaRequest> _parser = new pb::MessageParser<UpdateStaminaRequest>(() => new UpdateStaminaRequest());
+  public sealed partial class GetPlayerSaveDataRequest : pb::IMessage<GetPlayerSaveDataRequest> {
+    private static readonly pb::MessageParser<GetPlayerSaveDataRequest> _parser = new pb::MessageParser<GetPlayerSaveDataRequest>(() => new GetPlayerSaveDataRequest());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<UpdateStaminaRequest> Parser { get { return _parser; } }
+    public static pb::MessageParser<GetPlayerSaveDataRequest> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -68,55 +67,41 @@ namespace MokomoGames.Protobuf {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public UpdateStaminaRequest() {
+    public GetPlayerSaveDataRequest() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public UpdateStaminaRequest(UpdateStaminaRequest other) : this() {
-      diff_ = other.diff_;
+    public GetPlayerSaveDataRequest(GetPlayerSaveDataRequest other) : this() {
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public UpdateStaminaRequest Clone() {
-      return new UpdateStaminaRequest(this);
-    }
-
-    /// <summary>Field number for the "diff" field.</summary>
-    public const int DiffFieldNumber = 1;
-    private int diff_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Diff {
-      get { return diff_; }
-      set {
-        diff_ = value;
-      }
+    public GetPlayerSaveDataRequest Clone() {
+      return new GetPlayerSaveDataRequest(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as UpdateStaminaRequest);
+      return Equals(other as GetPlayerSaveDataRequest);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(UpdateStaminaRequest other) {
+    public bool Equals(GetPlayerSaveDataRequest other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Diff != other.Diff) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Diff != 0) hash ^= Diff.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -130,10 +115,6 @@ namespace MokomoGames.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Diff != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(Diff);
-      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -142,9 +123,6 @@ namespace MokomoGames.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Diff != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Diff);
-      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -152,12 +130,9 @@ namespace MokomoGames.Protobuf {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(UpdateStaminaRequest other) {
+    public void MergeFrom(GetPlayerSaveDataRequest other) {
       if (other == null) {
         return;
-      }
-      if (other.Diff != 0) {
-        Diff = other.Diff;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -170,139 +145,6 @@ namespace MokomoGames.Protobuf {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            Diff = input.ReadInt32();
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class UpdateStaminaResponse : pb::IMessage<UpdateStaminaResponse> {
-    private static readonly pb::MessageParser<UpdateStaminaResponse> _parser = new pb::MessageParser<UpdateStaminaResponse>(() => new UpdateStaminaResponse());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<UpdateStaminaResponse> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::MokomoGames.Protobuf.UserDataReflection.Descriptor.MessageTypes[1]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public UpdateStaminaResponse() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public UpdateStaminaResponse(UpdateStaminaResponse other) : this() {
-      currentStamina_ = other.currentStamina_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public UpdateStaminaResponse Clone() {
-      return new UpdateStaminaResponse(this);
-    }
-
-    /// <summary>Field number for the "currentStamina" field.</summary>
-    public const int CurrentStaminaFieldNumber = 1;
-    private uint currentStamina_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public uint CurrentStamina {
-      get { return currentStamina_; }
-      set {
-        currentStamina_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as UpdateStaminaResponse);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(UpdateStaminaResponse other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (CurrentStamina != other.CurrentStamina) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (CurrentStamina != 0) hash ^= CurrentStamina.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (CurrentStamina != 0) {
-        output.WriteRawTag(8);
-        output.WriteUInt32(CurrentStamina);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (CurrentStamina != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurrentStamina);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(UpdateStaminaResponse other) {
-      if (other == null) {
-        return;
-      }
-      if (other.CurrentStamina != 0) {
-        CurrentStamina = other.CurrentStamina;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 8: {
-            CurrentStamina = input.ReadUInt32();
-            break;
-          }
         }
       }
     }
@@ -317,7 +159,7 @@ namespace MokomoGames.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::MokomoGames.Protobuf.UserDataReflection.Descriptor.MessageTypes[2]; }
+      get { return global::MokomoGames.Protobuf.UserDataReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -452,7 +294,7 @@ namespace MokomoGames.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::MokomoGames.Protobuf.UserDataReflection.Descriptor.MessageTypes[3]; }
+      get { return global::MokomoGames.Protobuf.UserDataReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -553,7 +395,7 @@ namespace MokomoGames.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::MokomoGames.Protobuf.UserDataReflection.Descriptor.MessageTypes[4]; }
+      get { return global::MokomoGames.Protobuf.UserDataReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -674,6 +516,236 @@ namespace MokomoGames.Protobuf {
 
   }
 
+  public sealed partial class RecoveryFuelByYukichiRequest : pb::IMessage<RecoveryFuelByYukichiRequest> {
+    private static readonly pb::MessageParser<RecoveryFuelByYukichiRequest> _parser = new pb::MessageParser<RecoveryFuelByYukichiRequest>(() => new RecoveryFuelByYukichiRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<RecoveryFuelByYukichiRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::MokomoGames.Protobuf.UserDataReflection.Descriptor.MessageTypes[4]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RecoveryFuelByYukichiRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RecoveryFuelByYukichiRequest(RecoveryFuelByYukichiRequest other) : this() {
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RecoveryFuelByYukichiRequest Clone() {
+      return new RecoveryFuelByYukichiRequest(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as RecoveryFuelByYukichiRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(RecoveryFuelByYukichiRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(RecoveryFuelByYukichiRequest other) {
+      if (other == null) {
+        return;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class RecoveryFuelByYukichiResponse : pb::IMessage<RecoveryFuelByYukichiResponse> {
+    private static readonly pb::MessageParser<RecoveryFuelByYukichiResponse> _parser = new pb::MessageParser<RecoveryFuelByYukichiResponse>(() => new RecoveryFuelByYukichiResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<RecoveryFuelByYukichiResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::MokomoGames.Protobuf.UserDataReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RecoveryFuelByYukichiResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RecoveryFuelByYukichiResponse(RecoveryFuelByYukichiResponse other) : this() {
+      fuel_ = other.fuel_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RecoveryFuelByYukichiResponse Clone() {
+      return new RecoveryFuelByYukichiResponse(this);
+    }
+
+    /// <summary>Field number for the "fuel" field.</summary>
+    public const int FuelFieldNumber = 1;
+    private uint fuel_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint Fuel {
+      get { return fuel_; }
+      set {
+        fuel_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as RecoveryFuelByYukichiResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(RecoveryFuelByYukichiResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Fuel != other.Fuel) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Fuel != 0) hash ^= Fuel.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Fuel != 0) {
+        output.WriteRawTag(8);
+        output.WriteUInt32(Fuel);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Fuel != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Fuel);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(RecoveryFuelByYukichiResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Fuel != 0) {
+        Fuel = other.Fuel;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Fuel = input.ReadUInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class UserData : pb::IMessage<UserData> {
     private static readonly pb::MessageParser<UserData> _parser = new pb::MessageParser<UserData>(() => new UserData());
     private pb::UnknownFieldSet _unknownFields;
@@ -682,7 +754,7 @@ namespace MokomoGames.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::MokomoGames.Protobuf.UserDataReflection.Descriptor.MessageTypes[5]; }
+      get { return global::MokomoGames.Protobuf.UserDataReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -935,135 +1007,6 @@ namespace MokomoGames.Protobuf {
           }
           case 48: {
             RankExp = input.ReadUInt32();
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class RecoveryFuelByYukichiResponse : pb::IMessage<RecoveryFuelByYukichiResponse> {
-    private static readonly pb::MessageParser<RecoveryFuelByYukichiResponse> _parser = new pb::MessageParser<RecoveryFuelByYukichiResponse>(() => new RecoveryFuelByYukichiResponse());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<RecoveryFuelByYukichiResponse> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::MokomoGames.Protobuf.UserDataReflection.Descriptor.MessageTypes[6]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public RecoveryFuelByYukichiResponse() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public RecoveryFuelByYukichiResponse(RecoveryFuelByYukichiResponse other) : this() {
-      fuel_ = other.fuel_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public RecoveryFuelByYukichiResponse Clone() {
-      return new RecoveryFuelByYukichiResponse(this);
-    }
-
-    /// <summary>Field number for the "fuel" field.</summary>
-    public const int FuelFieldNumber = 1;
-    private uint fuel_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public uint Fuel {
-      get { return fuel_; }
-      set {
-        fuel_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as RecoveryFuelByYukichiResponse);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(RecoveryFuelByYukichiResponse other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (Fuel != other.Fuel) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (Fuel != 0) hash ^= Fuel.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (Fuel != 0) {
-        output.WriteRawTag(8);
-        output.WriteUInt32(Fuel);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (Fuel != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Fuel);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(RecoveryFuelByYukichiResponse other) {
-      if (other == null) {
-        return;
-      }
-      if (other.Fuel != 0) {
-        Fuel = other.Fuel;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 8: {
-            Fuel = input.ReadUInt32();
             break;
           }
         }
