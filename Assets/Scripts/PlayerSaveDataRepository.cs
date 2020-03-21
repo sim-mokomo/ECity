@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using MokomoGames.Protobuf;
 using MokomoGames.Users;
@@ -64,9 +63,21 @@ namespace MokomoGames
             return response;
         }
 
-        public UniTask<UpdateUserSoulDataFavoriteResponse> UpdateUserSoulDataFavorite(string guid, bool favorite)
+        public async UniTask<UpdateUserSoulDataFavoriteResponse> UpdateUserSoulDataFavorite(string guid, bool favorite)
         {
-            throw new NotImplementedException();
+            var request = new UpdateUserSoulDataFavoriteRequest
+            {
+                Favorite = favorite,
+                Guid = guid
+            };
+
+            var response = await PlayFabUtility.ExecuteFunctionAsync<UpdateUserSoulDataFavoriteResponse>
+            (
+                "updateUserSoulDataFavorite",
+                new Dictionary<string, string>().JsonDictionary(request)
+            );
+
+            return response;
         }
     }
 }
