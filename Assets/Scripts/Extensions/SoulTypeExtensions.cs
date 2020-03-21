@@ -10,7 +10,7 @@ namespace MokomoGames
                    self == SoulType.Sale ||
                    self == SoulType.ReinforcedSynthesis;
         }
-        
+
         public static string GetName(this SoulType self)
         {
             switch (self)

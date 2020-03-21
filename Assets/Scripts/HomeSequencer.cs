@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using MokomoGames.UI;
 using MokomoGames.Users;
 using UnityEngine;
@@ -10,8 +9,8 @@ namespace MokomoGames
 {
     public class HomeSequencer : MonoBehaviour, ISequencer
     {
-        [Inject] private IMasterDataRepository _masterDataRepository;
         private readonly UIMenuListContainer _menuListContainer = new UIMenuListContainer();
+        [Inject] private IMasterDataRepository _masterDataRepository;
         [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
         private UserSoulDataContainerList _userSoulDataContainerList;
         [SerializeField] private UIFillWarningStaminaDialog fillWarningStaminaDialog;
