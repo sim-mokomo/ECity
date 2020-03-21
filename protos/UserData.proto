@@ -15,7 +15,7 @@ message UpdateStaminaResponse
 
 message GetPlayerSaveDataResponse
 {
-    PlayerSaveData saveData = 1;
+    UserData saveData = 1;
 }
 
 message RecoveryStaminaByWaitTimeRequest
@@ -28,14 +28,14 @@ message RecoveryStaminaByWaitTimeResponse
     uint32 recoveriedStamina = 1;
 }
 
-message PlayerSaveData
+message UserData
 {
     uint32 stamina = 1;
     uint32 yukichi = 2;
     uint32 coin = 3;
     uint32 mizu = 4;
     uint32 rank = 5;
-    uint32 exp = 6;
+    uint32 rank_exp = 6;
 }
 
 message RecoveryFuelByYukichiResponse
