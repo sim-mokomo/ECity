@@ -7,8 +7,7 @@ namespace MokomoGames
     {
         private readonly IMasterDataRepository _masterDataRepository;
 
-        public UserSoulDataContainer(UserSoulData userSoulData, IMasterDataRepository masterDataRepository,
-            IPlayerSaveDataRepository playerSaveDataRepository)
+        public UserSoulDataContainer(UserSoulData userSoulData, IMasterDataRepository masterDataRepository)
         {
             UserSoulData = userSoulData;
             BaseConfig = masterDataRepository.SoulTable.Records.FirstOrDefault(x => x.No == UserSoulData.SoulNo);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MokomoGames.Protobuf;
 
 namespace MokomoGames
 {
@@ -11,6 +12,12 @@ namespace MokomoGames
         public UserSoulDataContainerList(IEnumerable<UserSoulDataContainer> containers)
         {
             _containers = containers;
+        }
+
+        public UserSoulDataContainerList(IEnumerable<UserSoulData> userSoulDatas,
+            IMasterDataRepository masterDataRepository)
+        {
+            _containers = userSoulDatas.Select(x => new UserSoulDataContainer(x, masterDataRepository));
         }
 
         public bool ExistMaterialSouls => GetMaterialSouls().Any();

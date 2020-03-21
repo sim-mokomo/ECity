@@ -34,9 +34,7 @@ namespace MokomoGames
 
             user = await _playerSaveDataRepository.GetPlayerSaveData();
             var soulDataList = await _playerSaveDataRepository.GetUserSoulDataList();
-            _userSoulDataContainerList = new UserSoulDataContainerList(
-                soulDataList.Souls.Select(x =>
-                    new UserSoulDataContainer(x, _masterDataRepository, _playerSaveDataRepository)));
+            _userSoulDataContainerList = new UserSoulDataContainerList(soulDataList.Souls, _masterDataRepository);
             soulListPage.SetData(_userSoulDataContainerList);
             Refresh(user);
 
