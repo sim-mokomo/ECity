@@ -39,12 +39,9 @@ namespace MokomoGames
             Refresh(user);
 
             staminaRecoveryTimeController = new StaminaRecoveryTimeController(_playerSaveDataRepository);
-            staminaRecoveryTimeController.OnRecoveriedStamina += (uint recoveriedDiff) =>
-            { 
-                // CL表示専用なので改変されてもok
-                var data = user.toData();
-                data.Stamina += recoveriedDiff;
-                user = new User(data,user.MaxFuel,user.NeedNextRankExp);
+            staminaRecoveryTimeController.OnRecoveriedStamina += recoveriedDiff =>
+            {
+                user = UserService.CreateRecoveriedStaminaUserByTime(user, recoveriedDiff);
                 Refresh(user);
             };
             staminaRecoveryTimeController.OnClock += () =>
@@ -85,13 +82,7 @@ namespace MokomoGames
                 if (!user.IsMaxFuel)
                 {
                     _playerSaveDataRepository.RecoveryFuelByYukichi();
-                    
-                    // CL表示専用なので改変されてもok
-                    var data = user.toData();
-                    data.Stamina += user.MaxFuel;
-                    data.Yukichi--;
-                    user = new User(data,user.MaxFuel,user.NeedNextRankExp);
-                    
+                    user = UserService.CreateRecoveriedStaminaUserByYukichi(user);
                     Refresh(user);
                 }
 
