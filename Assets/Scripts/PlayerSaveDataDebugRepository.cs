@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MokomoGames;
 using MokomoGames.Protobuf;
+using MokomoGames.Users;
 using UniRx.Async;
 using UnityEngine;
 using Zenject;
@@ -13,17 +14,29 @@ public class PlayerSaveDataDebugRepository : IPlayerSaveDataRepository
     [Inject] private IMasterDataRepository _masterDataRepository;
     [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
 
-    public UniTask<PlayerSaveData> GetPlayerSaveData()
+    public UniTask<User> GetPlayerSaveData()
     {
-        return new UniTask<PlayerSaveData>(new PlayerSaveData()
+        var data = new UserData()
         {
             Coin = 100,
             Mizu = 56,
             Stamina = 10,
             Yukichi = 2,
-            Exp = 6,
-            Rank = 1
-        });
+            Rank = 1,
+            RankExp = 6,
+        };
+        var user = toModel(data);
+        return new UniTask<User>(user);
+    }
+
+    public User toModel(UserData data)
+    {
+        return new User(data);
+    }
+
+    public UserData toData(User user)
+    {
+        return user.toData();
     }
 
     public UniTask<RecoveryFuelByYukichiResponse> RecoveryFuelByYukichi()

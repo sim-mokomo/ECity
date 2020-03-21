@@ -6,6 +6,7 @@ using Google.Protobuf;
 using PlayFab;
 using PlayFab.ClientModels;
 using MokomoGames.Protobuf;
+using MokomoGames.Users;
 using PlayFab.CloudScriptModels;using PlayFab.Json;
 using UniRx.Async;
 using UnityEngine;
@@ -14,14 +15,25 @@ namespace MokomoGames
 {
     public class PlayerSaveDataRepository : IPlayerSaveDataRepository
     {
-        public async UniTask<PlayerSaveData> GetPlayerSaveData()
+        public async UniTask<User> GetPlayerSaveData()
         {
             var response = await PlayFabUtility.ExecuteFunctionAsync<GetPlayerSaveDataResponse>
             (
                 functionName:"getPlayerSaveData",
                 functionParameter: null
             );
-            return response.SaveData;
+            var user = toModel(response.SaveData);
+            return user;
+        }
+
+        public User toModel(UserData data)
+        {
+            return new User(data);
+        }
+
+        public UserData toData(User user)
+        {
+            return user.toData();
         }
 
         public async UniTask<RecoveryFuelByYukichiResponse> RecoveryFuelByYukichi()
