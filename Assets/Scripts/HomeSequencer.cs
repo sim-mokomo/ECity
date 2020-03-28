@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using MokomoGames.UI;
 using MokomoGames.Users;
 using UnityEngine;
@@ -9,22 +11,18 @@ namespace MokomoGames
 {
     public class HomeSequencer : MonoBehaviour, ISequencer
     {
-        private readonly UIMenuListContainer _menuListContainer = new UIMenuListContainer();
         [Inject] private IMasterDataRepository _masterDataRepository;
         [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
-        private UserSoulList _userSoulList;
         [SerializeField] private UIFillWarningStaminaDialog fillWarningStaminaDialog;
-
         [SerializeField] private UIHeader headerUi;
         [SerializeField] private UIRankConfirm rankConfirm;
         [SerializeField] private UIRecoveryStaminaDialog recoveryStaminaDialog;
-        [SerializeField] private UISaleMenu saleMenu;
-        [SerializeField] private UISoulLaboMenu soulLaboMenu;
-        [SerializeField] private Button soulLaboToggle;
-        [SerializeField] private UISoulListMenu soulListMenu;
         [SerializeField] private UISoulListPage soulListPage;
-        private StaminaRecoveryTimeController staminaRecoveryTimeController;
+        [SerializeField] private UISoulSalePage soulSalePage;
+        [SerializeField] private NestedMenuController nestedMenuController;
+        private UserSoulList _userSoulList;
         private User user;
+        private StaminaRecoveryTimeController staminaRecoveryTimeController;
         public MasterSequencer.SequencerType Type => MasterSequencer.SequencerType.Home;
         public event Action<MasterSequencer.SequencerType, bool, Func<bool>> OnLeave;
 
@@ -36,6 +34,7 @@ namespace MokomoGames
             var soulDataList = await _playerSaveDataRepository.GetUserSoulDataList();
             _userSoulList = new UserSoulList(soulDataList.Souls, _masterDataRepository);
             soulListPage.SetData(_userSoulList);
+            soulSalePage.SetData(_userSoulList);            
             Refresh(user);
 
             staminaRecoveryTimeController = new StaminaRecoveryTimeController(_playerSaveDataRepository);
@@ -92,23 +91,27 @@ namespace MokomoGames
             };
             fillWarningStaminaDialog.OnTappedClose += fillWarningStaminaDialog.Close;
             fillWarningStaminaDialog.OnTappedConfirm += fillWarningStaminaDialog.Close;
-
-            soulLaboToggle.onClick.AddListener(() => { _menuListContainer.Add(soulLaboMenu); });
-            soulLaboMenu.ListButton.onClick.AddListener(() => _menuListContainer.Add(soulListMenu));
-            soulLaboMenu.SaleButton.onClick.AddListener(() => _menuListContainer.Add(saleMenu));
+            
+            nestedMenuController.Entry();
 
             foreach (var page in GetComponentsInChildren<IPage>())
             {
-                page.OnTappedHomeButton -= ReleaseAllMenuList;
-                page.OnTappedHomeButton += ReleaseAllMenuList;
+                page.OnTappedHomeButton -= nestedMenuController.Release;
+                page.OnTappedHomeButton += nestedMenuController.Release;
+            }
+            
+            foreach (var menu in nestedMenuController.NestedMenuConfigrations.Select(x => x.MenuList))
+            {
+                menu.OnRequest += OnRequest;
+                menu.OnRequestedClose += () => menu.Close();
+                menu.Close();
             }
 
-            soulLaboMenu.Close();
-            soulListMenu.Close();
-            saleMenu.Close();
             recoveryStaminaDialog.gameObject.SetActive(false);
             fillWarningStaminaDialog.gameObject.SetActive(false);
             soulListPage.gameObject.SetActive(false);
+            soulSalePage.gameObject.SetActive(false);
+        }
 
         private void OnRequest(UIMenuList.PageType type)
         {
@@ -132,7 +135,10 @@ namespace MokomoGames
         public void Tick()
         {
             headerUi.Tick();
-            _menuListContainer.Tick();
+            if (!soulListPage.gameObject.activeSelf && !soulSalePage.gameObject.activeSelf)
+            {
+                nestedMenuController.Tick();
+            }
         }
 
         public void End()
@@ -143,11 +149,6 @@ namespace MokomoGames
         public void Display(bool show)
         {
             gameObject.SetActive(show);
-        }
-
-        public void ReleaseAllMenuList()
-        {
-            _menuListContainer.RemoveAll();
         }
 
         private void Refresh(User user)
