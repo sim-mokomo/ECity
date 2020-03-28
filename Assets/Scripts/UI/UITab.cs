@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace UI
+namespace MokomoGames.UI
 {
     public class UITab : MonoBehaviour
     {
@@ -19,16 +18,10 @@ namespace UI
         private ColorBlock selectingColorBlock;
         private ColorBlock unSelectingColorBlock;
         public event Action<UITabElement> OnChangedTab;
-        private UITabElement GetTab(TabType tabType) => _tabElements.FirstOrDefault(x => x.TabType == tabType);
 
-        [Serializable]
-        public class UITabElement
+        private UITabElement GetTab(TabType tabType)
         {
-            [SerializeField] private TabType _tabType;
-            [SerializeField] private Toggle _toggle;
-
-            public Toggle Toggle => _toggle;
-            public TabType TabType => _tabType;
+            return _tabElements.FirstOrDefault(x => x.TabType == tabType);
         }
 
         private void Awake()
@@ -48,8 +41,7 @@ namespace UI
             unSelectingColorBlock.selectedColor = Color.gray;
 
             foreach (var tabElement in _tabElements)
-            {
-                tabElement.Toggle.onValueChanged.AddListener((isOn) =>
+                tabElement.Toggle.onValueChanged.AddListener(isOn =>
                 {
                     if (tabElement.Toggle.isOn == isOn)
                     {
@@ -57,7 +49,6 @@ namespace UI
                         OnChangedTab?.Invoke(tabElement);
                     }
                 });
-            }
         }
 
         public void Begin(TabType firstFocusTab)
@@ -72,7 +63,7 @@ namespace UI
             focusTab.Toggle.colors = selectingColorBlock;
 
             var unFocusTabs = _tabElements.Where(x => x != focusTab);
-            unFocusTabs.ToList().ForEach( x => x.Toggle.colors = unSelectingColorBlock);
+            unFocusTabs.ToList().ForEach(x => x.Toggle.colors = unSelectingColorBlock);
         }
     }
 }

@@ -4,19 +4,18 @@ using TMPro;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace MokomoGames.UI
 {
     public class UISoulListPage : MonoBehaviour, IPage
     {
+        private UserSoulList _userSoulList;
         [SerializeField] private Button backButton;
         [SerializeField] private TextMeshProUGUI hasSoulNum;
         [SerializeField] private Button homeButton;
-        [SerializeField] private UISoulDetailPage soulDetailPage;
         [SerializeField] private UICellScroll soulCellScroll;
+        [SerializeField] private UISoulDetailPage soulDetailPage;
         [SerializeField] private UITab tab;
-        private UserSoulList _userSoulList;
         public event Action OnTappedHomeButton;
 
         private void Awake()
@@ -27,7 +26,7 @@ namespace MokomoGames.UI
                 var showSouls = tabElement.TabType == UITab.TabType.Battle
                     ? _userSoulList.GetBattleSouls()
                     : _userSoulList.GetMaterialSouls();
-                
+
                 UpdateHasSoulNum(showSouls.Count());
                 soulCellScroll.MakeCells(showSouls.ToList(), soul =>
                 {
@@ -35,7 +34,7 @@ namespace MokomoGames.UI
                     soulDetailPage.Begin(soul);
                 });
             };
-            tab.Begin(firstFocusTab: UITab.TabType.Battle);
+            tab.Begin(UITab.TabType.Battle);
 
             backButton.onClick.AddListener(() => gameObject.SetActive(false));
             homeButton.onClick.AddListener(() =>
@@ -44,19 +43,18 @@ namespace MokomoGames.UI
                 gameObject.SetActive(false);
                 OnTappedHomeButton?.Invoke();
             });
-            
+
             soulDetailPage.OnTappedBackButton += () => soulDetailPage.Show(false);
             soulDetailPage.Show(false);
         }
 
         public void Begin()
         {
-            
         }
 
         public void SetData(UserSoulList userSoulList)
         {
-            this._userSoulList = userSoulList;
+            _userSoulList = userSoulList;
         }
 
         private void UpdateHasSoulNum(int currentCount)

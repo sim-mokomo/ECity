@@ -18,6 +18,7 @@ namespace MokomoGames
         [SerializeField] private UIHeader headerUi;
         [SerializeField] private UIRankConfirm rankConfirm;
         [SerializeField] private UIRecoveryStaminaDialog recoveryStaminaDialog;
+        [SerializeField] private UISaleMenu saleMenu;
         [SerializeField] private UISoulLaboMenu soulLaboMenu;
         [SerializeField] private Button soulLaboToggle;
         [SerializeField] private UISoulListMenu soulListMenu;
@@ -93,7 +94,8 @@ namespace MokomoGames
             fillWarningStaminaDialog.OnTappedConfirm += fillWarningStaminaDialog.Close;
 
             soulLaboToggle.onClick.AddListener(() => { _menuListContainer.Add(soulLaboMenu); });
-            soulLaboMenu.ListButton.onClick.AddListener(() => { _menuListContainer.Add(soulListMenu); });
+            soulLaboMenu.ListButton.onClick.AddListener(() => _menuListContainer.Add(soulListMenu));
+            soulLaboMenu.SaleButton.onClick.AddListener(() => _menuListContainer.Add(saleMenu));
 
             foreach (var page in GetComponentsInChildren<IPage>())
             {
@@ -103,6 +105,7 @@ namespace MokomoGames
 
             soulLaboMenu.Close();
             soulListMenu.Close();
+            saleMenu.Close();
             recoveryStaminaDialog.gameObject.SetActive(false);
             fillWarningStaminaDialog.gameObject.SetActive(false);
             soulListPage.gameObject.SetActive(false);

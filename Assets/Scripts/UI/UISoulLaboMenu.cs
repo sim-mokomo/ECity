@@ -6,7 +6,10 @@ using TouchType = MokomoGames.TouchType;
 public class UISoulLaboMenu : UIMenuList
 {
     [SerializeField] private Button listButton;
+    [SerializeField] private Button saleButton;
+
     public Button ListButton => listButton;
+    public Button SaleButton => saleButton;
 
     public override void Tick()
     {
