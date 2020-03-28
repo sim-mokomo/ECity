@@ -6,21 +6,21 @@ namespace MokomoGames.UI
 {
     public class PageRepository : MonoBehaviour
     {
-        [SerializeField] private List<Page> pages;
-
-        public List<Page> Pages => pages;
-
-        public IReadOnlyList<ISoulPage> SoulPages => 
-            pages
-                .OfType<ISoulPage>()
-                .ToList();
-        
         public enum PageType
         {
             None,
             SoulList,
-            SoulSale,
+            SoulSale
         }
+
+        [SerializeField] private List<Page> pages;
+
+        public List<Page> Pages => pages;
+
+        public IReadOnlyList<ISoulPage> SoulPages =>
+            pages
+                .OfType<ISoulPage>()
+                .ToList();
 
         public IPage GetPage(PageType pageType)
         {

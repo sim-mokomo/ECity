@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Linq;
 using TMPro;
-using UI;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace MokomoGames.UI
 {
-    public class UISoulListPage : Page,ISoulPage
+    public class UISoulListPage : Page, ISoulPage
     {
         private UserSoulList _userSoulList;
         [SerializeField] private Button backButton;
@@ -15,8 +14,9 @@ namespace MokomoGames.UI
         [SerializeField] private Button homeButton;
         [SerializeField] private UICellScroll soulCellScroll;
         [SerializeField] private UISoulDetailPage soulDetailPage;
-        [SerializeField] private UITab tab;
         [SerializeField] private UIHasNumSolidLabel soulHasNumSolidLabel;
+        [SerializeField] private UITab tab;
+
         public override void Show(bool show)
         {
             gameObject.SetActive(show);
@@ -26,6 +26,18 @@ namespace MokomoGames.UI
 
         public override event Action OnTappedHomeButton;
 
+        public override bool Showing => gameObject.activeSelf;
+
+        public override void Begin()
+        {
+            tab.Begin(UITab.TabType.Battle);
+        }
+
+        public void SetData(UserSoulList userSoulList)
+        {
+            _userSoulList = userSoulList;
+        }
+
         private void Awake()
         {
             tab.OnChangedTab += tabElement =>
@@ -34,8 +46,8 @@ namespace MokomoGames.UI
                 var showSouls = tabElement.TabType == UITab.TabType.Battle
                     ? _userSoulList.GetBattleSouls()
                     : _userSoulList.GetMaterialSouls();
-                
-                soulHasNumSolidLabel.UpdateHasNum((uint)showSouls.Count(),9999);
+
+                soulHasNumSolidLabel.UpdateHasNum((uint) showSouls.Count(), 9999);
                 soulCellScroll.MakeCells(showSouls.ToList(), soul =>
                 {
                     soulDetailPage.Show(true);
@@ -53,18 +65,6 @@ namespace MokomoGames.UI
 
             soulDetailPage.OnTappedBackButton += () => soulDetailPage.Show(false);
             soulDetailPage.Show(false);
-        }
-
-        public override bool Showing => gameObject.activeSelf;
-
-        public override void Begin()
-        {
-            tab.Begin(UITab.TabType.Battle);
-        }
-
-        public void SetData(UserSoulList userSoulList)
-        {
-            _userSoulList = userSoulList;
         }
     }
 }

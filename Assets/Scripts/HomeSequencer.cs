@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using MokomoGames.UI;
 using MokomoGames.Users;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace MokomoGames
@@ -12,16 +10,16 @@ namespace MokomoGames
     public class HomeSequencer : MonoBehaviour, ISequencer
     {
         [Inject] private IMasterDataRepository _masterDataRepository;
+        private PageRepository _pageRepository;
         [Inject] private IPlayerSaveDataRepository _playerSaveDataRepository;
+        private UserSoulList _userSoulList;
         [SerializeField] private UIFillWarningStaminaDialog fillWarningStaminaDialog;
         [SerializeField] private UIHeader headerUi;
+        [SerializeField] private NestedMenuController nestedMenuController;
         [SerializeField] private UIRankConfirm rankConfirm;
         [SerializeField] private UIRecoveryStaminaDialog recoveryStaminaDialog;
-        [SerializeField] private NestedMenuController nestedMenuController;
-        private PageRepository _pageRepository;
-        private UserSoulList _userSoulList;
-        private User user;
         private StaminaRecoveryTimeController staminaRecoveryTimeController;
+        private User user;
         public MasterSequencer.SequencerType Type => MasterSequencer.SequencerType.Home;
         public event Action<MasterSequencer.SequencerType, bool, Func<bool>> OnLeave;
 
@@ -89,14 +87,11 @@ namespace MokomoGames
             };
             fillWarningStaminaDialog.OnTappedClose += fillWarningStaminaDialog.Close;
             fillWarningStaminaDialog.OnTappedConfirm += fillWarningStaminaDialog.Close;
-            
+
             nestedMenuController.Entry();
-            
+
             _pageRepository = FindObjectOfType<PageRepository>();
-            foreach (var soulPage in _pageRepository.SoulPages)
-            {
-                soulPage.SetData(_userSoulList);
-            }
+            foreach (var soulPage in _pageRepository.SoulPages) soulPage.SetData(_userSoulList);
 
             foreach (var page in _pageRepository.Pages)
             {
@@ -104,10 +99,10 @@ namespace MokomoGames
                 page.OnTappedHomeButton += nestedMenuController.Release;
                 page.Show(false);
             }
-            
+
             foreach (var menu in nestedMenuController.NestedMenuConfigrations.Select(x => x.MenuList))
             {
-                menu.OnRequest += (pageType) =>
+                menu.OnRequest += pageType =>
                 {
                     var page = _pageRepository.GetPage(pageType);
                     if (page == null)
@@ -122,14 +117,11 @@ namespace MokomoGames
             recoveryStaminaDialog.gameObject.SetActive(false);
             fillWarningStaminaDialog.gameObject.SetActive(false);
         }
-        
+
         public void Tick()
         {
             headerUi.Tick();
-            if (_pageRepository != null && !_pageRepository.SoulPages.Any(x => x.Showing))
-            {
-                nestedMenuController.Tick();
-            }
+            if (_pageRepository != null && !_pageRepository.SoulPages.Any(x => x.Showing)) nestedMenuController.Tick();
         }
 
         public void End()

@@ -5,9 +5,9 @@ namespace MokomoGames.UI
     public interface IPage
     {
         bool Showing { get; }
+        PageRepository.PageType PageType { get; }
         void Begin();
         void Show(bool show);
-        PageRepository.PageType PageType { get; }   
         event Action OnTappedHomeButton;
     }
 

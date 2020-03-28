@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace MokomoGames.UI
@@ -20,7 +19,7 @@ namespace MokomoGames.UI
             base.Tick();
 
             if (CommonInput.GetTouch() == TouchType.Began)
-                if (!CommonInput.IsTouchedUI<UISaleMenu>()) 
+                if (!CommonInput.IsTouchedUI<UISaleMenu>())
                     OnRequestedClose?.Invoke();
         }
     }

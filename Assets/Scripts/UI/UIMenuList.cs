@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
@@ -18,8 +16,6 @@ public class UIMenuList : MonoBehaviour, IOpenable
     [SerializeField] private RectTransform moveRectTransform;
     public Action OnRequestedClose;
     private TweenerCore<Vector3, Vector3, VectorOptions> openTweenerCore;
-    
-    public event Action<PageRepository.PageType> OnRequest; 
 
     public float MoveDurationWhenOpen => moveDurationWhenOpen;
     public bool IsOpening => openTweenerCore != null || closeTweenerCore == null || closeTweenerCore.IsActive();
@@ -41,6 +37,8 @@ public class UIMenuList : MonoBehaviour, IOpenable
         await PlayCloseAnimation(immediately);
         OnClosed?.Invoke();
     }
+
+    public event Action<PageRepository.PageType> OnRequest;
 
     private UniTask PlayOpenAnimation(bool immediately = false)
     {

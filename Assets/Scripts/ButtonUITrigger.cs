@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace MokomoGames
@@ -12,7 +11,7 @@ namespace MokomoGames
         private void Awake()
         {
             listenButton = GetComponent<Button>();
-            listenButton.onClick.AddListener( Detect );
+            listenButton.onClick.AddListener(Detect);
         }
     }
 }

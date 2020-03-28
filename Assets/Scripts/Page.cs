@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MokomoGames
 {
-    public abstract class Page: MonoBehaviour,IPage
+    public abstract class Page : MonoBehaviour, IPage
     {
         public abstract bool Showing { get; }
         public abstract void Begin();
