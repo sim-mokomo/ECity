@@ -20,12 +20,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65a1104ebc3dd834b985f45eac69d508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveDistXWhenOpen: 0
   moveDistXWhenClose: 1300
-  moveDurationWhenOpen: 0.1
+  moveDistXWhenOpen: 0
   moveDurationWhenClose: 0.3
+  moveDurationWhenOpen: 0.1
   moveRectTransform: {fileID: 1326616916547176039}
   listButton: {fileID: 2179449885132763205}
+  saleButton: {fileID: 2179449886688996162}
 --- !u!114 &2179449886394654810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -755,7 +756,6 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -1101,7 +1101,6 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -1638,7 +1637,6 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -2452,7 +2450,6 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -2752,7 +2749,6 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -4113,7 +4109,6 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -4478,7 +4473,6 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -4809,7 +4803,6 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -4867,7 +4860,7 @@ PrefabInstance:
     - target: {fileID: 889426914848735169, guid: 8877ce4563f74154bafb990ece460bf6,
         type: 3}
       propertyPath: m_Size
-      value: 0.78605354
+      value: 0.78605366
       objectReference: {fileID: 0}
     - target: {fileID: 889426915414555744, guid: 8877ce4563f74154bafb990ece460bf6,
         type: 3}
