@@ -6,9 +6,9 @@ namespace MokomoGames.UI
 {
     public class PageRepository : MonoBehaviour
     {
-        [SerializeField] private List<IPage> pages;
+        [SerializeField] private List<Page> pages;
 
-        public List<IPage> Pages => pages;
+        public List<Page> Pages => pages;
 
         public IReadOnlyList<ISoulPage> SoulPages => 
             pages

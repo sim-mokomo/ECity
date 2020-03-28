@@ -110,6 +110,8 @@ namespace MokomoGames
                 menu.OnRequest += (pageType) =>
                 {
                     var page = _pageRepository.GetPage(pageType);
+                    if (page == null)
+                        return;
                     page.Show(true);
                     page.Begin();
                 };
@@ -124,7 +126,7 @@ namespace MokomoGames
         public void Tick()
         {
             headerUi.Tick();
-            if (_pageRepository != null && _pageRepository.SoulPages.Any(x => x.Showing))
+            if (_pageRepository != null && !_pageRepository.SoulPages.Any(x => x.Showing))
             {
                 nestedMenuController.Tick();
             }

@@ -7,8 +7,8 @@ using TouchType = MokomoGames.TouchType;
 
 public class UISoulListMenu : UIMenuList
 {
-    [SerializeField] private Button artifactButton;
     [SerializeField] private Button soulListButton;
+    [SerializeField] private Button artifactButton;
 
     private void Awake()
     {
