@@ -26,12 +26,18 @@ namespace MokomoGames
 
         public IEnumerable<Soul> GetMaterialSouls()
         {
-            return ExistMaterialSouls ? _souls.Where(x => x.Config.SoulType.IsMaterial()) : Empty;
+            var souls = _souls.Where(x => x.Config.SoulType.IsMaterial());
+            if (!souls.Any())
+                return Empty;
+            return souls;
         }
 
         public IEnumerable<Soul> GetBattleSouls()
         {
-            return ExistBattleSouls ? _souls.Where(x => !x.Config.SoulType.IsMaterial()) : Empty;
+            var souls = _souls.Where(x => !x.Config.SoulType.IsMaterial());
+            if (!souls.Any())
+                return Empty;
+            return _souls;
         }
     }
 }
