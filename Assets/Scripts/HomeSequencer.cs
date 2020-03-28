@@ -17,9 +17,8 @@ namespace MokomoGames
         [SerializeField] private UIHeader headerUi;
         [SerializeField] private UIRankConfirm rankConfirm;
         [SerializeField] private UIRecoveryStaminaDialog recoveryStaminaDialog;
-        [SerializeField] private UISoulListPage soulListPage;
-        [SerializeField] private UISoulSalePage soulSalePage;
         [SerializeField] private NestedMenuController nestedMenuController;
+        private PageRepository _pageRepository;
         private UserSoulList _userSoulList;
         private User user;
         private StaminaRecoveryTimeController staminaRecoveryTimeController;
@@ -33,8 +32,7 @@ namespace MokomoGames
             user = await _playerSaveDataRepository.GetPlayerSaveData();
             var soulDataList = await _playerSaveDataRepository.GetUserSoulDataList();
             _userSoulList = new UserSoulList(soulDataList.Souls, _masterDataRepository);
-            soulListPage.SetData(_userSoulList);
-            soulSalePage.SetData(_userSoulList);            
+
             Refresh(user);
 
             staminaRecoveryTimeController = new StaminaRecoveryTimeController(_playerSaveDataRepository);
@@ -93,49 +91,40 @@ namespace MokomoGames
             fillWarningStaminaDialog.OnTappedConfirm += fillWarningStaminaDialog.Close;
             
             nestedMenuController.Entry();
+            
+            _pageRepository = FindObjectOfType<PageRepository>();
+            foreach (var soulPage in _pageRepository.SoulPages)
+            {
+                soulPage.SetData(_userSoulList);
+            }
 
-            foreach (var page in GetComponentsInChildren<IPage>())
+            foreach (var page in _pageRepository.Pages)
             {
                 page.OnTappedHomeButton -= nestedMenuController.Release;
                 page.OnTappedHomeButton += nestedMenuController.Release;
+                page.Show(false);
             }
             
             foreach (var menu in nestedMenuController.NestedMenuConfigrations.Select(x => x.MenuList))
             {
-                menu.OnRequest += OnRequest;
+                menu.OnRequest += (pageType) =>
+                {
+                    var page = _pageRepository.GetPage(pageType);
+                    page.Show(true);
+                    page.Begin();
+                };
                 menu.OnRequestedClose += () => menu.Close();
                 menu.Close();
             }
 
             recoveryStaminaDialog.gameObject.SetActive(false);
             fillWarningStaminaDialog.gameObject.SetActive(false);
-            soulListPage.gameObject.SetActive(false);
-            soulSalePage.gameObject.SetActive(false);
         }
-
-        private void OnRequest(UIMenuList.PageType type)
-        {
-            switch (type)
-            {
-                case UIMenuList.PageType.SoulList:
-                    soulListPage.gameObject.SetActive(true);
-                    soulListPage.Begin();
-                    break;
-                case UIMenuList.PageType.SoulSale:
-                    soulSalePage.gameObject.SetActive(true);
-                    soulSalePage.Begin();
-                    break;
-                case UIMenuList.PageType.None:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
-            }
-        }
-
+        
         public void Tick()
         {
             headerUi.Tick();
-            if (!soulListPage.gameObject.activeSelf && !soulSalePage.gameObject.activeSelf)
+            if (_pageRepository != null && _pageRepository.SoulPages.Any(x => x.Showing))
             {
                 nestedMenuController.Tick();
             }
