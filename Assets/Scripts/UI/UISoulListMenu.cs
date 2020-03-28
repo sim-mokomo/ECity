@@ -1,4 +1,5 @@
-﻿using MokomoGames;
+﻿using System;
+using MokomoGames;
 using MokomoGames.UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,28 +9,19 @@ public class UISoulListMenu : UIMenuList
 {
     [SerializeField] private Button artifactButton;
     [SerializeField] private Button soulListButton;
-    [SerializeField] private UISoulListPage soulListPage;
 
     private void Awake()
     {
-        soulListButton.onClick.AddListener(() =>
-        {
-            soulListPage.gameObject.SetActive(true);
-            soulListPage.Begin();
-        });
+        soulListButton.onClick.AddListener(() =>  RequestPage(PageType.SoulList));
+        artifactButton.onClick.AddListener(() =>  RequestPage(PageType.None));
     }
 
     public override void Tick()
     {
         base.Tick();
-        if (soulListPage.gameObject.activeSelf)
-            return;
 
         if (CommonInput.GetTouch() == TouchType.Began)
             if (!CommonInput.IsTouchedUI<UISoulListMenu>())
-            {
                 OnRequestedClose?.Invoke();
-                Close();
-            }
     }
 }

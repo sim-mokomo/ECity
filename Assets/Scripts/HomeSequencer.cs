@@ -109,6 +109,24 @@ namespace MokomoGames
             recoveryStaminaDialog.gameObject.SetActive(false);
             fillWarningStaminaDialog.gameObject.SetActive(false);
             soulListPage.gameObject.SetActive(false);
+
+        private void OnRequest(UIMenuList.PageType type)
+        {
+            switch (type)
+            {
+                case UIMenuList.PageType.SoulList:
+                    soulListPage.gameObject.SetActive(true);
+                    soulListPage.Begin();
+                    break;
+                case UIMenuList.PageType.SoulSale:
+                    soulSalePage.gameObject.SetActive(true);
+                    soulSalePage.Begin();
+                    break;
+                case UIMenuList.PageType.None:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
         }
 
         public void Tick()

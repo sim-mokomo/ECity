@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace MokomoGames.UI
@@ -10,22 +11,16 @@ namespace MokomoGames.UI
 
         private void Awake()
         {
-            souleSaleButton.onClick.AddListener(() =>
-            {
-                //TODO: 魂売却ページを開く
-            });
-
-            artifactSaleButton.onClick.AddListener(() =>
-            {
-                //TODO: artifact売却ページに飛ぶ
-            });
+            souleSaleButton.onClick.AddListener(() => RequestPage(PageType.SoulSale));
+            artifactSaleButton.onClick.AddListener(() => RequestPage(PageType.None));
         }
 
         public override void Tick()
         {
             base.Tick();
+
             if (CommonInput.GetTouch() == TouchType.Began)
-                if (!CommonInput.IsTouchedUI<UISaleMenu>())
+                if (!CommonInput.IsTouchedUI<UISaleMenu>()) 
                     OnRequestedClose?.Invoke();
         }
     }
