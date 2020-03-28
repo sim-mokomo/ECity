@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8451465217849285414}
+  - component: {fileID: 8487456106356413297}
   m_Layer: 0
   m_Name: UISoulHasNum
   m_TagString: Untagged
@@ -39,6 +40,19 @@ RectTransform:
   m_AnchoredPosition: {x: 336.38, y: -413.7}
   m_SizeDelta: {x: 672.76, y: 119.1}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8487456106356413297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3415993559791962828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7099df00941569f4ea86957f38fdf2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasNum: {fileID: 418785324751835606}
 --- !u!1 &3426497110587691808
 GameObject:
   m_ObjectHideFlags: 0

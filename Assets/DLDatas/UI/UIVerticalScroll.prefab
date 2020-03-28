@@ -246,8 +246,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellRow: {fileID: 1637426051785474238, guid: 8e1f245a8c0ee3a448f271c812d88e93, type: 3}
-  verticalRoot: {fileID: 3695099180475779914}
   contentRoot: {fileID: 5074679481203846122}
+  verticalRoot: {fileID: 3695099180475779914}
 --- !u!1 &3396763300373203593
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 20
     m_Bottom: 0
   m_ChildAlignment: 4
   m_Spacing: 20
@@ -574,7 +574,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 5926836687377069378}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.5439393
+  m_Size: 0.54393935
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
