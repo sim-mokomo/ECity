@@ -34,7 +34,6 @@ namespace MokomoGames.UI
                     soulDetailPage.Begin(soul);
                 });
             };
-            tab.Begin(UITab.TabType.Battle);
 
             backButton.onClick.AddListener(() => gameObject.SetActive(false));
             homeButton.onClick.AddListener(() =>
@@ -50,6 +49,7 @@ namespace MokomoGames.UI
 
         public void Begin()
         {
+            tab.Begin(UITab.TabType.Battle);
         }
 
         public void SetData(UserSoulList userSoulList)
