@@ -1,0 +1,77 @@
+@startuml
+
+
+class HomeSequencer
+{
+    
+}
+
+class UIMenuListContainer
+{
+}
+
+package MenuList
+{
+    class UISoulLaboMenu
+    {
+    }
+    
+    class UISoulListMenu
+    {
+    }
+    
+    class UISoulSaleMenu
+    {
+    }
+    
+    class UIMenuList
+    {
+    }
+}
+
+package Page
+{
+    interface IPage
+    {
+    }
+
+    interface ISoulPage
+    {
+
+    }
+    
+    class UISoulSalePage
+    {
+    }
+    
+    class UISoulListPage
+    {
+    }
+
+    ISoulPage --u|> IPage
+    UISoulListPage --u|> ISoulPage
+    UISoulSalePage --u|> ISoulPage
+}
+
+
+
+class NestedMenuController
+{
+}
+
+class PageRepository
+{
+
+}
+
+HomeSequencer --> NestedMenuController
+HomeSequencer --> PageRepository
+PageRepository --> IPage
+NestedMenuController --> UIMenuListContainer
+UIMenuListContainer --> UIMenuList
+UISoulLaboMenu --u|> UIMenuList
+UISoulSaleMenu --u|> UIMenuList
+UISoulListMenu --u|> UIMenuList
+UIMenuList -> IPage
+
+@enduml
