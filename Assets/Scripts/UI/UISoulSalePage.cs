@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace MokomoGames.UI
 {
-    public class UISoulSalePage : MonoBehaviour, IPage
+    public class UISoulSalePage : MonoBehaviour, IPage,ISoulPage
     {
         private UserSoulList userSoulList;
         [SerializeField] private Button backButton;
@@ -13,6 +13,13 @@ namespace MokomoGames.UI
         [SerializeField] private UITab tab;
         [SerializeField] private UICellScroll _cellScroll;
         [SerializeField] private UIHasNumSolidLabel soulHasNumSolidLabel;
+        public void Show(bool show)
+        {
+            gameObject.SetActive(show);
+        }
+
+        public PageRepository.PageType PageType => PageRepository.PageType.SoulSale;
+
         public event Action OnTappedHomeButton;
 
         public void SetData(UserSoulList userSoulList)
@@ -44,6 +51,8 @@ namespace MokomoGames.UI
                 OnTappedHomeButton?.Invoke();
             });
         }
+
+        public bool Showing => gameObject.activeSelf;
 
         public void Begin()
         {

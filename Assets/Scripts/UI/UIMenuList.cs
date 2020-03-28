@@ -4,6 +4,7 @@ using System.Linq;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
+using MokomoGames.UI;
 using UniRx.Async;
 using UnityEngine;
 
@@ -18,13 +19,7 @@ public class UIMenuList : MonoBehaviour, IOpenable
     public Action OnRequestedClose;
     private TweenerCore<Vector3, Vector3, VectorOptions> openTweenerCore;
     
-    public enum PageType
-    {
-        None,
-        SoulList,
-        SoulSale,
-    }
-    public event Action<PageType> OnRequest; 
+    public event Action<PageRepository.PageType> OnRequest; 
 
     public float MoveDurationWhenOpen => moveDurationWhenOpen;
     public bool IsOpening => openTweenerCore != null || closeTweenerCore == null || closeTweenerCore.IsActive();
@@ -69,7 +64,7 @@ public class UIMenuList : MonoBehaviour, IOpenable
     {
     }
 
-    protected void RequestPage(PageType pageType)
+    protected void RequestPage(PageRepository.PageType pageType)
     {
         OnRequest?.Invoke(pageType);
     }

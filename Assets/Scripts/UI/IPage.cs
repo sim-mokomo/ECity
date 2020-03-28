@@ -1,6 +1,18 @@
 ﻿using System;
 
-public interface IPage
+namespace MokomoGames.UI
 {
-    event Action OnTappedHomeButton;
+    public interface IPage
+    {
+        bool Showing { get; }
+        void Begin();
+        void Show(bool show);
+        PageRepository.PageType PageType { get; }   
+        event Action OnTappedHomeButton;
+    }
+
+    public interface ISoulPage : IPage
+    {
+        void SetData(UserSoulList userSoulList);
+    }
 }

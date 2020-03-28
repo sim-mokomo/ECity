@@ -12,8 +12,8 @@ public class UISoulListMenu : UIMenuList
 
     private void Awake()
     {
-        soulListButton.onClick.AddListener(() =>  RequestPage(PageType.SoulList));
-        artifactButton.onClick.AddListener(() =>  RequestPage(PageType.None));
+        soulListButton.onClick.AddListener(() =>  RequestPage(PageRepository.PageType.SoulList));
+        artifactButton.onClick.AddListener(() =>  RequestPage(PageRepository.PageType.None));
     }
 
     public override void Tick()

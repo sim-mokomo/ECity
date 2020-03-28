@@ -11,8 +11,8 @@ namespace MokomoGames.UI
 
         private void Awake()
         {
-            souleSaleButton.onClick.AddListener(() => RequestPage(PageType.SoulSale));
-            artifactSaleButton.onClick.AddListener(() => RequestPage(PageType.None));
+            souleSaleButton.onClick.AddListener(() => RequestPage(PageRepository.PageType.SoulSale));
+            artifactSaleButton.onClick.AddListener(() => RequestPage(PageRepository.PageType.None));
         }
 
         public override void Tick()
