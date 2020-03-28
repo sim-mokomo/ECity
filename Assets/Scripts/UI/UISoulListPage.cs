@@ -16,6 +16,7 @@ namespace MokomoGames.UI
         [SerializeField] private UICellScroll soulCellScroll;
         [SerializeField] private UISoulDetailPage soulDetailPage;
         [SerializeField] private UITab tab;
+        [SerializeField] private UIHasNumSolidLabel soulHasNumSolidLabel;
         public event Action OnTappedHomeButton;
 
         private void Awake()
@@ -26,8 +27,8 @@ namespace MokomoGames.UI
                 var showSouls = tabElement.TabType == UITab.TabType.Battle
                     ? _userSoulList.GetBattleSouls()
                     : _userSoulList.GetMaterialSouls();
-
-                UpdateHasSoulNum(showSouls.Count());
+                
+                soulHasNumSolidLabel.UpdateHasNum((uint)showSouls.Count(),9999);
                 soulCellScroll.MakeCells(showSouls.ToList(), soul =>
                 {
                     soulDetailPage.Show(true);
@@ -55,12 +56,6 @@ namespace MokomoGames.UI
         public void SetData(UserSoulList userSoulList)
         {
             _userSoulList = userSoulList;
-        }
-
-        private void UpdateHasSoulNum(int currentCount)
-        {
-            var hasSoulCapacity = 999;
-            hasSoulNum.text = $"{currentCount}/{hasSoulCapacity}";
         }
     }
 }
