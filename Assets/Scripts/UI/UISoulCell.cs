@@ -31,6 +31,9 @@ namespace MokomoGames.UI
         public float Height => _rectTransform.rect.height;
         public float Width => _rectTransform.rect.width;
         public Soul Soul => _soul;
+        private bool showing;
+
+        public bool Showing => showing;
 
         public event Action<Soul> OnTappedIcon;
 
@@ -59,6 +62,8 @@ namespace MokomoGames.UI
                 var child = transform.GetChild(i);
                 child.gameObject.SetActive(show);
             }
+
+            showing = show;
         }
 
         public void Selecting(bool selecting)

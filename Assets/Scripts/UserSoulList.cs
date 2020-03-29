@@ -9,6 +9,8 @@ namespace MokomoGames
     {
         private readonly IEnumerable<Soul> _souls;
 
+        public IEnumerable<Soul> Souls => _souls;
+
         public UserSoulList(IEnumerable<Soul> souls)
         {
             _souls = souls;

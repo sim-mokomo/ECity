@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using PlayFab.ClientModels;
+using TMPro;
 using UniRx.Async;
+using UniRx.Async.Triggers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,9 +19,14 @@ namespace MokomoGames.UI
         [SerializeField] private Button saleButton;
         [SerializeField] private UIHasNumSolidLabel soulHasNumSolidLabel;
         [SerializeField] private UITab tab;
+        [SerializeField] private TextMeshProUGUI shizukuHasNum;
+        [SerializeField] private TextMeshProUGUI karumaHasNum;
+        [SerializeField] private TextMeshProUGUI acquisitionShizukNum;
+        [SerializeField] private TextMeshProUGUI acquisitionKarumaNum;
         private UserSoulList userSoulList;
         private IEnumerable<UISoulCell> cells;
         public IEnumerable<UISoulCell> Cells => cells;
+        public IEnumerable<UISoulCell> ActivateCells => Cells.Where(x => x.Showing);
         public event Action OnTappedSelectingClearButton;
         public event Action OnTappedSaleButton;
 
@@ -74,14 +81,38 @@ namespace MokomoGames.UI
             
             selectingClearButton.onClick.AddListener(() => OnTappedSelectingClearButton?.Invoke());
             saleButton.onClick.AddListener(() => OnTappedSaleButton?.Invoke());
+
+            UpdateHasShizukuNum(0);
+            UpdateHasKarumaNum(0);
+            UpdateAcquisionShizukuNum(0);
+            UpdateAcquisionKarumaNum(0);
         }
 
         public void UpdateSelecting(List<Soul> souls)
         {
-            foreach (var cell in cells)
+            foreach (var cell in ActivateCells)
             {
-                cell.Selecting( souls.FirstOrDefault(soul => soul == cell.Soul) != null);
+                cell.Selecting(souls.FirstOrDefault(soul => soul.Equals(cell.Soul)) != null);
             }
+        }
+
+        public void UpdateHasShizukuNum(uint shizuku)
+        {
+            shizukuHasNum.text = $"{0}";
+        }
+        public void UpdateHasKarumaNum(uint karuma)
+        {
+            karumaHasNum.text = $"{0}";
+        }
+
+        public void UpdateAcquisionShizukuNum(uint shizuku)
+        {
+            acquisitionShizukNum.text = $"{shizuku}";
+        }
+        
+        public void UpdateAcquisionKarumaNum(uint karuma)
+        {
+            acquisitionKarumaNum.text = $"{karuma}";
         }
     }
 }
