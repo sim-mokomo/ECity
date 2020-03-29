@@ -18,6 +18,7 @@ namespace MokomoGames
         [SerializeField] private NestedMenuController nestedMenuController;
         [SerializeField] private UIRankConfirm rankConfirm;
         [SerializeField] private UIRecoveryStaminaDialog recoveryStaminaDialog;
+        private SoulSaleApplicationService _soulSaleApplicationService;
         private StaminaRecoveryTimeController staminaRecoveryTimeController;
         private User user;
         public MasterSequencer.SequencerType Type => MasterSequencer.SequencerType.Home;
@@ -114,6 +115,9 @@ namespace MokomoGames
                 menu.Close();
             }
 
+            var soulSalePage = _pageRepository.GetPage(PageRepository.PageType.SoulSale) as UISoulSalePage;
+            _soulSaleApplicationService = new SoulSaleApplicationService(_userSoulList,soulSalePage);
+
             recoveryStaminaDialog.gameObject.SetActive(false);
             fillWarningStaminaDialog.gameObject.SetActive(false);
         }
@@ -121,6 +125,7 @@ namespace MokomoGames
         public void Tick()
         {
             headerUi.Tick();
+            _soulSaleApplicationService.Tick();
             if (_pageRepository != null && !_pageRepository.SoulPages.Any(x => x.Showing)) nestedMenuController.Tick();
         }
 

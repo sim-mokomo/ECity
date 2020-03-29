@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using PlayFab.ClientModels;
+using UniRx.Async;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,9 +13,15 @@ namespace MokomoGames.UI
         [SerializeField] private UICellScroll _cellScroll;
         [SerializeField] private Button backButton;
         [SerializeField] private Button homeButton;
+        [SerializeField] private Button selectingClearButton;
+        [SerializeField] private Button saleButton;
         [SerializeField] private UIHasNumSolidLabel soulHasNumSolidLabel;
         [SerializeField] private UITab tab;
         private UserSoulList userSoulList;
+        private IEnumerable<UISoulCell> cells;
+        public IEnumerable<UISoulCell> Cells => cells;
+        public event Action OnTappedSelectingClearButton;
+        public event Action OnTappedSaleButton;
 
         public override void Show(bool show)
         {
@@ -22,6 +31,7 @@ namespace MokomoGames.UI
         public override PageRepository.PageType PageType => PageRepository.PageType.SoulSale;
 
         public override event Action OnTappedHomeButton;
+        public event Action<Soul> OnTappedSoulCellIcon; 
 
         public void SetData(UserSoulList userSoulList)
         {
@@ -45,10 +55,13 @@ namespace MokomoGames.UI
                     : userSoulList.GetMaterialSouls();
 
                 soulHasNumSolidLabel.UpdateHasNum((uint) showSouls.Count(), 9999);
-                _cellScroll.MakeCells(showSouls.ToList(), soul =>
+                cells = _cellScroll.MakeCells(showSouls.ToList(), OnTappedSoulCellIcon);
+                foreach (var cell in cells)
                 {
-                    //TODO: 売却対象として選択できるように
-                });
+                    cell.Selecting(false);
+                }
+                //TODO: 売却対象として選択できるように
+                //TODO: 魂ごとに、「売却額」「売却カルマ」を定義する
             };
 
             backButton.onClick.AddListener(() => gameObject.SetActive(false));
@@ -58,6 +71,17 @@ namespace MokomoGames.UI
                 gameObject.SetActive(false);
                 OnTappedHomeButton?.Invoke();
             });
+            
+            selectingClearButton.onClick.AddListener(() => OnTappedSelectingClearButton?.Invoke());
+            saleButton.onClick.AddListener(() => OnTappedSaleButton?.Invoke());
+        }
+
+        public void UpdateSelecting(List<Soul> souls)
+        {
+            foreach (var cell in cells)
+            {
+                cell.Selecting( souls.FirstOrDefault(soul => soul == cell.Soul) != null);
+            }
         }
     }
 }

@@ -26,8 +26,12 @@ namespace MokomoGames.UI
         [SerializeField] private Image characterIcon;
         [SerializeField] private Button characterIconButton;
         [SerializeField] private UIStars stars;
+        [SerializeField] private UICheckMark _checkMark;
+        [SerializeField] private Image grayOutImage;
         public float Height => _rectTransform.rect.height;
         public float Width => _rectTransform.rect.width;
+        public Soul Soul => _soul;
+
         public event Action<Soul> OnTappedIcon;
 
         private void Awake()
@@ -55,6 +59,12 @@ namespace MokomoGames.UI
                 var child = transform.GetChild(i);
                 child.gameObject.SetActive(show);
             }
+        }
+
+        public void Selecting(bool selecting)
+        {
+            grayOutImage.gameObject.SetActive(selecting);
+            _checkMark.gameObject.SetActive(selecting);
         }
     }
 }
