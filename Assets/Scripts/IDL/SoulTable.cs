@@ -24,19 +24,20 @@ namespace MokomoGames.Protobuf {
     static SoulTableReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg9Tb3VsVGFibGUucHJvdG8SBWVjaXR5GgxCYXR0bGUucHJvdG8igwIKD1Nv",
+            "Cg9Tb3VsVGFibGUucHJvdG8SBWVjaXR5GgxCYXR0bGUucHJvdG8itgIKD1Nv",
             "dWxUYWJsZVJlY29yZBIKCgJubxgBIAEoDRIUCgxhbm90aGVyX25hbWUYAiAB",
             "KAkSDAoEbmFtZRgDIAEoCRIiCglzb3VsX3R5cGUYBCABKA4yDy5lY2l0eS5T",
             "b3VsVHlwZRIOCgZyYXJpdHkYBSABKA0SIwoJYXR0cmlidXRlGAYgASgOMhAu",
             "ZWNpdHkuQXR0cmlidXRlEgoKAmN2GAcgASgJEgwKBGNvc3QYCCABKA0SFwoP",
             "bm9ybWFsX3NraWxsX2lkGAkgASgNEhcKD3JlYWRlcl9za2lsbF9pZBgKIAEo",
-            "DRIbChNjaGFyYWN0ZXJfaWNvbl9uYW1lGAsgASgJIjQKCVNvdWxUYWJsZRIn",
-            "CgdyZWNvcmRzGAEgAygLMhYuZWNpdHkuU291bFRhYmxlUmVjb3JkQheqAhRN",
-            "b2tvbW9HYW1lcy5Qcm90b2J1ZmIGcHJvdG8z"));
+            "DRIbChNjaGFyYWN0ZXJfaWNvbl9uYW1lGAsgASgJEhgKEHNhbGVfc2hpenVr",
+            "dV9udW0YDCABKA0SFwoPc2FsZV9rYXJ1bWFfbnVtGA0gASgNIjQKCVNvdWxU",
+            "YWJsZRInCgdyZWNvcmRzGAEgAygLMhYuZWNpdHkuU291bFRhYmxlUmVjb3Jk",
+            "QheqAhRNb2tvbW9HYW1lcy5Qcm90b2J1ZmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::MokomoGames.Protobuf.BattleReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.SoulTableRecord), global::MokomoGames.Protobuf.SoulTableRecord.Parser, new[]{ "No", "AnotherName", "Name", "SoulType", "Rarity", "Attribute", "Cv", "Cost", "NormalSkillId", "ReaderSkillId", "CharacterIconName" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.SoulTableRecord), global::MokomoGames.Protobuf.SoulTableRecord.Parser, new[]{ "No", "AnotherName", "Name", "SoulType", "Rarity", "Attribute", "Cv", "Cost", "NormalSkillId", "ReaderSkillId", "CharacterIconName", "SaleShizukuNum", "SaleKarumaNum" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::MokomoGames.Protobuf.SoulTable), global::MokomoGames.Protobuf.SoulTable.Parser, new[]{ "Records" }, null, null, null, null)
           }));
     }
@@ -80,6 +81,8 @@ namespace MokomoGames.Protobuf {
       normalSkillId_ = other.normalSkillId_;
       readerSkillId_ = other.readerSkillId_;
       characterIconName_ = other.characterIconName_;
+      saleShizukuNum_ = other.saleShizukuNum_;
+      saleKarumaNum_ = other.saleKarumaNum_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -209,6 +212,28 @@ namespace MokomoGames.Protobuf {
       }
     }
 
+    /// <summary>Field number for the "sale_shizuku_num" field.</summary>
+    public const int SaleShizukuNumFieldNumber = 12;
+    private uint saleShizukuNum_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint SaleShizukuNum {
+      get { return saleShizukuNum_; }
+      set {
+        saleShizukuNum_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "sale_karuma_num" field.</summary>
+    public const int SaleKarumaNumFieldNumber = 13;
+    private uint saleKarumaNum_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint SaleKarumaNum {
+      get { return saleKarumaNum_; }
+      set {
+        saleKarumaNum_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as SoulTableRecord);
@@ -233,6 +258,8 @@ namespace MokomoGames.Protobuf {
       if (NormalSkillId != other.NormalSkillId) return false;
       if (ReaderSkillId != other.ReaderSkillId) return false;
       if (CharacterIconName != other.CharacterIconName) return false;
+      if (SaleShizukuNum != other.SaleShizukuNum) return false;
+      if (SaleKarumaNum != other.SaleKarumaNum) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -250,6 +277,8 @@ namespace MokomoGames.Protobuf {
       if (NormalSkillId != 0) hash ^= NormalSkillId.GetHashCode();
       if (ReaderSkillId != 0) hash ^= ReaderSkillId.GetHashCode();
       if (CharacterIconName.Length != 0) hash ^= CharacterIconName.GetHashCode();
+      if (SaleShizukuNum != 0) hash ^= SaleShizukuNum.GetHashCode();
+      if (SaleKarumaNum != 0) hash ^= SaleKarumaNum.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -307,6 +336,14 @@ namespace MokomoGames.Protobuf {
         output.WriteRawTag(90);
         output.WriteString(CharacterIconName);
       }
+      if (SaleShizukuNum != 0) {
+        output.WriteRawTag(96);
+        output.WriteUInt32(SaleShizukuNum);
+      }
+      if (SaleKarumaNum != 0) {
+        output.WriteRawTag(104);
+        output.WriteUInt32(SaleKarumaNum);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -347,6 +384,12 @@ namespace MokomoGames.Protobuf {
       }
       if (CharacterIconName.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(CharacterIconName);
+      }
+      if (SaleShizukuNum != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(SaleShizukuNum);
+      }
+      if (SaleKarumaNum != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(SaleKarumaNum);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -391,6 +434,12 @@ namespace MokomoGames.Protobuf {
       }
       if (other.CharacterIconName.Length != 0) {
         CharacterIconName = other.CharacterIconName;
+      }
+      if (other.SaleShizukuNum != 0) {
+        SaleShizukuNum = other.SaleShizukuNum;
+      }
+      if (other.SaleKarumaNum != 0) {
+        SaleKarumaNum = other.SaleKarumaNum;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -445,6 +494,14 @@ namespace MokomoGames.Protobuf {
           }
           case 90: {
             CharacterIconName = input.ReadString();
+            break;
+          }
+          case 96: {
+            SaleShizukuNum = input.ReadUInt32();
+            break;
+          }
+          case 104: {
+            SaleKarumaNum = input.ReadUInt32();
             break;
           }
         }

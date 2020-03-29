@@ -17,6 +17,8 @@ message SoulTableRecord
     uint32 normal_skill_id = 9;
     uint32 reader_skill_id = 10;
     string character_icon_name = 11;
+    uint32 sale_shizuku_num = 12;
+    uint32 sale_karuma_num = 13;
 }
 
 message SoulTable
