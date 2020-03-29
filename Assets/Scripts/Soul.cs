@@ -96,5 +96,10 @@ namespace MokomoGames
                 .Where(x => x.Level <= NormalSkillLevelTableRecord.Level)
                 .Sum(x => x.NeedNextLevelExp);
         }
+
+        public bool Equals(Soul soul)
+        {
+            return UserData.Guid == soul.UserData.Guid;
+        }
     }
 }
