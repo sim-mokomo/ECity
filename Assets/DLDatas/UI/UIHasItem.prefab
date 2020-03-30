@@ -66,8 +66,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u6240\u6301\u30E6\u30AD\u30C1"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d8ec0e3d7c98f4e8fadd84c469c81937, type: 2}
-  m_sharedMaterial: {fileID: -5873148260944188819, guid: d8ec0e3d7c98f4e8fadd84c469c81937,
+  m_fontAsset: {fileID: 11400000, guid: 07581d1cdd3e438479c72779ed4bc27f, type: 2}
+  m_sharedMaterial: {fileID: -4651668480745319337, guid: 07581d1cdd3e438479c72779ed4bc27f,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -101,11 +101,10 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -261,8 +260,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -80, y: 0}
-  m_SizeDelta: {x: 131.69995, y: 74.9}
+  m_AnchoredPosition: {x: -111.3, y: 0}
+  m_SizeDelta: {x: 194.2, y: 74.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6076788500975769358
 CanvasRenderer:
@@ -293,8 +292,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 9999
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d8ec0e3d7c98f4e8fadd84c469c81937, type: 2}
-  m_sharedMaterial: {fileID: -5873148260944188819, guid: d8ec0e3d7c98f4e8fadd84c469c81937,
+  m_fontAsset: {fileID: 11400000, guid: 07581d1cdd3e438479c72779ed4bc27f, type: 2}
+  m_sharedMaterial: {fileID: -4651668480745319337, guid: 07581d1cdd3e438479c72779ed4bc27f,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -328,11 +327,10 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -393,7 +391,7 @@ GameObject:
   - component: {fileID: 2112836064659333261}
   - component: {fileID: 3406634118974996470}
   m_Layer: 5
-  m_Name: UIHasYukichi
+  m_Name: UIHasItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

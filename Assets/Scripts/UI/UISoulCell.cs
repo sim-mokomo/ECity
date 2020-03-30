@@ -30,12 +30,14 @@ namespace MokomoGames.UI
         [SerializeField] private Image grayOutImage;
         public float Height => _rectTransform.rect.height;
         public float Width => _rectTransform.rect.width;
+        public Vector2 Size => _rectTransform.rect.size;
         public Soul Soul => _soul;
         private bool showing;
 
         public bool Showing => showing;
 
         public event Action<Soul> OnTappedIcon;
+        public event Action<Soul> OnLongTappedIcon;
 
         private void Awake()
         {
@@ -51,6 +53,8 @@ namespace MokomoGames.UI
             attributeColorTable.TryGetValue(soul.Config.Attribute, out var backgroundColor);
             attributeBackgroundImage.color = backgroundColor;
             stars.Show(soul.Config.Rarity);
+            
+            Selecting(false);
 
             _soul = soul;
         }

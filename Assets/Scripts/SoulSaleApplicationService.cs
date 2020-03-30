@@ -7,14 +7,19 @@ namespace MokomoGames
 {
     public class SoulSaleApplicationService
     {
+        private UISoulSaleConfirm _saleConfirm;
         private UISoulSalePage _soulsalePage;
         private UserSoulList _userSoulList;
         private List<Soul> selectingSouls;
         private uint totalAcquisionSaleShizukuNum;
         private uint totalAcquisionSaleKarumaNum;
 
-        public SoulSaleApplicationService(UserSoulList userSoulList,UISoulSalePage soulsalePage)
+        public SoulSaleApplicationService(
+            UISoulSaleConfirm saleConfirm,
+            UserSoulList userSoulList,
+            UISoulSalePage soulsalePage)
         {
+            _saleConfirm = saleConfirm;
             _soulsalePage = soulsalePage;
             _userSoulList = userSoulList;
 
@@ -24,7 +29,7 @@ namespace MokomoGames
             selectingSouls = new List<Soul>();
             soulsalePage.OnTappedSoulCellIcon += soul =>
             {
-                var tappedSoul = userSoulList.Souls.FirstOrDefault(x => x.Equals(soul));
+                var tappedSoul = _userSoulList.Souls.FirstOrDefault(x => x.Equals(soul));
                 var index = selectingSouls.FindIndex(x => x.Equals(tappedSoul));
                 if (index >= 0)
                     selectingSouls.RemoveAt(index);
@@ -48,6 +53,13 @@ namespace MokomoGames
                 _soulsalePage.UpdateAcquisionShizukuNum(totalAcquisionSaleShizukuNum);
                 _soulsalePage.UpdateAcquisionKarumaNum(totalAcquisionSaleKarumaNum);
             };
+
+            soulsalePage.OnTappedSaleButton += () =>
+            {
+                _saleConfirm.Show(true);
+                _saleConfirm.Begin(selectingSouls);
+            };
+            _saleConfirm.Show(false);
         }
 
         public void Tick()

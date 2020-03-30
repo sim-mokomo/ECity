@@ -361,8 +361,8 @@ MonoBehaviour:
   homeButton: {fileID: 5113640314618593986}
   soulCellScroll: {fileID: 2640545748160441242}
   soulDetailPage: {fileID: 0}
-  tab: {fileID: 1166107102905687029}
   soulHasNumSolidLabel: {fileID: 6470486930811046897}
+  tab: {fileID: 1166107102905687029}
 --- !u!1 &2121451880947392182
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,25 +997,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIVerticalScroll
       objectReference: {fileID: 0}
-    - target: {fileID: 5926836687377069378, guid: 0b83b9084f52a2a4c8ef7c84ddcd8ccc,
+    - target: {fileID: 5074679481203846122, guid: 0b83b9084f52a2a4c8ef7c84ddcd8ccc,
         type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
+      propertyPath: m_AnchoredPosition.y
+      value: 0.0000384897
       objectReference: {fileID: 0}
     - target: {fileID: 5926836687377069378, guid: 0b83b9084f52a2a4c8ef7c84ddcd8ccc,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5926836687377069378, guid: 0b83b9084f52a2a4c8ef7c84ddcd8ccc,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.99999994
       objectReference: {fileID: 0}
     - target: {fileID: 6848166818622752432, guid: 0b83b9084f52a2a4c8ef7c84ddcd8ccc,
         type: 3}
       propertyPath: m_Size
-      value: 0.5439393
+      value: 0.99999994
       objectReference: {fileID: 0}
     - target: {fileID: 6931319065793424255, guid: 0b83b9084f52a2a4c8ef7c84ddcd8ccc,
         type: 3}
@@ -1121,6 +1121,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9198333032863616600, guid: 0b83b9084f52a2a4c8ef7c84ddcd8ccc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b83b9084f52a2a4c8ef7c84ddcd8ccc, type: 3}

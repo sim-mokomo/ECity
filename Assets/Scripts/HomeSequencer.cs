@@ -18,6 +18,7 @@ namespace MokomoGames
         [SerializeField] private NestedMenuController nestedMenuController;
         [SerializeField] private UIRankConfirm rankConfirm;
         [SerializeField] private UIRecoveryStaminaDialog recoveryStaminaDialog;
+        [SerializeField] private UISoulSaleConfirm _soulSaleConfirm;
         private SoulSaleApplicationService _soulSaleApplicationService;
         private StaminaRecoveryTimeController staminaRecoveryTimeController;
         private User user;
@@ -116,7 +117,7 @@ namespace MokomoGames
             }
 
             var soulSalePage = _pageRepository.GetPage(PageRepository.PageType.SoulSale) as UISoulSalePage;
-            _soulSaleApplicationService = new SoulSaleApplicationService(_userSoulList,soulSalePage);
+            _soulSaleApplicationService = new SoulSaleApplicationService(_soulSaleConfirm,_userSoulList,soulSalePage);
 
             recoveryStaminaDialog.gameObject.SetActive(false);
             fillWarningStaminaDialog.gameObject.SetActive(false);
