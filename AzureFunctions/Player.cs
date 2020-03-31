@@ -45,7 +45,8 @@ namespace MokomoGames.Function
                     "coin",
                     "mizu",
                     "rank",
-                    "exp"
+                    "exp",
+                    "karuma"
                 }
             });
             var userDataResponseDic = userDataResponse.Result.Data;
@@ -59,6 +60,7 @@ namespace MokomoGames.Function
             var coinValue = userDataResponseDic.ContainsKey("coin") ? uint.Parse(userDataResponseDic["coin"].Value) : 0;
             var mizuValue = userDataResponseDic.ContainsKey("mizu") ? uint.Parse(userDataResponseDic["mizu"].Value) : 0;
             var expValue = userDataResponseDic.ContainsKey("exp") ? uint.Parse(userDataResponseDic["exp"].Value) : 0;
+            var karuma = userDataResponseDic.ContainsKey("karuma") ? uint.Parse(userDataResponseDic["karuma"].Value) : 0;
 
             var playerSaveData = new UserData()
             {
@@ -67,7 +69,7 @@ namespace MokomoGames.Function
                 Mizu = mizuValue,
                 Rank = rankValue,
                 Yukichi = yukichiValue,
-                RankExp = expValue,
+                Karuma = karuma,
             };
 
             var saveDataResponse = new GetPlayerSaveDataResponse()

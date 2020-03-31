@@ -33,6 +33,16 @@ message RecoveryFuelByYukichiResponse
     uint32 fuel = 1;
 }
 
+message SaleSoulsRequest
+{
+    repeated string uuid = 1; 
+}
+
+message SaleSoulsResponse
+{
+    
+}
+
 message UserData
 {
     uint32 stamina = 1;
@@ -41,5 +51,6 @@ message UserData
     uint32 mizu = 4;
     uint32 rank = 5;
     uint32 rank_exp = 6;
+    uint32 karuma = 7;
 }
 

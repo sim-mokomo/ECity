@@ -14,6 +14,7 @@ namespace MokomoGames.Users
             RankExp = data.RankExp;
             MaxFuel = maxFuel;
             NeedNextRankExp = needNextRankExp;
+            Karuma = data.Karuma;
         }
 
         public uint Stamina { get; }
@@ -31,6 +32,7 @@ namespace MokomoGames.Users
         public uint MaxFuel { get; }
 
         public uint NeedNextRankExp { get; }
+        public uint Karuma { get; }
 
         public bool IsMaxFuel => Stamina >= MaxFuel;
 
@@ -43,7 +45,8 @@ namespace MokomoGames.Users
                 Rank = Rank,
                 RankExp = RankExp,
                 Stamina = Stamina,
-                Yukichi = Yukichi
+                Yukichi = Yukichi,
+                Karuma = Karuma
             };
             return data;
         }
