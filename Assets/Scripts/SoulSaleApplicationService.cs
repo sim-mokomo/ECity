@@ -13,6 +13,7 @@ namespace MokomoGames
         private List<Soul> selectingSouls = new List<Soul>();
         private uint totalAcquisionSaleShizukuNum = 0;
         private uint totalAcquisionSaleKarumaNum = 0;
+        private bool SelectingAny => selectingSouls.Any();
 
         public SoulSaleApplicationService(
             UISoulSaleConfirm saleConfirm,
@@ -47,6 +48,8 @@ namespace MokomoGames
 
             soulsalePage.OnTappedSaleButton += () =>
             {
+                if(!SelectingAny)
+                    return;
                 _saleConfirm.Show(true);
                 _saleConfirm.Begin(selectingSouls);
             };
