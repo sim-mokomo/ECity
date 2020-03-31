@@ -12,16 +12,22 @@ public class UISoulSaleConfirm : MonoBehaviour
 {
     private List<UISoulCell> soulCells;
     [SerializeField] private Button closeButton;
+    [SerializeField] private Button rejectButton;
+    [SerializeField] private Button submitButton;
     [SerializeField] private UIHasYukichi acquisionShizuku;
     [SerializeField] private UIHasYukichi acquisionKaruma;
     [SerializeField] private GridLayoutGroup gridLayoutGroup;
 
     public event Action OnTappedCloseButton;
+    public event Action OnTappedRejectButton;
+    public event Action OnSubmitButton;
 
     private void Awake()
     {
         soulCells = gridLayoutGroup.GetComponentsInChildren<UISoulCell>().ToList();
         closeButton.onClick.AddListener( () => OnTappedCloseButton?.Invoke());
+        rejectButton.onClick.AddListener( () => OnTappedRejectButton?.Invoke());
+        submitButton.onClick.AddListener(() => OnSubmitButton?.Invoke());
     }
 
     public void Begin(List<Soul> saleSouls)

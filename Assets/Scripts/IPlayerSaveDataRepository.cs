@@ -1,4 +1,5 @@
-﻿using MokomoGames.Protobuf;
+﻿using System.Collections.Generic;
+using MokomoGames.Protobuf;
 using MokomoGames.Users;
 using UniRx.Async;
 
@@ -12,4 +13,5 @@ public interface IPlayerSaveDataRepository
     UniTask<RecoveryStaminaByWaitTimeResponse> RecoveryStaminaByWaitTime();
     UniTask<GetUserSoulDataListResponse> GetUserSoulDataList();
     UniTask<UpdateUserSoulDataFavoriteResponse> UpdateUserSoulDataFavorite(string guid, bool favorite);
+    UniTask<SaleSoulsResponse> SaleSouls(IEnumerable<string> guids);
 }

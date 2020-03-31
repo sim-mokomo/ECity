@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MokomoGames;
 using MokomoGames.Protobuf;
@@ -70,5 +71,10 @@ public class PlayerSaveDataDebugRepository : IPlayerSaveDataRepository
         favorite = !favorite;
         return new UniTask<UpdateUserSoulDataFavoriteResponse>(new UpdateUserSoulDataFavoriteResponse
             {Favorite = favorite});
+    }
+
+    public UniTask<SaleSoulsResponse> SaleSouls(IEnumerable<string> guids)
+    {
+        return new UniTask<SaleSoulsResponse>(new SaleSoulsResponse());
     }
 }

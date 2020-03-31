@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using MokomoGames.UI;
+using MokomoGames.Users;
+using UniRx.Async;
 using UnityEngine;
 
 namespace MokomoGames
@@ -10,6 +12,7 @@ namespace MokomoGames
         private UISoulSaleConfirm _saleConfirm;
         private UISoulSalePage _soulsalePage;
         private UserSoulList _userSoulList;
+        private IPlayerSaveDataRepository _playerSaveDataRepository;
         private List<Soul> selectingSouls = new List<Soul>();
         private uint totalAcquisionSaleShizukuNum = 0;
         private uint totalAcquisionSaleKarumaNum = 0;
@@ -19,11 +22,18 @@ namespace MokomoGames
         public SoulSaleApplicationService(
             UISoulSaleConfirm saleConfirm,
             UserSoulList userSoulList,
-            UISoulSalePage soulsalePage)
+            UISoulSalePage soulsalePage,
+            IPlayerSaveDataRepository playerSaveDataRepository,
+            IMasterDataRepository masterDataRepository,
+            User user)
         {
             _saleConfirm = saleConfirm;
             _soulsalePage = soulsalePage;
             _userSoulList = userSoulList;
+            _playerSaveDataRepository = playerSaveDataRepository;
+            
+            _soulsalePage.UpdateHasShizukuNum(user.Mizu);
+            _soulsalePage.UpdateHasKarumaNum(user.Karuma);
             
             soulsalePage.OnChangedTab += tabElement =>
             {
@@ -41,10 +51,7 @@ namespace MokomoGames
 
             soulsalePage.OnTappedSelectingClearButton += () =>
             {
-                selectingSouls.Clear();
-                _soulsalePage.UpdateSelecting(selectingSouls);
-                _soulsalePage.UpdateAcquisionShizukuNum(totalAcquisionSaleShizukuNum = 0);
-                _soulsalePage.UpdateAcquisionKarumaNum(totalAcquisionSaleKarumaNum = 0);
+                ClearSelectingCells();
             };
 
             soulsalePage.OnTappedSaleButton += () =>
@@ -57,6 +64,32 @@ namespace MokomoGames
             
             _saleConfirm.Show(false);
             _saleConfirm.OnTappedCloseButton += () => _saleConfirm.Show(false);
+            _saleConfirm.OnTappedRejectButton += () => _saleConfirm.Show(false);
+            _saleConfirm.OnSubmitButton += async () =>
+            {
+                await _playerSaveDataRepository.SaleSouls(selectingSouls.Select(x => x.UserData.Guid));
+                
+                var newSoulsResponse = await _playerSaveDataRepository.GetUserSoulDataList();
+                userSoulList = new UserSoulList(newSoulsResponse.Souls,masterDataRepository);
+                user = await _playerSaveDataRepository.GetPlayerSaveData();
+                
+                _soulsalePage.UpdateHasShizukuNum(user.Mizu);
+                _soulsalePage.UpdateHasKarumaNum(user.Karuma);
+                
+                ClearSelectingCells();
+            };
+        }
+
+        public void ClearSelectingCells()
+        {
+            selectingSouls.Clear();
+            _soulsalePage.UpdateSelecting(selectingSouls);
+            
+            totalAcquisionSaleKarumaNum = 0;
+            totalAcquisionSaleShizukuNum = 0;
+            
+            _soulsalePage.UpdateAcquisionKarumaNum(0);
+            _soulsalePage.UpdateAcquisionShizukuNum(0);
         }
         
         private void OnClickIcon(Soul soul)

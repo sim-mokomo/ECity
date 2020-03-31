@@ -79,5 +79,10 @@ namespace MokomoGames
 
             return response;
         }
+
+        public UniTask<SaleSoulsResponse> SaleSouls(IEnumerable<string> guids)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

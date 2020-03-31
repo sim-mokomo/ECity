@@ -117,7 +117,13 @@ namespace MokomoGames
             }
 
             var soulSalePage = _pageRepository.GetPage(PageRepository.PageType.SoulSale) as UISoulSalePage;
-            _soulSaleApplicationService = new SoulSaleApplicationService(_soulSaleConfirm,_userSoulList,soulSalePage);
+            _soulSaleApplicationService = new SoulSaleApplicationService(
+                _soulSaleConfirm,
+                _userSoulList,
+                soulSalePage,
+                _playerSaveDataRepository,
+                _masterDataRepository,
+                user);
 
             recoveryStaminaDialog.gameObject.SetActive(false);
             fillWarningStaminaDialog.gameObject.SetActive(false);
