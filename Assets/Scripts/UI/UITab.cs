@@ -43,7 +43,7 @@ namespace MokomoGames.UI
             foreach (var tabElement in _tabElements)
                 tabElement.Toggle.onValueChanged.AddListener(isOn =>
                 {
-                    if (tabElement.Toggle.isOn == isOn)
+                    if (tabElement.Toggle.isOn)
                     {
                         UpdateFocusTabColor(tabElement.TabType);
                         OnChangedTab?.Invoke(tabElement);
