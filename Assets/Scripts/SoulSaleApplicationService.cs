@@ -14,6 +14,7 @@ namespace MokomoGames
         private uint totalAcquisionSaleShizukuNum = 0;
         private uint totalAcquisionSaleKarumaNum = 0;
         private bool SelectingAny => selectingSouls.Any();
+        private bool AddableSoulCondicate => selectingSouls.Count < 10;
 
         public SoulSaleApplicationService(
             UISoulSaleConfirm saleConfirm,
@@ -65,7 +66,8 @@ namespace MokomoGames
             if (index >= 0)
                 selectingSouls.RemoveAt(index);
             else
-                selectingSouls.Add(tappedSoul);
+                if(AddableSoulCondicate)
+                    selectingSouls.Add(tappedSoul);
             _soulsalePage.UpdateSelecting(selectingSouls);
                 
             totalAcquisionSaleShizukuNum = (uint) selectingSouls.Sum(x => x.Config.SaleShizukuNum);
