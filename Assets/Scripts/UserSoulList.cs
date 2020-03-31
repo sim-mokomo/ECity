@@ -39,7 +39,7 @@ namespace MokomoGames
             var souls = _souls.Where(x => !x.Config.SoulType.IsMaterial());
             if (!souls.Any())
                 return Empty;
-            return _souls;
+            return souls;
         }
     }
 }
