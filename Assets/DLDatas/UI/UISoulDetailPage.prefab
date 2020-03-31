@@ -375,7 +375,7 @@ GameObject:
   - component: {fileID: 7645342673052790882}
   - component: {fileID: 7645342673052790881}
   m_Layer: 0
-  m_Name: UISoulDetailParameter
+  m_Name: UISoulDetailPage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -420,29 +420,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9945727f7ab72640bcb173309a8762e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elementNameText: {fileID: 7645342673858250683}
-  elementIcon: {fileID: 7645342674002636956}
-  hpText: {fileID: 8319136604207334544}
-  recoveryPowerText: {fileID: 8319136604906342717}
+  _favoriteButton: {fileID: 857786625580124738}
   attackText: {fileID: 8319136603633457777}
+  backButton: {fileID: 3299313586376520409}
   costText: {fileID: 8319136604943242461}
-  levelText: {fileID: 7645342674305128013}
+  elementIcon: {fileID: 7645342674002636956}
+  elementNameText: {fileID: 7645342673858250683}
   expGauge: {fileID: 260578397020418087}
-  normalSkillNameText: {fileID: 8319136604355919346}
+  favoriteButton: {fileID: 7645342674586817635}
+  hpText: {fileID: 8319136604207334544}
+  levelText: {fileID: 7645342674305128013}
+  mainNameText: {fileID: 7645342673972349913}
+  normalSkillChargeTurnText: {fileID: 7645342674996276215}
+  normalSkillContentText: {fileID: 7645342673131398990}
   normalSkillGauge: {fileID: 260578396430526850}
   normalSkillLevelText: {fileID: 7645342674757593665}
-  normalSkillContentText: {fileID: 7645342673131398990}
-  normalSkillChargeTurnText: {fileID: 7645342674996276215}
-  readerSkillNameText: {fileID: 8319136604488875579}
-  readerSkillContentText: {fileID: 7645342673811342595}
-  subNameText: {fileID: 7645342674767516513}
-  mainNameText: {fileID: 7645342673972349913}
-  rarityUI: {fileID: 7579253064537827458}
+  normalSkillNameText: {fileID: 8319136604355919346}
   noText: {fileID: 7645342672974682334}
+  rarityUI: {fileID: 7579253064537827458}
+  readerSkillContentText: {fileID: 7645342673811342595}
+  readerSkillNameText: {fileID: 8319136604488875579}
+  recoveryPowerText: {fileID: 8319136604906342717}
+  subNameText: {fileID: 7645342674767516513}
   typeText: {fileID: 7645342674633777697}
-  favoriteButton: {fileID: 7645342674586817635}
-  backButton: {fileID: 3299313586376520409}
-  _favoriteButton: {fileID: 857786625580124738}
 --- !u!1 &7645342673131398984
 GameObject:
   m_ObjectHideFlags: 0

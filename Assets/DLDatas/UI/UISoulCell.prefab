@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 7056750400567730823}
   - component: {fileID: 2031307631945515883}
   - component: {fileID: 8265333281053635416}
-  - component: {fileID: 5692544075242935362}
+  - component: {fileID: 7130691837754958255}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5692544075242935362
+--- !u!114 &7130691837754958255
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -343,7 +343,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5404657716322190113}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: d7695a20c7774621b70d69f8bfe9776c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -510,10 +510,10 @@ MonoBehaviour:
   attributeBackgroundImage: {fileID: 7172418903409082697}
   attributeIcon: {fileID: 7243454542971281016}
   characterIcon: {fileID: 9036691985061776269}
-  characterIconButton: {fileID: 5692544075242935362}
   stars: {fileID: 3041807584635576690}
   _checkMark: {fileID: 66118640223493400}
   grayOutImage: {fileID: 7205483313512486707}
+  longTapButton: {fileID: 7130691837754958255}
 --- !u!114 &1400568858893259448
 MonoBehaviour:
   m_ObjectHideFlags: 0

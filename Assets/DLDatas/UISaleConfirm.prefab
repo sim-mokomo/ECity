@@ -448,6 +448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b765fc747460c4eb74dc0e971433b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  closeButton: {fileID: 316792636396888912}
   acquisionShizuku: {fileID: 8731831470057965616}
   acquisionKaruma: {fileID: 9222522166955216059}
   gridLayoutGroup: {fileID: 3526844699068637823}
@@ -3036,6 +3037,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8c46628ca788c44ebf55ad51094bf03, type: 3}
+--- !u!114 &316792636396888912 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5912664335691134706, guid: c8c46628ca788c44ebf55ad51094bf03,
+    type: 3}
+  m_PrefabInstance: {fileID: 6227204893742519714}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &3357354387847205984 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8718056131662152130, guid: c8c46628ca788c44ebf55ad51094bf03,
