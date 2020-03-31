@@ -12,7 +12,7 @@ namespace MokomoGames.UI
         [SerializeField] private GridLayoutGroup gridLayoutGroup;
         [SerializeField] private int cellNumPerRow;
 
-        public List<UISoulCell> MakeCells(List<Soul> souls, Action<Soul> OnTappedSoulCellIcon)
+        public List<UISoulCell> MakeCells(List<Soul> souls)
         {
             var cells = new List<UISoulCell>();
             
@@ -21,15 +21,14 @@ namespace MokomoGames.UI
                 var cell = Instantiate(cellPrefab,gridLayoutGroup.transform);
                 cell.Show(true);
                 cell.Begin(soul);
-                cell.OnTappedIcon += OnTappedSoulCellIcon;
                 cells.Add(cell);
             }
 
-            gridLayoutGroup.constraintCount = Mathf.CeilToInt((float) souls.Count / cellNumPerRow);
+            gridLayoutGroup.constraintCount = Mathf.CeilToInt(cellNumPerRow);
             gridLayoutGroup.cellSize = cells[0].Size;
             var height = 0f;
             height += (cellNumPerRow - 1) * (gridLayoutGroup.spacing.y / 2);
-            height += gridLayoutGroup.constraintCount * cells[0]?.Height ?? 0f;
+            height += (cells.Count / cellNumPerRow) * cells[0]?.Height ?? 0f;
             height += gridLayoutGroup.padding.top;
             contentRoot.sizeDelta = new Vector2(contentRoot.sizeDelta.x, height);
 

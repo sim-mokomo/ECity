@@ -10,9 +10,9 @@ namespace MokomoGames
         private UISoulSaleConfirm _saleConfirm;
         private UISoulSalePage _soulsalePage;
         private UserSoulList _userSoulList;
-        private List<Soul> selectingSouls;
-        private uint totalAcquisionSaleShizukuNum;
-        private uint totalAcquisionSaleKarumaNum;
+        private List<Soul> selectingSouls = new List<Soul>();
+        private uint totalAcquisionSaleShizukuNum = 0;
+        private uint totalAcquisionSaleKarumaNum = 0;
 
         public SoulSaleApplicationService(
             UISoulSaleConfirm saleConfirm,
@@ -22,36 +22,27 @@ namespace MokomoGames
             _saleConfirm = saleConfirm;
             _soulsalePage = soulsalePage;
             _userSoulList = userSoulList;
-
-            totalAcquisionSaleShizukuNum = 0;
-            totalAcquisionSaleKarumaNum = 0;
-                
-            selectingSouls = new List<Soul>();
-            soulsalePage.OnTappedSoulCellIcon += soul =>
+            
+            soulsalePage.OnChangedTab += tabElement =>
             {
-                var tappedSoul = _userSoulList.Souls.FirstOrDefault(x => x.Equals(soul));
-                var index = selectingSouls.FindIndex(x => x.Equals(tappedSoul));
-                if (index >= 0)
-                    selectingSouls.RemoveAt(index);
-                else
-                    selectingSouls.Add(tappedSoul);
+                var souls = tabElement.TabType == UITab.TabType.Battle
+                    ? userSoulList.GetBattleSouls()
+                    : userSoulList.GetMaterialSouls();
+
+                var cells = _soulsalePage.MakeIcons(souls);
                 _soulsalePage.UpdateSelecting(selectingSouls);
-                
-                totalAcquisionSaleShizukuNum = (uint) selectingSouls.Sum(x => x.Config.SaleShizukuNum);
-                totalAcquisionSaleKarumaNum = (uint) selectingSouls.Sum(x => x.Config.SaleKarumaNum);
-                _soulsalePage.UpdateAcquisionShizukuNum(totalAcquisionSaleShizukuNum);
-                _soulsalePage.UpdateAcquisionKarumaNum(totalAcquisionSaleKarumaNum);
+                foreach (var cell in cells)
+                {
+                    cell.OnClick += OnClickIcon;
+                }
             };
 
             soulsalePage.OnTappedSelectingClearButton += () =>
             {
                 selectingSouls.Clear();
                 _soulsalePage.UpdateSelecting(selectingSouls);
-
-                totalAcquisionSaleShizukuNum = 0;
-                totalAcquisionSaleKarumaNum = 0;
-                _soulsalePage.UpdateAcquisionShizukuNum(totalAcquisionSaleShizukuNum);
-                _soulsalePage.UpdateAcquisionKarumaNum(totalAcquisionSaleKarumaNum);
+                _soulsalePage.UpdateAcquisionShizukuNum(totalAcquisionSaleShizukuNum = 0);
+                _soulsalePage.UpdateAcquisionKarumaNum(totalAcquisionSaleKarumaNum = 0);
             };
 
             soulsalePage.OnTappedSaleButton += () =>
@@ -59,7 +50,25 @@ namespace MokomoGames
                 _saleConfirm.Show(true);
                 _saleConfirm.Begin(selectingSouls);
             };
+            
             _saleConfirm.Show(false);
+            _saleConfirm.OnTappedCloseButton += () => _saleConfirm.Show(false);
+        }
+        
+        private void OnClickIcon(Soul soul)
+        {
+            var tappedSoul = _userSoulList.Souls.FirstOrDefault(x => x.Equals(soul));
+            var index = selectingSouls.FindIndex(x => x.Equals(tappedSoul));
+            if (index >= 0)
+                selectingSouls.RemoveAt(index);
+            else
+                selectingSouls.Add(tappedSoul);
+            _soulsalePage.UpdateSelecting(selectingSouls);
+                
+            totalAcquisionSaleShizukuNum = (uint) selectingSouls.Sum(x => x.Config.SaleShizukuNum);
+            totalAcquisionSaleKarumaNum = (uint) selectingSouls.Sum(x => x.Config.SaleKarumaNum);
+            _soulsalePage.UpdateAcquisionShizukuNum(totalAcquisionSaleShizukuNum);
+            _soulsalePage.UpdateAcquisionKarumaNum(totalAcquisionSaleKarumaNum);
         }
 
         public void Tick()

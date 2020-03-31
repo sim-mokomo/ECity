@@ -48,11 +48,17 @@ namespace MokomoGames.UI
                     : _userSoulList.GetMaterialSouls();
 
                 soulHasNumSolidLabel.UpdateHasNum((uint) showSouls.Count(), 9999);
-                soulCellScroll.MakeCells(showSouls.ToList(), soul =>
+                var cells = soulCellScroll.MakeCells(showSouls.ToList());
+                foreach (var cell in cells)
                 {
-                    soulDetailPage.Show(true);
-                    soulDetailPage.Begin(soul);
-                });
+                    cell.OnClick += soul =>
+                    {
+                        soulDetailPage.Show(true);
+                        soulDetailPage.Begin(soul);
+                    };
+
+                    cell.OnLongClick += (soul) => {};
+                }
             };
 
             backButton.onClick.AddListener(() => gameObject.SetActive(false));

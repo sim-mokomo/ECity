@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UI;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Attribute = MokomoGames.Protobuf.Attribute;
 
@@ -24,10 +25,10 @@ namespace MokomoGames.UI
         [SerializeField] private Image attributeBackgroundImage;
         [SerializeField] private Image attributeIcon;
         [SerializeField] private Image characterIcon;
-        [SerializeField] private Button characterIconButton;
         [SerializeField] private UIStars stars;
         [SerializeField] private UICheckMark _checkMark;
         [SerializeField] private Image grayOutImage;
+        [SerializeField] private LongTapButton longTapButton;
         public float Height => _rectTransform.rect.height;
         public float Width => _rectTransform.rect.width;
         public Vector2 Size => _rectTransform.rect.size;
@@ -36,13 +37,14 @@ namespace MokomoGames.UI
 
         public bool Showing => showing;
 
-        public event Action<Soul> OnTappedIcon;
-        public event Action<Soul> OnLongTappedIcon;
+        public event Action<Soul> OnClick;
+        public event Action<Soul> OnLongClick;
 
         private void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
-            characterIconButton.onClick.AddListener(() => OnTappedIcon?.Invoke(_soul));
+            longTapButton.OnLongClick += () => OnLongClick?.Invoke(_soul);
+            longTapButton.OnClick += () => OnClick?.Invoke(_soul);
         }
 
         public void Begin(Soul soul)

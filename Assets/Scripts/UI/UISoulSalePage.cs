@@ -23,12 +23,15 @@ namespace MokomoGames.UI
         [SerializeField] private TextMeshProUGUI karumaHasNum;
         [SerializeField] private TextMeshProUGUI acquisitionShizukNum;
         [SerializeField] private TextMeshProUGUI acquisitionKarumaNum;
+        [SerializeField] private UISoulDetailPage soulDetailPage;
         private UserSoulList userSoulList;
         private IEnumerable<UISoulCell> cells;
         public IEnumerable<UISoulCell> Cells => cells;
         public IEnumerable<UISoulCell> ActivateCells => Cells.Where(x => x.Showing);
         public event Action OnTappedSelectingClearButton;
         public event Action OnTappedSaleButton;
+        public override event Action OnTappedHomeButton;
+        public event Action<UITabElement> OnChangedTab; 
 
         public override void Show(bool show)
         {
@@ -36,10 +39,7 @@ namespace MokomoGames.UI
         }
 
         public override PageRepository.PageType PageType => PageRepository.PageType.SoulSale;
-
-        public override event Action OnTappedHomeButton;
-        public event Action<Soul> OnTappedSoulCellIcon; 
-
+        
         public void SetData(UserSoulList userSoulList)
         {
             this.userSoulList = userSoulList;
@@ -54,23 +54,6 @@ namespace MokomoGames.UI
 
         private void Awake()
         {
-            tab.OnChangedTab += tabElement =>
-            {
-                _cellScroll.DestroyCells();
-                var showSouls = tabElement.TabType == UITab.TabType.Battle
-                    ? userSoulList.GetBattleSouls()
-                    : userSoulList.GetMaterialSouls();
-
-                soulHasNumSolidLabel.UpdateHasNum((uint) showSouls.Count(), 9999);
-                cells = _cellScroll.MakeCells(showSouls.ToList(), OnTappedSoulCellIcon);
-                foreach (var cell in cells)
-                {
-                    cell.Selecting(false);
-                }
-                //TODO: 売却対象として選択できるように
-                //TODO: 魂ごとに、「売却額」「売却カルマ」を定義する
-            };
-
             backButton.onClick.AddListener(() => gameObject.SetActive(false));
             homeButton.onClick.AddListener(() =>
             {
@@ -79,6 +62,7 @@ namespace MokomoGames.UI
                 OnTappedHomeButton?.Invoke();
             });
             
+            tab.OnChangedTab += (tabElement) => OnChangedTab?.Invoke(tabElement);
             selectingClearButton.onClick.AddListener(() => OnTappedSelectingClearButton?.Invoke());
             saleButton.onClick.AddListener(() => OnTappedSaleButton?.Invoke());
 
@@ -86,6 +70,26 @@ namespace MokomoGames.UI
             UpdateHasKarumaNum(0);
             UpdateAcquisionShizukuNum(0);
             UpdateAcquisionKarumaNum(0);
+        }
+
+        public IEnumerable<UISoulCell> MakeIcons(IEnumerable<Soul> souls)
+        {
+            _cellScroll.DestroyCells();
+
+            soulHasNumSolidLabel.UpdateHasNum((uint) souls.Count(), 9999);
+            cells = _cellScroll.MakeCells(souls.ToList());
+            foreach (var cell in cells)
+            {
+                cell.Selecting(false);
+                cell.OnLongClick += (soul) =>
+                {
+                    soulDetailPage.Show(true);
+                    soulDetailPage.Begin(soul);
+                    soulDetailPage.OnTappedBackButton += () => { soulDetailPage.Show(false); };
+                };
+            }
+
+            return cells;
         }
 
         public void UpdateSelecting(List<Soul> souls)
